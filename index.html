@@ -2,474 +2,477 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PS4 JB Launcher</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+user-select:none;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #020611;
-    color: white;
+html,body{
+width:100%;
+height:100%;
+overflow:hidden;
+font-family:Arial,Helvetica,sans-serif;
+color:white;
+background:#020611;
 }
 
-body {
-    background:
-        radial-gradient(circle at 50% 45%, #102a55 0%, #06152e 35%, #01040c 75%);
+body{
+background:
+radial-gradient(circle at 50% 45%,#123465 0%,#06152e 38%,#01040c 80%);
 }
 
-.wave {
-    position: absolute;
-    top: -30%;
-    width: 13vw;
-    height: 160%;
-    background: linear-gradient(
-        180deg,
-        transparent,
-        rgba(60,130,255,0.08),
-        rgba(255,255,255,0.025),
-        rgba(40,100,220,0.08),
-        transparent
-    );
-    filter: blur(3px);
-    transform: rotate(18deg);
-    animation: waveMove 10s infinite ease-in-out;
+.wave{
+position:absolute;
+top:-30%;
+width:14vw;
+height:170%;
+background:linear-gradient(
+180deg,
+transparent,
+rgba(60,130,255,.08),
+rgba(255,255,255,.025),
+rgba(40,100,220,.08),
+transparent
+);
+filter:blur(4px);
+transform:rotate(18deg);
+animation:wave 11s infinite ease-in-out;
 }
 
-.wave:nth-child(1) {
-    left: 5%;
-    animation-delay: -2s;
+.wave:nth-child(1){left:4%;animation-delay:-2s}
+.wave:nth-child(2){left:27%;animation-delay:-6s}
+.wave:nth-child(3){left:52%;animation-delay:-8s}
+.wave:nth-child(4){left:77%;animation-delay:-4s}
+
+@keyframes wave{
+0%{transform:translateX(-80px) rotate(18deg)}
+50%{transform:translateX(100px) rotate(18deg)}
+100%{transform:translateX(-80px) rotate(18deg)}
 }
 
-.wave:nth-child(2) {
-    left: 25%;
-    animation-delay: -5s;
+.particle{
+position:absolute;
+width:3px;
+height:3px;
+border-radius:50%;
+background:rgba(140,200,255,.6);
+animation:float linear infinite;
 }
 
-.wave:nth-child(3) {
-    left: 50%;
-    animation-delay: -7s;
+@keyframes float{
+0%{
+transform:translateY(110vh);
+opacity:0;
+}
+15%{opacity:.8}
+85%{opacity:.8}
+100%{
+transform:translateY(-20vh) translateX(80px);
+opacity:0;
+}
 }
 
-.wave:nth-child(4) {
-    left: 75%;
-    animation-delay: -3s;
+.credit{
+position:absolute;
+top:24px;
+left:0;
+right:0;
+text-align:center;
+z-index:20;
+font-size:11px;
+letter-spacing:4px;
+color:rgba(255,255,255,.65);
+text-shadow:0 0 12px #4b8cff;
 }
 
-@keyframes waveMove {
-    0% {
-        transform: translateX(-80px) rotate(18deg);
-    }
-
-    50% {
-        transform: translateX(100px) rotate(18deg);
-    }
-
-    100% {
-        transform: translateX(-80px) rotate(18deg);
-    }
+.creator{
+margin-top:7px;
+font-size:19px;
+font-weight:bold;
+letter-spacing:3px;
+color:white;
+text-shadow:
+0 0 8px #2488ff,
+0 0 20px #1258c7;
 }
 
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: rgba(130,190,255,0.55);
-    animation: floatParticle linear infinite;
+.title{
+position:absolute;
+top:15%;
+width:100%;
+text-align:center;
+font-size:clamp(22px,4vw,42px);
+font-weight:bold;
+letter-spacing:7px;
+text-shadow:
+0 0 8px #4c9cff,
+0 0 25px #145ed8;
+z-index:10;
 }
 
-@keyframes floatParticle {
-    0% {
-        transform: translateY(110vh) translateX(0);
-        opacity: 0;
-    }
-
-    15% {
-        opacity: 0.8;
-    }
-
-    85% {
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: translateY(-20vh) translateX(100px);
-        opacity: 0;
-    }
+.subtitle{
+position:absolute;
+top:calc(15% + 58px);
+width:100%;
+text-align:center;
+font-size:11px;
+letter-spacing:4px;
+color:rgba(255,255,255,.5);
+z-index:10;
 }
 
-.credit {
-    position: absolute;
-    top: 24px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 20;
-    letter-spacing: 4px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.65);
-    text-shadow: 0 0 12px #4b8cff;
+.menu{
+position:absolute;
+left:50%;
+top:54%;
+transform:translate(-50%,-50%);
+width:min(900px,94vw);
+display:flex;
+justify-content:center;
+align-items:center;
+gap:120px;
+z-index:10;
 }
 
-.creator {
-    margin-top: 7px;
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    color: #ffffff;
-    text-shadow:
-        0 0 8px #2488ff,
-        0 0 20px #1258c7;
+.choice{
+width:300px;
+height:300px;
+text-align:center;
+position:relative;
+transition:.25s;
 }
 
-.title {
-    position: absolute;
-    top: 16%;
-    width: 100%;
-    text-align: center;
-    font-size: clamp(22px, 4vw, 42px);
-    font-weight: bold;
-    letter-spacing: 7px;
-    text-shadow:
-        0 0 8px #4c9cff,
-        0 0 25px #145ed8;
-    z-index: 10;
+.choice.selected{
+transform:scale(1.06);
 }
 
-.subtitle {
-    position: absolute;
-    top: calc(16% + 55px);
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    letter-spacing: 4px;
-    color: rgba(255,255,255,0.5);
-    z-index: 10;
+.hand{
+position:absolute;
+left:50%;
+top:5px;
+width:190px;
+height:210px;
+transform:translateX(-50%);
+z-index:2;
 }
 
-.menu {
-    position: absolute;
-    left: 50%;
-    top: 54%;
-    transform: translate(-50%, -50%);
-    width: min(850px, 90vw);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 100px;
-    z-index: 10;
+.hand.right{
+transform:translateX(-50%) scaleX(-1);
 }
 
-.choice {
-    width: 280px;
-    text-align: center;
-    transition: 0.25s ease;
+.palm{
+position:absolute;
+width:105px;
+height:110px;
+left:42px;
+top:65px;
+background:#d99763;
+border-radius:48% 45% 42% 45%;
+box-shadow:
+inset -9px -10px 0 rgba(105,55,30,.18),
+inset 7px 6px 0 rgba(255,225,190,.16);
 }
 
-.choice.selected {
-    transform: scale(1.07);
+.finger{
+position:absolute;
+width:30px;
+height:100px;
+background:#dfa06d;
+border-radius:18px;
+transform-origin:bottom;
+box-shadow:
+inset -5px -5px 0 rgba(105,55,30,.14);
+z-index:3;
 }
 
-.hand {
-    position: relative;
-    width: 145px;
-    height: 145px;
-    margin: auto auto 15px;
-    filter:
-        drop-shadow(0 0 8px rgba(0,0,0,.7))
-        drop-shadow(0 0 18px rgba(40,100,255,.18));
-    transform: rotate(-7deg);
+.f1{
+left:38px;
+top:8px;
+transform:rotate(-28deg);
 }
 
-.hand.right {
-    transform: rotate(7deg) scaleX(-1);
+.f2{
+left:68px;
+top:0;
+transform:rotate(-10deg);
 }
 
-.palm {
-    position: absolute;
-    width: 82px;
-    height: 82px;
-    left: 31px;
-    top: 48px;
-    background: #d89563;
-    border-radius: 45% 48% 40% 42%;
-    box-shadow:
-        inset -8px -8px 0 rgba(120,65,35,.15),
-        inset 5px 5px 0 rgba(255,220,180,.18);
+.f3{
+left:98px;
+top:3px;
+transform:rotate(8deg);
 }
 
-.finger {
-    position: absolute;
-    width: 25px;
-    height: 70px;
-    background: #dfa06f;
-    border-radius: 15px;
-    transform-origin: bottom;
-    box-shadow:
-        inset -4px -4px 0 rgba(120,65,35,.13);
+.f4{
+left:126px;
+top:17px;
+transform:rotate(27deg);
 }
 
-.f1 {
-    left: 27px;
-    top: 7px;
-    transform: rotate(-24deg);
+.thumb{
+position:absolute;
+width:42px;
+height:83px;
+left:18px;
+top:82px;
+background:#d89562;
+border-radius:25px;
+transform:rotate(-47deg);
+box-shadow:
+inset -5px -5px 0 rgba(100,50,30,.15);
+z-index:6;
 }
 
-.f2 {
-    left: 51px;
-    top: 1px;
-    transform: rotate(-8deg);
+.knuckle{
+position:absolute;
+width:25px;
+height:7px;
+border-radius:50%;
+background:rgba(100,50,30,.22);
+z-index:7;
 }
 
-.f3 {
-    left: 76px;
-    top: 5px;
-    transform: rotate(8deg);
+.k1{
+left:42px;
+top:91px;
+transform:rotate(-22deg);
 }
 
-.f4 {
-    left: 99px;
-    top: 18px;
-    transform: rotate(27deg);
+.k2{
+left:70px;
+top:86px;
+transform:rotate(-8deg);
 }
 
-.thumb {
-    position: absolute;
-    width: 38px;
-    height: 70px;
-    left: 4px;
-    top: 61px;
-    background: #d89563;
-    border-radius: 25px;
-    transform: rotate(-45deg);
-    box-shadow:
-        inset -5px -5px 0 rgba(100,50,30,.15);
+.k3{
+left:99px;
+top:88px;
+transform:rotate(8deg);
 }
 
-.line {
-    position: absolute;
-    width: 45px;
-    height: 3px;
-    background: rgba(100,55,35,.3);
-    border-radius: 50%;
+.k4{
+left:127px;
+top:101px;
+transform:rotate(24deg);
 }
 
-.line.one {
-    left: 48px;
-    top: 84px;
-    transform: rotate(20deg);
+.line{
+position:absolute;
+width:52px;
+height:4px;
+border-radius:50%;
+background:rgba(95,50,30,.25);
+z-index:8;
 }
 
-.line.two {
-    left: 48px;
-    top: 96px;
-    transform: rotate(10deg);
+.line.one{
+left:65px;
+top:130px;
+transform:rotate(18deg);
 }
 
-.pill {
-    width: 210px;
-    height: 74px;
-    margin: auto;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: 19px;
-    letter-spacing: 3px;
-    cursor: pointer;
-    position: relative;
-    transition: .25s;
-    border: 3px solid rgba(255,255,255,.3);
-    box-shadow:
-        inset 0 5px 10px rgba(255,255,255,.25),
-        inset 0 -8px 15px rgba(0,0,0,.35),
-        0 10px 25px rgba(0,0,0,.5);
+.line.two{
+left:65px;
+top:144px;
+transform:rotate(8deg);
 }
 
-.red-pill {
-    background:
-        linear-gradient(
-            180deg,
-            #ff4949,
-            #b40000
-        );
-
-    box-shadow:
-        inset 0 5px 10px rgba(255,255,255,.25),
-        inset 0 -8px 15px rgba(0,0,0,.35),
-        0 0 25px rgba(255,20,20,.25);
+.pill{
+position:absolute;
+left:50%;
+top:118px;
+transform:translateX(-50%);
+width:235px;
+height:78px;
+border-radius:50px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:bold;
+font-size:19px;
+letter-spacing:3px;
+cursor:pointer;
+z-index:5;
+border:3px solid rgba(255,255,255,.4);
+transition:.25s;
+box-shadow:
+inset 0 6px 10px rgba(255,255,255,.25),
+inset 0 -9px 15px rgba(0,0,0,.4),
+0 10px 25px rgba(0,0,0,.5);
 }
 
-.blue-pill {
-    background:
-        linear-gradient(
-            180deg,
-            #42a8ff,
-            #0645a8
-        );
-
-    box-shadow:
-        inset 0 5px 10px rgba(255,255,255,.25),
-        inset 0 -8px 15px rgba(0,0,0,.35),
-        0 0 25px rgba(20,120,255,.35);
+.red-pill{
+background:linear-gradient(
+180deg,
+#ff4d4d,
+#b00000
+);
+box-shadow:
+inset 0 6px 10px rgba(255,255,255,.25),
+inset 0 -9px 15px rgba(0,0,0,.4),
+0 0 25px rgba(255,20,20,.3);
 }
 
-.choice.selected .pill {
-    transform: scale(1.08);
-    border-color: white;
-    box-shadow:
-        0 0 10px white,
-        0 0 30px currentColor,
-        inset 0 5px 10px rgba(255,255,255,.3);
+.blue-pill{
+background:linear-gradient(
+180deg,
+#45aaff,
+#0645a8
+);
+box-shadow:
+inset 0 6px 10px rgba(255,255,255,.25),
+inset 0 -9px 15px rgba(0,0,0,.4),
+0 0 25px rgba(20,120,255,.35);
 }
 
-.description {
-    margin-top: 13px;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,.55);
+.choice.selected .pill{
+transform:translateX(-50%) scale(1.08);
+border-color:white;
 }
 
-.controls {
-    position: absolute;
-    bottom: 42px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: rgba(255,255,255,.4);
-    z-index: 20;
+.choice.selected .hand{
+filter:
+drop-shadow(0 0 8px rgba(255,255,255,.18))
+drop-shadow(0 0 18px rgba(40,120,255,.25));
 }
 
-.crt {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 100;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(255,255,255,.018),
-            rgba(255,255,255,.018) 1px,
-            transparent 1px,
-            transparent 4px
-        );
-    opacity: .4;
+.description{
+position:absolute;
+top:215px;
+left:0;
+right:0;
+font-size:10px;
+letter-spacing:3px;
+color:rgba(255,255,255,.5);
 }
 
-.vignette {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 90;
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 45%,
-            rgba(0,0,0,.5) 100%
-        );
+.controls{
+position:absolute;
+bottom:40px;
+left:0;
+right:0;
+text-align:center;
+font-size:11px;
+letter-spacing:2px;
+color:rgba(255,255,255,.4);
+z-index:20;
 }
 
-.boot {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    background:
-        radial-gradient(
-            circle at center,
-            #071c3b,
-            #00030a
-        );
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transition: opacity 1s ease;
+.crt{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:100;
+background:
+repeating-linear-gradient(
+0deg,
+rgba(255,255,255,.018),
+rgba(255,255,255,.018) 1px,
+transparent 1px,
+transparent 4px
+);
+opacity:.45;
 }
 
-.boot-logo {
-    font-size: 32px;
-    letter-spacing: 10px;
-    text-shadow:
-        0 0 10px #318bff,
-        0 0 30px #1458bd;
+.vignette{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:90;
+background:
+radial-gradient(
+ellipse at center,
+transparent 42%,
+rgba(0,0,0,.55) 100%
+);
 }
 
-.boot-sub {
-    margin-top: 15px;
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: rgba(255,255,255,.5);
+.boot{
+position:fixed;
+inset:0;
+z-index:200;
+background:
+radial-gradient(circle at center,#071c3b,#00030a);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+transition:opacity 1s;
 }
 
-.loading {
-    margin-top: 35px;
-    width: 220px;
-    height: 3px;
-    background: rgba(255,255,255,.15);
-    overflow: hidden;
+.boot-logo{
+font-size:34px;
+letter-spacing:10px;
+text-shadow:
+0 0 10px #318bff,
+0 0 30px #1458bd;
 }
 
-.loading-bar {
-    width: 0%;
-    height: 100%;
-    background: white;
-    box-shadow: 0 0 12px #5ca5ff;
-    animation: loading 2.5s ease forwards;
+.boot-sub{
+margin-top:15px;
+font-size:10px;
+letter-spacing:5px;
+color:rgba(255,255,255,.5);
 }
 
-@keyframes loading {
-    to {
-        width: 100%;
-    }
+.loading{
+margin-top:35px;
+width:220px;
+height:3px;
+background:rgba(255,255,255,.15);
+overflow:hidden;
 }
 
-.fade {
-    opacity: 0;
-    transition: opacity .8s ease;
+.loading-bar{
+width:0;
+height:100%;
+background:white;
+box-shadow:0 0 12px #5ca5ff;
+animation:loading 2.5s ease forwards;
 }
 
-@media(max-width: 700px) {
+@keyframes loading{
+to{width:100%}
+}
 
-    .menu {
-        gap: 25px;
-    }
+.fade{
+opacity:0;
+transition:opacity .8s;
+}
 
-    .choice {
-        width: 160px;
-    }
+@media(max-width:700px){
 
-    .pill {
-        width: 155px;
-        height: 60px;
-        font-size: 14px;
-    }
+.menu{
+gap:35px;
+}
 
-    .hand {
-        transform: scale(.75) rotate(-7deg);
-        margin-bottom: -5px;
-    }
+.choice{
+width:190px;
+}
 
-    .hand.right {
-        transform: scale(.75) rotate(7deg) scaleX(-1);
-    }
+.pill{
+width:175px;
+height:62px;
+font-size:14px;
+}
 
-    .title {
-        letter-spacing: 4px;
-    }
+.hand{
+transform:translateX(-50%) scale(.78);
+}
+
+.hand.right{
+transform:translateX(-50%) scale(.78) scaleX(-1);
+}
+
+.title{
+letter-spacing:4px;
+}
 }
 </style>
 </head>
@@ -481,457 +484,405 @@ body {
 <div class="wave"></div>
 <div class="wave"></div>
 
-<div class="particle" style="left:5%; animation-duration:13s;"></div>
-<div class="particle" style="left:12%; animation-duration:18s;"></div>
-<div class="particle" style="left:21%; animation-duration:15s;"></div>
-<div class="particle" style="left:32%; animation-duration:20s;"></div>
-<div class="particle" style="left:43%; animation-duration:17s;"></div>
-<div class="particle" style="left:55%; animation-duration:14s;"></div>
-<div class="particle" style="left:66%; animation-duration:19s;"></div>
-<div class="particle" style="left:74%; animation-duration:16s;"></div>
-<div class="particle" style="left:85%; animation-duration:21s;"></div>
-<div class="particle" style="left:94%; animation-duration:15s;"></div>
+<div class="particle" style="left:5%;animation-duration:13s"></div>
+<div class="particle" style="left:15%;animation-duration:18s"></div>
+<div class="particle" style="left:25%;animation-duration:15s"></div>
+<div class="particle" style="left:38%;animation-duration:20s"></div>
+<div class="particle" style="left:50%;animation-duration:17s"></div>
+<div class="particle" style="left:62%;animation-duration:14s"></div>
+<div class="particle" style="left:73%;animation-duration:19s"></div>
+<div class="particle" style="left:84%;animation-duration:16s"></div>
+<div class="particle" style="left:94%;animation-duration:21s"></div>
 
 <div class="credit">
-    CREATED FOR THE COMMUNITY
-    <div class="creator">
-        Raw13G
-    </div>
+CREATED FOR THE COMMUNITY
+<div class="creator">Raw13G</div>
 </div>
 
 <div class="title">
-    PS4 WEBKIT LAUNCHER
+PS4 WEBKIT LAUNCHER
 </div>
 
 <div class="subtitle">
-    SELECT AN OPTION
+SELECT AN OPTION
 </div>
 
 <div class="menu">
 
-    <div class="choice selected" id="redChoice">
+<div class="choice selected" id="redChoice">
 
-        <div class="hand">
+<div class="hand">
 
-            <div class="finger f1"></div>
-            <div class="finger f2"></div>
-            <div class="finger f3"></div>
-            <div class="finger f4"></div>
+<div class="finger f1"></div>
+<div class="finger f2"></div>
+<div class="finger f3"></div>
+<div class="finger f4"></div>
 
-            <div class="thumb"></div>
+<div class="palm"></div>
 
-            <div class="palm"></div>
+<div class="thumb"></div>
 
-            <div class="line one"></div>
-            <div class="line two"></div>
+<div class="knuckle k1"></div>
+<div class="knuckle k2"></div>
+<div class="knuckle k3"></div>
+<div class="knuckle k4"></div>
 
-        </div>
+<div class="line one"></div>
+<div class="line two"></div>
 
-        <div
-            class="pill red-pill"
-            onclick="redPill()"
-        >
-            CLOSE
-        </div>
+</div>
 
-        <div class="description">
-            EXIT PAGE
-        </div>
+<div class="pill red-pill" onclick="redPill()">
+CLOSE
+</div>
 
-    </div>
+<div class="description">
+EXIT PAGE
+</div>
 
-    <div class="choice" id="blueChoice">
+</div>
 
-        <div class="hand right">
+<div class="choice" id="blueChoice">
 
-            <div class="finger f1"></div>
-            <div class="finger f2"></div>
-            <div class="finger f3"></div>
-            <div class="finger f4"></div>
+<div class="hand right">
 
-            <div class="thumb"></div>
+<div class="finger f1"></div>
+<div class="finger f2"></div>
+<div class="finger f3"></div>
+<div class="finger f4"></div>
 
-            <div class="palm"></div>
+<div class="palm"></div>
 
-            <div class="line one"></div>
-            <div class="line two"></div>
+<div class="thumb"></div>
 
-        </div>
+<div class="knuckle k1"></div>
+<div class="knuckle k2"></div>
+<div class="knuckle k3"></div>
+<div class="knuckle k4"></div>
 
-        <div
-            class="pill blue-pill"
-            onclick="bluePill()"
-        >
-            CONTINUE
-        </div>
+<div class="line one"></div>
+<div class="line two"></div>
 
-        <div class="description">
-            OPEN RAW13G
-        </div>
+</div>
 
-    </div>
+<div class="pill blue-pill" onclick="bluePill()">
+CONTINUE
+</div>
+
+<div class="description">
+OPEN RAW13G
+</div>
+
+</div>
 
 </div>
 
 <div class="controls">
-    ← → &nbsp;&nbsp; SELECT
-    &nbsp;&nbsp;&nbsp; ENTER / X &nbsp;&nbsp; CONFIRM
+← → SELECT &nbsp;&nbsp;&nbsp; ENTER / X CONFIRM
 </div>
 
 <div class="vignette"></div>
-
 <div class="crt"></div>
 
 <div class="boot" id="boot">
 
-    <div class="boot-logo">
-        PS4
-    </div>
+<div class="boot-logo">
+PS4
+</div>
 
-    <div class="boot-sub">
-        WEBKIT LAUNCHER
-    </div>
+<div class="boot-sub">
+WEBKIT LAUNCHER
+</div>
 
-    <div class="loading">
-        <div class="loading-bar"></div>
-    </div>
+<div class="loading">
+<div class="loading-bar"></div>
+</div>
 
 </div>
 
 <script>
 
-const TARGET =
-    "https://raw13g.github.io/";
+const TARGET="https://raw13g.github.io/";
 
-let audioStarted = false;
+let audioStarted=false;
 
-function startupSound() {
+function startupSound(){
 
-    if (audioStarted) return;
+if(audioStarted)return;
 
-    audioStarted = true;
+audioStarted=true;
 
-    try {
+try{
 
-        const AudioContext =
-            window.AudioContext ||
-            window.webkitAudioContext;
+const AudioContext=
+window.AudioContext||
+window.webkitAudioContext;
 
-        if (!AudioContext) return;
+if(!AudioContext)return;
 
-        const ctx = new AudioContext();
+const ctx=new AudioContext();
 
-        const notes = [
-            [130.81, 0.00, 0.45],
-            [196.00, 0.35, 0.45],
-            [261.63, 0.70, 0.45],
-            [329.63, 1.05, 0.65]
-        ];
-
-        notes.forEach(note => {
-
-            const oscillator =
-                ctx.createOscillator();
-
-            const gain =
-                ctx.createGain();
-
-            oscillator.type = "sine";
-
-            oscillator.frequency.value =
-                note[0];
-
-            oscillator.connect(gain);
-
-            gain.connect(ctx.destination);
-
-            const start =
-                ctx.currentTime + note[1];
-
-            const end =
-                start + note[2];
-
-            gain.gain.setValueAtTime(
-                0.0001,
-                start
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                0.18,
-                start + 0.03
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                0.0001,
-                end
-            );
-
-            oscillator.start(start);
-
-            oscillator.stop(end);
-
-        });
-
-    } catch(e) {
-
-        console.log("Audio unavailable");
-
-    }
-
-}
-
-window.addEventListener(
-    "load",
-    () => {
-
-        setTimeout(() => {
-
-            const boot =
-                document.getElementById("boot");
-
-            boot.style.opacity = "0";
-
-            setTimeout(() => {
-
-                boot.style.display = "none";
-
-            }, 1000);
-
-        }, 2600);
-
-    }
-);
-
-document.addEventListener(
-    "click",
-    startupSound,
-    { once: true }
-);
-
-document.addEventListener(
-    "keydown",
-    startupSound,
-    { once: true }
-);
-
-function redPill() {
-
-    document.body.classList.add("fade");
-
-    setTimeout(() => {
-
-        window.close();
-
-        setTimeout(() => {
-
-            document.body.classList.remove("fade");
-
-            alert(
-                "The browser blocked automatic closing of this page."
-            );
-
-        }, 900);
-
-    }, 500);
-
-}
-
-function bluePill() {
-
-    document.body.classList.add("fade");
-
-    setTimeout(() => {
-
-        window.location.href = TARGET;
-
-    }, 500);
-
-}
-
-let selected = 0;
-
-const choices = [
-    document.getElementById("redChoice"),
-    document.getElementById("blueChoice")
+const notes=[
+[130.81,0,.45],
+[196,0.35,.45],
+[261.63,.70,.45],
+[329.63,1.05,.65]
 ];
 
-function updateSelection() {
+notes.forEach(note=>{
 
-    choices.forEach(
-        (choice, index) => {
+const oscillator=ctx.createOscillator();
+const gain=ctx.createGain();
 
-            choice.classList.toggle(
-                "selected",
-                index === selected
-            );
+oscillator.type="sine";
+oscillator.frequency.value=note[0];
 
-        }
-    );
+oscillator.connect(gain);
+gain.connect(ctx.destination);
+
+const start=ctx.currentTime+note[1];
+const end=start+note[2];
+
+gain.gain.setValueAtTime(.0001,start);
+
+gain.gain.exponentialRampToValueAtTime(
+.18,
+start+.03
+);
+
+gain.gain.exponentialRampToValueAtTime(
+.0001,
+end
+);
+
+oscillator.start(start);
+oscillator.stop(end);
+
+});
+
+}catch(e){}
 
 }
 
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+const boot=document.getElementById("boot");
+
+boot.style.opacity="0";
+
+setTimeout(()=>{
+boot.style.display="none";
+},1000);
+
+},2600);
+
+});
+
 document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "ArrowLeft" ||
-            event.key === "ArrowUp"
-        ) {
-
-            selected = 0;
-
-            updateSelection();
-
-        }
-
-        if (
-            event.key === "ArrowRight" ||
-            event.key === "ArrowDown"
-        ) {
-
-            selected = 1;
-
-            updateSelection();
-
-        }
-
-        if (
-            event.key === "Enter" ||
-            event.key.toLowerCase() === "x"
-        ) {
-
-            if (selected === 0) {
-
-                redPill();
-
-            } else {
-
-                bluePill();
-
-            }
-
-        }
-
-    }
+"click",
+startupSound,
+{once:true}
 );
 
-let gamepadLoop = false;
+document.addEventListener(
+"keydown",
+startupSound,
+{once:true}
+);
 
-function checkGamepad() {
+function redPill(){
 
-    const pads =
-        navigator.getGamepads
-            ? navigator.getGamepads()
-            : [];
+document.body.classList.add("fade");
 
-    if (!pads) return;
+setTimeout(()=>{
 
-    for (const pad of pads) {
+window.close();
 
-        if (!pad) continue;
+setTimeout(()=>{
 
-        if (
-            pad.buttons[14] &&
-            pad.buttons[14].pressed
-        ) {
+document.body.classList.remove("fade");
 
-            selected = 0;
+alert(
+"The browser blocked automatic closing of this page."
+);
 
-            updateSelection();
+},900);
 
-        }
+},500);
 
-        if (
-            pad.buttons[15] &&
-            pad.buttons[15].pressed
-        ) {
+}
 
-            selected = 1;
+function bluePill(){
 
-            updateSelection();
+document.body.classList.add("fade");
 
-        }
+setTimeout(()=>{
 
-        if (
-            pad.buttons[0] &&
-            pad.buttons[0].pressed
-        ) {
+window.location.href=TARGET;
 
-            if (!gamepadLoop) {
+},500);
 
-                gamepadLoop = true;
+}
 
-                if (selected === 0) {
+let selected=0;
 
-                    redPill();
+const choices=[
+document.getElementById("redChoice"),
+document.getElementById("blueChoice")
+];
 
-                } else {
+function updateSelection(){
 
-                    bluePill();
+choices.forEach((choice,index)=>{
 
-                }
+choice.classList.toggle(
+"selected",
+index===selected
+);
 
-                setTimeout(
-                    () => {
-                        gamepadLoop = false;
-                    },
-                    700
-                );
+});
 
-            }
+}
 
-        }
+document.addEventListener("keydown",event=>{
 
-    }
+if(
+event.key==="ArrowLeft"||
+event.key==="ArrowUp"
+){
 
-    requestAnimationFrame(checkGamepad);
+selected=0;
+updateSelection();
+
+}
+
+if(
+event.key==="ArrowRight"||
+event.key==="ArrowDown"
+){
+
+selected=1;
+updateSelection();
+
+}
+
+if(
+event.key==="Enter"||
+event.key.toLowerCase()==="x"
+){
+
+if(selected===0){
+redPill();
+}else{
+bluePill();
+}
+
+}
+
+});
+
+let gamepadLoop=false;
+
+function checkGamepad(){
+
+const pads=
+navigator.getGamepads?
+navigator.getGamepads():[];
+
+if(pads){
+
+for(const pad of pads){
+
+if(!pad)continue;
+
+if(
+pad.buttons[14]&&
+pad.buttons[14].pressed
+){
+
+selected=0;
+updateSelection();
+
+}
+
+if(
+pad.buttons[15]&&
+pad.buttons[15].pressed
+){
+
+selected=1;
+updateSelection();
+
+}
+
+if(
+pad.buttons[0]&&
+pad.buttons[0].pressed
+){
+
+if(!gamepadLoop){
+
+gamepadLoop=true;
+
+if(selected===0){
+redPill();
+}else{
+bluePill();
+}
+
+setTimeout(()=>{
+gamepadLoop=false;
+},700);
+
+}
+
+}
+
+}
+
+}
+
+requestAnimationFrame(checkGamepad);
 
 }
 
 requestAnimationFrame(checkGamepad);
 
 document
-    .querySelector(".red-pill")
-    .addEventListener(
-        "mouseenter",
-        () => {
+.querySelector(".red-pill")
+.addEventListener("mouseenter",()=>{
 
-            selected = 0;
+selected=0;
+updateSelection();
 
-            updateSelection();
-
-        }
-    );
+});
 
 document
-    .querySelector(".blue-pill")
-    .addEventListener(
-        "mouseenter",
-        () => {
+.querySelector(".blue-pill")
+.addEventListener("mouseenter",()=>{
 
-            selected = 1;
+selected=1;
+updateSelection();
 
-            updateSelection();
-
-        }
-    );
+});
 
 document
-    .querySelector(".red-pill")
-    .addEventListener(
-        "touchstart",
-        startupSound,
-        { passive: true }
-    );
+.querySelector(".red-pill")
+.addEventListener(
+"touchstart",
+startupSound,
+{passive:true}
+);
 
 document
-    .querySelector(".blue-pill")
-    .addEventListener(
-        "touchstart",
-        startupSound,
-        { passive: true }
-    );
+.querySelector(".blue-pill")
+.addEventListener(
+"touchstart",
+startupSound,
+{passive:true}
+);
 
 updateSelection();
 
