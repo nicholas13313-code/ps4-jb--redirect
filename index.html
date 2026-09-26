@@ -1,15 +1,584 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>PS4 13.52</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta http-equiv="refresh"
-          content="0; url=https://raw13g.github.io/">
+<title>PS4 WebKit - Raw13G</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+            radial-gradient(circle at center, #151515 0%, #070707 55%, #000 100%);
+        color: white;
+        font-family: "Courier New", monospace;
+        overflow: hidden;
+        image-rendering: pixelated;
+    }
+
+    /* Scanlines */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.025) 0px,
+            rgba(255,255,255,0.025) 1px,
+            transparent 2px,
+            transparent 4px
+        );
+        z-index: 20;
+    }
+
+    .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 28px 20px;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .credit {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .credit-small {
+        color: #777;
+        font-size: 12px;
+        letter-spacing: 4px;
+    }
+
+    .creator {
+        margin-top: 8px;
+        font-size: clamp(28px, 6vw, 52px);
+        font-weight: bold;
+        letter-spacing: 5px;
+
+        color: #fff;
+
+        text-shadow:
+            3px 3px 0 #333,
+            0 0 12px rgba(255,255,255,.25);
+    }
+
+    .line {
+        width: 280px;
+        height: 2px;
+        margin: 12px auto;
+        background: #333;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main {
+        width: min(1000px, 100%);
+        display: flex;
+        justify-content: center;
+        gap: 70px;
+        margin-top: 15px;
+    }
+
+    .choice {
+        width: 330px;
+        text-align: center;
+    }
+
+    .choice-title {
+        font-size: 25px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        margin-bottom: 8px;
+    }
+
+    .red-title {
+        color: #ff2635;
+        text-shadow: 0 0 10px #ff2635;
+    }
+
+    .blue-title {
+        color: #168cff;
+        text-shadow: 0 0 10px #168cff;
+    }
+
+    .description {
+        color: #888;
+        font-size: 13px;
+        line-height: 1.6;
+        min-height: 42px;
+    }
+
+    /* =========================
+       HAND + PILL
+    ========================= */
+
+    .hand-area {
+        position: relative;
+        height: 190px;
+        margin: 5px auto 15px;
+    }
+
+    /*
+       Pixel-art inspired hand.
+       Built completely from CSS.
+    */
+
+    .hand {
+        position: absolute;
+        left: 50%;
+        bottom: 8px;
+
+        width: 210px;
+        height: 95px;
+
+        transform: translateX(-50%);
+
+        background:
+            linear-gradient(
+                160deg,
+                #d99b72 0%,
+                #b87550 55%,
+                #8d5138 100%
+            );
+
+        border: 5px solid #542f25;
+        border-radius: 55% 55% 35% 35%;
+
+        box-shadow:
+            inset -8px -8px 0 rgba(70,30,20,.25),
+            8px 8px 0 #181818;
+    }
+
+    /* fingers */
+
+    .finger {
+        position: absolute;
+
+        width: 42px;
+        height: 75px;
+
+        background:
+            linear-gradient(
+                90deg,
+                #9d5f43,
+                #d99b72,
+                #a86649
+            );
+
+        border: 4px solid #542f25;
+        border-radius: 20px;
+
+        bottom: 48px;
+    }
+
+    .finger.one {
+        left: 18px;
+        transform: rotate(-18deg);
+    }
+
+    .finger.two {
+        left: 57px;
+        transform: rotate(-8deg);
+    }
+
+    .finger.three {
+        right: 57px;
+        transform: rotate(8deg);
+    }
+
+    .finger.four {
+        right: 18px;
+        transform: rotate(18deg);
+    }
+
+    /* Palm lines */
+
+    .palm-line {
+        position: absolute;
+        width: 70px;
+        height: 3px;
+        background: #75412f;
+        opacity: .7;
+        border-radius: 5px;
+    }
+
+    .palm-line.a {
+        left: 65px;
+        top: 48px;
+        transform: rotate(15deg);
+    }
+
+    .palm-line.b {
+        right: 55px;
+        top: 65px;
+        transform: rotate(-12deg);
+    }
+
+    /* Pill */
+
+    .pill {
+        position: absolute;
+
+        width: 92px;
+        height: 42px;
+
+        left: 50%;
+        top: 72px;
+
+        transform: translateX(-50%) rotate(-12deg);
+
+        border-radius: 25px;
+
+        border: 4px solid #160b0b;
+
+        z-index: 5;
+
+        cursor: pointer;
+
+        transition:
+            transform .15s,
+            filter .15s;
+    }
+
+    .pill:hover {
+        transform:
+            translateX(-50%)
+            rotate(-12deg)
+            scale(1.12);
+    }
+
+    .pill::after {
+        content: "";
+        position: absolute;
+
+        left: 8px;
+        top: 6px;
+
+        width: 22px;
+        height: 7px;
+
+        border-radius: 50%;
+
+        background: rgba(255,255,255,.55);
+    }
+
+    .red-pill {
+        background:
+            linear-gradient(
+                90deg,
+                #72000b 0%,
+                #ff1528 45%,
+                #85000c 100%
+            );
+
+        box-shadow:
+            0 0 10px #ff1628,
+            5px 5px 0 #280006;
+    }
+
+    .blue-pill {
+        background:
+            linear-gradient(
+                90deg,
+                #003d82 0%,
+                #168cff 45%,
+                #00468e 100%
+            );
+
+        box-shadow:
+            0 0 10px #168cff,
+            5px 5px 0 #00172d;
+    }
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .button {
+        width: 100%;
+
+        padding: 15px 20px;
+
+        background: #090909;
+
+        border: 3px solid;
+        border-radius: 4px;
+
+        font-family: "Courier New", monospace;
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: 2px;
+
+        cursor: pointer;
+
+        transition:
+            background .15s,
+            transform .15s,
+            box-shadow .15s;
+    }
+
+    .button:hover {
+        transform: translateY(-3px);
+    }
+
+    .red-button {
+        color: #ff2635;
+        border-color: #ff2635;
+
+        box-shadow:
+            4px 4px 0 #56000a;
+    }
+
+    .red-button:hover {
+        background: #280006;
+
+        box-shadow:
+            0 0 18px #ff2635,
+            4px 4px 0 #56000a;
+    }
+
+    .blue-button {
+        color: #168cff;
+        border-color: #168cff;
+
+        box-shadow:
+            4px 4px 0 #003263;
+    }
+
+    .blue-button:hover {
+        background: #00152b;
+
+        box-shadow:
+            0 0 18px #168cff,
+            4px 4px 0 #003263;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+        margin-top: 35px;
+
+        color: #555;
+
+        font-size: 11px;
+        letter-spacing: 3px;
+
+        text-align: center;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 750px) {
+
+        body {
+            overflow-y: auto;
+        }
+
+        .page {
+            padding-top: 20px;
+        }
+
+        .main {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .choice {
+            width: min(330px, 90vw);
+        }
+
+        .footer {
+            margin-bottom: 20px;
+        }
+    }
+</style>
 </head>
 
+
 <body>
-    <h1>PS4 13.52</h1>
-    <p>Opening jailbreak page...</p>
+
+<div class="page">
+
+    <!-- CREATOR -->
+    <div class="credit">
+
+        <div class="credit-small">
+            PS4 JAILBREAK PROJECT
+        </div>
+
+        <div class="creator">
+            Raw13G
+        </div>
+
+        <div class="line"></div>
+
+        <div class="credit-small">
+            WEBKIT 13.52
+        </div>
+
+    </div>
+
+
+    <div class="main">
+
+        <!-- ================= RED ================= -->
+
+        <div class="choice">
+
+            <div class="choice-title red-title">
+                RED PILL
+            </div>
+
+            <div class="description">
+                Close this page or return to the previous screen.
+            </div>
+
+
+            <div class="hand-area">
+
+                <div class="hand">
+
+                    <div class="finger one"></div>
+                    <div class="finger two"></div>
+                    <div class="finger three"></div>
+                    <div class="finger four"></div>
+
+                    <div class="palm-line a"></div>
+                    <div class="palm-line b"></div>
+
+                </div>
+
+                <div
+                    class="pill red-pill"
+                    onclick="closePage()">
+                </div>
+
+            </div>
+
+
+            <button
+                class="button red-button"
+                onclick="closePage()">
+
+                [ TAKE RED PILL ]
+
+            </button>
+
+        </div>
+
+
+        <!-- ================= BLUE ================= -->
+
+        <div class="choice">
+
+            <div class="choice-title blue-title">
+                BLUE PILL
+            </div>
+
+            <div class="description">
+                Continue to the PS4 WebKit page.
+            </div>
+
+
+            <div class="hand-area">
+
+                <div class="hand">
+
+                    <div class="finger one"></div>
+                    <div class="finger two"></div>
+                    <div class="finger three"></div>
+                    <div class="finger four"></div>
+
+                    <div class="palm-line a"></div>
+                    <div class="palm-line b"></div>
+
+                </div>
+
+                <div
+                    class="pill blue-pill"
+                    onclick="startJB()">
+                </div>
+
+            </div>
+
+
+            <button
+                class="button blue-button"
+                onclick="startJB()">
+
+                [ TAKE BLUE PILL ]
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        PS4 13.52 • RETRO WEBKIT LAUNCHER
+    </div>
+
+</div>
+
+
+<script>
+
+    /* RED PILL */
+
+    function closePage() {
+
+        window.close();
+
+        /*
+          Browsers normally block window.close()
+          if this tab wasn't opened by JavaScript.
+
+          If blocked, show a message instead.
+        */
+
+        setTimeout(function () {
+
+            alert(
+                "This tab cannot be closed automatically. " +
+                "Please close it manually."
+            );
+
+        }, 300);
+    }
+
+
+    /* BLUE PILL */
+
+    function startJB() {
+
+        window.location.href =
+            "https://raw13g.github.io/";
+
+    }
+
+</script>
+
 </body>
 </html>
+```
