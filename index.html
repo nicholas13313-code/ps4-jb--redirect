@@ -1,584 +1,943 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PS4 WebKit - Raw13G</title>
+<title>PS4 JB Launcher</title>
 
 <style>
-    * {
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #020611;
+    color: white;
+}
+
+body {
+    background:
+        radial-gradient(circle at 50% 45%, #102a55 0%, #06152e 35%, #01040c 75%);
+}
+
+.wave {
+    position: absolute;
+    top: -30%;
+    width: 13vw;
+    height: 160%;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(60,130,255,0.08),
+        rgba(255,255,255,0.025),
+        rgba(40,100,220,0.08),
+        transparent
+    );
+    filter: blur(3px);
+    transform: rotate(18deg);
+    animation: waveMove 10s infinite ease-in-out;
+}
+
+.wave:nth-child(1) {
+    left: 5%;
+    animation-delay: -2s;
+}
+
+.wave:nth-child(2) {
+    left: 25%;
+    animation-delay: -5s;
+}
+
+.wave:nth-child(3) {
+    left: 50%;
+    animation-delay: -7s;
+}
+
+.wave:nth-child(4) {
+    left: 75%;
+    animation-delay: -3s;
+}
+
+@keyframes waveMove {
+    0% {
+        transform: translateX(-80px) rotate(18deg);
     }
 
-    body {
-        margin: 0;
-        min-height: 100vh;
-        background:
-            radial-gradient(circle at center, #151515 0%, #070707 55%, #000 100%);
-        color: white;
-        font-family: "Courier New", monospace;
-        overflow: hidden;
-        image-rendering: pixelated;
+    50% {
+        transform: translateX(100px) rotate(18deg);
     }
 
-    /* Scanlines */
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background: repeating-linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.025) 0px,
-            rgba(255,255,255,0.025) 1px,
-            transparent 2px,
+    100% {
+        transform: translateX(-80px) rotate(18deg);
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(130,190,255,0.55);
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(110vh) translateX(0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    85% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-20vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+.credit {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 20;
+    letter-spacing: 4px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    text-shadow: 0 0 12px #4b8cff;
+}
+
+.creator {
+    margin-top: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #ffffff;
+    text-shadow:
+        0 0 8px #2488ff,
+        0 0 20px #1258c7;
+}
+
+.title {
+    position: absolute;
+    top: 16%;
+    width: 100%;
+    text-align: center;
+    font-size: clamp(22px, 4vw, 42px);
+    font-weight: bold;
+    letter-spacing: 7px;
+    text-shadow:
+        0 0 8px #4c9cff,
+        0 0 25px #145ed8;
+    z-index: 10;
+}
+
+.subtitle {
+    position: absolute;
+    top: calc(16% + 55px);
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.5);
+    z-index: 10;
+}
+
+.menu {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    transform: translate(-50%, -50%);
+    width: min(850px, 90vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    z-index: 10;
+}
+
+.choice {
+    width: 280px;
+    text-align: center;
+    transition: 0.25s ease;
+}
+
+.choice.selected {
+    transform: scale(1.07);
+}
+
+.hand {
+    position: relative;
+    width: 145px;
+    height: 145px;
+    margin: auto auto 15px;
+    filter:
+        drop-shadow(0 0 8px rgba(0,0,0,.7))
+        drop-shadow(0 0 18px rgba(40,100,255,.18));
+    transform: rotate(-7deg);
+}
+
+.hand.right {
+    transform: rotate(7deg) scaleX(-1);
+}
+
+.palm {
+    position: absolute;
+    width: 82px;
+    height: 82px;
+    left: 31px;
+    top: 48px;
+    background: #d89563;
+    border-radius: 45% 48% 40% 42%;
+    box-shadow:
+        inset -8px -8px 0 rgba(120,65,35,.15),
+        inset 5px 5px 0 rgba(255,220,180,.18);
+}
+
+.finger {
+    position: absolute;
+    width: 25px;
+    height: 70px;
+    background: #dfa06f;
+    border-radius: 15px;
+    transform-origin: bottom;
+    box-shadow:
+        inset -4px -4px 0 rgba(120,65,35,.13);
+}
+
+.f1 {
+    left: 27px;
+    top: 7px;
+    transform: rotate(-24deg);
+}
+
+.f2 {
+    left: 51px;
+    top: 1px;
+    transform: rotate(-8deg);
+}
+
+.f3 {
+    left: 76px;
+    top: 5px;
+    transform: rotate(8deg);
+}
+
+.f4 {
+    left: 99px;
+    top: 18px;
+    transform: rotate(27deg);
+}
+
+.thumb {
+    position: absolute;
+    width: 38px;
+    height: 70px;
+    left: 4px;
+    top: 61px;
+    background: #d89563;
+    border-radius: 25px;
+    transform: rotate(-45deg);
+    box-shadow:
+        inset -5px -5px 0 rgba(100,50,30,.15);
+}
+
+.line {
+    position: absolute;
+    width: 45px;
+    height: 3px;
+    background: rgba(100,55,35,.3);
+    border-radius: 50%;
+}
+
+.line.one {
+    left: 48px;
+    top: 84px;
+    transform: rotate(20deg);
+}
+
+.line.two {
+    left: 48px;
+    top: 96px;
+    transform: rotate(10deg);
+}
+
+.pill {
+    width: 210px;
+    height: 74px;
+    margin: auto;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 19px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    position: relative;
+    transition: .25s;
+    border: 3px solid rgba(255,255,255,.3);
+    box-shadow:
+        inset 0 5px 10px rgba(255,255,255,.25),
+        inset 0 -8px 15px rgba(0,0,0,.35),
+        0 10px 25px rgba(0,0,0,.5);
+}
+
+.red-pill {
+    background:
+        linear-gradient(
+            180deg,
+            #ff4949,
+            #b40000
+        );
+
+    box-shadow:
+        inset 0 5px 10px rgba(255,255,255,.25),
+        inset 0 -8px 15px rgba(0,0,0,.35),
+        0 0 25px rgba(255,20,20,.25);
+}
+
+.blue-pill {
+    background:
+        linear-gradient(
+            180deg,
+            #42a8ff,
+            #0645a8
+        );
+
+    box-shadow:
+        inset 0 5px 10px rgba(255,255,255,.25),
+        inset 0 -8px 15px rgba(0,0,0,.35),
+        0 0 25px rgba(20,120,255,.35);
+}
+
+.choice.selected .pill {
+    transform: scale(1.08);
+    border-color: white;
+    box-shadow:
+        0 0 10px white,
+        0 0 30px currentColor,
+        inset 0 5px 10px rgba(255,255,255,.3);
+}
+
+.description {
+    margin-top: 13px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.55);
+}
+
+.controls {
+    position: absolute;
+    bottom: 42px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,.4);
+    z-index: 20;
+}
+
+.crt {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.018),
+            rgba(255,255,255,.018) 1px,
+            transparent 1px,
             transparent 4px
         );
-        z-index: 20;
+    opacity: .4;
+}
+
+.vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 90;
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 45%,
+            rgba(0,0,0,.5) 100%
+        );
+}
+
+.boot {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background:
+        radial-gradient(
+            circle at center,
+            #071c3b,
+            #00030a
+        );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity 1s ease;
+}
+
+.boot-logo {
+    font-size: 32px;
+    letter-spacing: 10px;
+    text-shadow:
+        0 0 10px #318bff,
+        0 0 30px #1458bd;
+}
+
+.boot-sub {
+    margin-top: 15px;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,.5);
+}
+
+.loading {
+    margin-top: 35px;
+    width: 220px;
+    height: 3px;
+    background: rgba(255,255,255,.15);
+    overflow: hidden;
+}
+
+.loading-bar {
+    width: 0%;
+    height: 100%;
+    background: white;
+    box-shadow: 0 0 12px #5ca5ff;
+    animation: loading 2.5s ease forwards;
+}
+
+@keyframes loading {
+    to {
+        width: 100%;
     }
+}
 
-    .page {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 28px 20px;
-    }
+.fade {
+    opacity: 0;
+    transition: opacity .8s ease;
+}
 
-    /* =========================
-       HEADER
-    ========================= */
+@media(max-width: 700px) {
 
-    .credit {
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    .credit-small {
-        color: #777;
-        font-size: 12px;
-        letter-spacing: 4px;
-    }
-
-    .creator {
-        margin-top: 8px;
-        font-size: clamp(28px, 6vw, 52px);
-        font-weight: bold;
-        letter-spacing: 5px;
-
-        color: #fff;
-
-        text-shadow:
-            3px 3px 0 #333,
-            0 0 12px rgba(255,255,255,.25);
-    }
-
-    .line {
-        width: 280px;
-        height: 2px;
-        margin: 12px auto;
-        background: #333;
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    .main {
-        width: min(1000px, 100%);
-        display: flex;
-        justify-content: center;
-        gap: 70px;
-        margin-top: 15px;
+    .menu {
+        gap: 25px;
     }
 
     .choice {
-        width: 330px;
-        text-align: center;
+        width: 160px;
     }
-
-    .choice-title {
-        font-size: 25px;
-        font-weight: bold;
-        letter-spacing: 5px;
-        margin-bottom: 8px;
-    }
-
-    .red-title {
-        color: #ff2635;
-        text-shadow: 0 0 10px #ff2635;
-    }
-
-    .blue-title {
-        color: #168cff;
-        text-shadow: 0 0 10px #168cff;
-    }
-
-    .description {
-        color: #888;
-        font-size: 13px;
-        line-height: 1.6;
-        min-height: 42px;
-    }
-
-    /* =========================
-       HAND + PILL
-    ========================= */
-
-    .hand-area {
-        position: relative;
-        height: 190px;
-        margin: 5px auto 15px;
-    }
-
-    /*
-       Pixel-art inspired hand.
-       Built completely from CSS.
-    */
-
-    .hand {
-        position: absolute;
-        left: 50%;
-        bottom: 8px;
-
-        width: 210px;
-        height: 95px;
-
-        transform: translateX(-50%);
-
-        background:
-            linear-gradient(
-                160deg,
-                #d99b72 0%,
-                #b87550 55%,
-                #8d5138 100%
-            );
-
-        border: 5px solid #542f25;
-        border-radius: 55% 55% 35% 35%;
-
-        box-shadow:
-            inset -8px -8px 0 rgba(70,30,20,.25),
-            8px 8px 0 #181818;
-    }
-
-    /* fingers */
-
-    .finger {
-        position: absolute;
-
-        width: 42px;
-        height: 75px;
-
-        background:
-            linear-gradient(
-                90deg,
-                #9d5f43,
-                #d99b72,
-                #a86649
-            );
-
-        border: 4px solid #542f25;
-        border-radius: 20px;
-
-        bottom: 48px;
-    }
-
-    .finger.one {
-        left: 18px;
-        transform: rotate(-18deg);
-    }
-
-    .finger.two {
-        left: 57px;
-        transform: rotate(-8deg);
-    }
-
-    .finger.three {
-        right: 57px;
-        transform: rotate(8deg);
-    }
-
-    .finger.four {
-        right: 18px;
-        transform: rotate(18deg);
-    }
-
-    /* Palm lines */
-
-    .palm-line {
-        position: absolute;
-        width: 70px;
-        height: 3px;
-        background: #75412f;
-        opacity: .7;
-        border-radius: 5px;
-    }
-
-    .palm-line.a {
-        left: 65px;
-        top: 48px;
-        transform: rotate(15deg);
-    }
-
-    .palm-line.b {
-        right: 55px;
-        top: 65px;
-        transform: rotate(-12deg);
-    }
-
-    /* Pill */
 
     .pill {
-        position: absolute;
-
-        width: 92px;
-        height: 42px;
-
-        left: 50%;
-        top: 72px;
-
-        transform: translateX(-50%) rotate(-12deg);
-
-        border-radius: 25px;
-
-        border: 4px solid #160b0b;
-
-        z-index: 5;
-
-        cursor: pointer;
-
-        transition:
-            transform .15s,
-            filter .15s;
+        width: 155px;
+        height: 60px;
+        font-size: 14px;
     }
 
-    .pill:hover {
-        transform:
-            translateX(-50%)
-            rotate(-12deg)
-            scale(1.12);
+    .hand {
+        transform: scale(.75) rotate(-7deg);
+        margin-bottom: -5px;
     }
 
-    .pill::after {
-        content: "";
-        position: absolute;
-
-        left: 8px;
-        top: 6px;
-
-        width: 22px;
-        height: 7px;
-
-        border-radius: 50%;
-
-        background: rgba(255,255,255,.55);
+    .hand.right {
+        transform: scale(.75) rotate(7deg) scaleX(-1);
     }
 
-    .red-pill {
-        background:
-            linear-gradient(
-                90deg,
-                #72000b 0%,
-                #ff1528 45%,
-                #85000c 100%
-            );
-
-        box-shadow:
-            0 0 10px #ff1628,
-            5px 5px 0 #280006;
+    .title {
+        letter-spacing: 4px;
     }
-
-    .blue-pill {
-        background:
-            linear-gradient(
-                90deg,
-                #003d82 0%,
-                #168cff 45%,
-                #00468e 100%
-            );
-
-        box-shadow:
-            0 0 10px #168cff,
-            5px 5px 0 #00172d;
-    }
-
-    /* =========================
-       BUTTON
-    ========================= */
-
-    .button {
-        width: 100%;
-
-        padding: 15px 20px;
-
-        background: #090909;
-
-        border: 3px solid;
-        border-radius: 4px;
-
-        font-family: "Courier New", monospace;
-        font-size: 15px;
-        font-weight: bold;
-        letter-spacing: 2px;
-
-        cursor: pointer;
-
-        transition:
-            background .15s,
-            transform .15s,
-            box-shadow .15s;
-    }
-
-    .button:hover {
-        transform: translateY(-3px);
-    }
-
-    .red-button {
-        color: #ff2635;
-        border-color: #ff2635;
-
-        box-shadow:
-            4px 4px 0 #56000a;
-    }
-
-    .red-button:hover {
-        background: #280006;
-
-        box-shadow:
-            0 0 18px #ff2635,
-            4px 4px 0 #56000a;
-    }
-
-    .blue-button {
-        color: #168cff;
-        border-color: #168cff;
-
-        box-shadow:
-            4px 4px 0 #003263;
-    }
-
-    .blue-button:hover {
-        background: #00152b;
-
-        box-shadow:
-            0 0 18px #168cff,
-            4px 4px 0 #003263;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    .footer {
-        margin-top: 35px;
-
-        color: #555;
-
-        font-size: 11px;
-        letter-spacing: 3px;
-
-        text-align: center;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 750px) {
-
-        body {
-            overflow-y: auto;
-        }
-
-        .page {
-            padding-top: 20px;
-        }
-
-        .main {
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .choice {
-            width: min(330px, 90vw);
-        }
-
-        .footer {
-            margin-bottom: 20px;
-        }
-    }
+}
 </style>
 </head>
 
-
 <body>
 
-<div class="page">
+<div class="wave"></div>
+<div class="wave"></div>
+<div class="wave"></div>
+<div class="wave"></div>
 
-    <!-- CREATOR -->
-    <div class="credit">
+<div class="particle" style="left:5%; animation-duration:13s;"></div>
+<div class="particle" style="left:12%; animation-duration:18s;"></div>
+<div class="particle" style="left:21%; animation-duration:15s;"></div>
+<div class="particle" style="left:32%; animation-duration:20s;"></div>
+<div class="particle" style="left:43%; animation-duration:17s;"></div>
+<div class="particle" style="left:55%; animation-duration:14s;"></div>
+<div class="particle" style="left:66%; animation-duration:19s;"></div>
+<div class="particle" style="left:74%; animation-duration:16s;"></div>
+<div class="particle" style="left:85%; animation-duration:21s;"></div>
+<div class="particle" style="left:94%; animation-duration:15s;"></div>
 
-        <div class="credit-small">
-            PS4 JAILBREAK PROJECT
+<div class="credit">
+    CREATED FOR THE COMMUNITY
+    <div class="creator">
+        Raw13G
+    </div>
+</div>
+
+<div class="title">
+    PS4 WEBKIT LAUNCHER
+</div>
+
+<div class="subtitle">
+    SELECT AN OPTION
+</div>
+
+<div class="menu">
+
+    <div class="choice selected" id="redChoice">
+
+        <div class="hand">
+
+            <div class="finger f1"></div>
+            <div class="finger f2"></div>
+            <div class="finger f3"></div>
+            <div class="finger f4"></div>
+
+            <div class="thumb"></div>
+
+            <div class="palm"></div>
+
+            <div class="line one"></div>
+            <div class="line two"></div>
+
         </div>
 
-        <div class="creator">
-            Raw13G
+        <div
+            class="pill red-pill"
+            onclick="redPill()"
+        >
+            CLOSE
         </div>
 
-        <div class="line"></div>
-
-        <div class="credit-small">
-            WEBKIT 13.52
+        <div class="description">
+            EXIT PAGE
         </div>
 
     </div>
 
+    <div class="choice" id="blueChoice">
 
-    <div class="main">
+        <div class="hand right">
 
-        <!-- ================= RED ================= -->
+            <div class="finger f1"></div>
+            <div class="finger f2"></div>
+            <div class="finger f3"></div>
+            <div class="finger f4"></div>
 
-        <div class="choice">
+            <div class="thumb"></div>
 
-            <div class="choice-title red-title">
-                RED PILL
-            </div>
+            <div class="palm"></div>
 
-            <div class="description">
-                Close this page or return to the previous screen.
-            </div>
-
-
-            <div class="hand-area">
-
-                <div class="hand">
-
-                    <div class="finger one"></div>
-                    <div class="finger two"></div>
-                    <div class="finger three"></div>
-                    <div class="finger four"></div>
-
-                    <div class="palm-line a"></div>
-                    <div class="palm-line b"></div>
-
-                </div>
-
-                <div
-                    class="pill red-pill"
-                    onclick="closePage()">
-                </div>
-
-            </div>
-
-
-            <button
-                class="button red-button"
-                onclick="closePage()">
-
-                [ TAKE RED PILL ]
-
-            </button>
+            <div class="line one"></div>
+            <div class="line two"></div>
 
         </div>
 
-
-        <!-- ================= BLUE ================= -->
-
-        <div class="choice">
-
-            <div class="choice-title blue-title">
-                BLUE PILL
-            </div>
-
-            <div class="description">
-                Continue to the PS4 WebKit page.
-            </div>
-
-
-            <div class="hand-area">
-
-                <div class="hand">
-
-                    <div class="finger one"></div>
-                    <div class="finger two"></div>
-                    <div class="finger three"></div>
-                    <div class="finger four"></div>
-
-                    <div class="palm-line a"></div>
-                    <div class="palm-line b"></div>
-
-                </div>
-
-                <div
-                    class="pill blue-pill"
-                    onclick="startJB()">
-                </div>
-
-            </div>
-
-
-            <button
-                class="button blue-button"
-                onclick="startJB()">
-
-                [ TAKE BLUE PILL ]
-
-            </button>
-
+        <div
+            class="pill blue-pill"
+            onclick="bluePill()"
+        >
+            CONTINUE
         </div>
 
-    </div>
+        <div class="description">
+            OPEN RAW13G
+        </div>
 
-
-    <div class="footer">
-        PS4 13.52 • RETRO WEBKIT LAUNCHER
     </div>
 
 </div>
 
+<div class="controls">
+    ← → &nbsp;&nbsp; SELECT
+    &nbsp;&nbsp;&nbsp; ENTER / X &nbsp;&nbsp; CONFIRM
+</div>
+
+<div class="vignette"></div>
+
+<div class="crt"></div>
+
+<div class="boot" id="boot">
+
+    <div class="boot-logo">
+        PS4
+    </div>
+
+    <div class="boot-sub">
+        WEBKIT LAUNCHER
+    </div>
+
+    <div class="loading">
+        <div class="loading-bar"></div>
+    </div>
+
+</div>
 
 <script>
 
-    /* RED PILL */
+const TARGET =
+    "https://raw13g.github.io/";
 
-    function closePage() {
+let audioStarted = false;
+
+function startupSound() {
+
+    if (audioStarted) return;
+
+    audioStarted = true;
+
+    try {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        if (!AudioContext) return;
+
+        const ctx = new AudioContext();
+
+        const notes = [
+            [130.81, 0.00, 0.45],
+            [196.00, 0.35, 0.45],
+            [261.63, 0.70, 0.45],
+            [329.63, 1.05, 0.65]
+        ];
+
+        notes.forEach(note => {
+
+            const oscillator =
+                ctx.createOscillator();
+
+            const gain =
+                ctx.createGain();
+
+            oscillator.type = "sine";
+
+            oscillator.frequency.value =
+                note[0];
+
+            oscillator.connect(gain);
+
+            gain.connect(ctx.destination);
+
+            const start =
+                ctx.currentTime + note[1];
+
+            const end =
+                start + note[2];
+
+            gain.gain.setValueAtTime(
+                0.0001,
+                start
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.18,
+                start + 0.03
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.0001,
+                end
+            );
+
+            oscillator.start(start);
+
+            oscillator.stop(end);
+
+        });
+
+    } catch(e) {
+
+        console.log("Audio unavailable");
+
+    }
+
+}
+
+window.addEventListener(
+    "load",
+    () => {
+
+        setTimeout(() => {
+
+            const boot =
+                document.getElementById("boot");
+
+            boot.style.opacity = "0";
+
+            setTimeout(() => {
+
+                boot.style.display = "none";
+
+            }, 1000);
+
+        }, 2600);
+
+    }
+);
+
+document.addEventListener(
+    "click",
+    startupSound,
+    { once: true }
+);
+
+document.addEventListener(
+    "keydown",
+    startupSound,
+    { once: true }
+);
+
+function redPill() {
+
+    document.body.classList.add("fade");
+
+    setTimeout(() => {
 
         window.close();
 
-        /*
-          Browsers normally block window.close()
-          if this tab wasn't opened by JavaScript.
+        setTimeout(() => {
 
-          If blocked, show a message instead.
-        */
-
-        setTimeout(function () {
+            document.body.classList.remove("fade");
 
             alert(
-                "This tab cannot be closed automatically. " +
-                "Please close it manually."
+                "The browser blocked automatic closing of this page."
             );
 
-        }, 300);
+        }, 900);
+
+    }, 500);
+
+}
+
+function bluePill() {
+
+    document.body.classList.add("fade");
+
+    setTimeout(() => {
+
+        window.location.href = TARGET;
+
+    }, 500);
+
+}
+
+let selected = 0;
+
+const choices = [
+    document.getElementById("redChoice"),
+    document.getElementById("blueChoice")
+];
+
+function updateSelection() {
+
+    choices.forEach(
+        (choice, index) => {
+
+            choice.classList.toggle(
+                "selected",
+                index === selected
+            );
+
+        }
+    );
+
+}
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "ArrowLeft" ||
+            event.key === "ArrowUp"
+        ) {
+
+            selected = 0;
+
+            updateSelection();
+
+        }
+
+        if (
+            event.key === "ArrowRight" ||
+            event.key === "ArrowDown"
+        ) {
+
+            selected = 1;
+
+            updateSelection();
+
+        }
+
+        if (
+            event.key === "Enter" ||
+            event.key.toLowerCase() === "x"
+        ) {
+
+            if (selected === 0) {
+
+                redPill();
+
+            } else {
+
+                bluePill();
+
+            }
+
+        }
+
+    }
+);
+
+let gamepadLoop = false;
+
+function checkGamepad() {
+
+    const pads =
+        navigator.getGamepads
+            ? navigator.getGamepads()
+            : [];
+
+    if (!pads) return;
+
+    for (const pad of pads) {
+
+        if (!pad) continue;
+
+        if (
+            pad.buttons[14] &&
+            pad.buttons[14].pressed
+        ) {
+
+            selected = 0;
+
+            updateSelection();
+
+        }
+
+        if (
+            pad.buttons[15] &&
+            pad.buttons[15].pressed
+        ) {
+
+            selected = 1;
+
+            updateSelection();
+
+        }
+
+        if (
+            pad.buttons[0] &&
+            pad.buttons[0].pressed
+        ) {
+
+            if (!gamepadLoop) {
+
+                gamepadLoop = true;
+
+                if (selected === 0) {
+
+                    redPill();
+
+                } else {
+
+                    bluePill();
+
+                }
+
+                setTimeout(
+                    () => {
+                        gamepadLoop = false;
+                    },
+                    700
+                );
+
+            }
+
+        }
+
     }
 
+    requestAnimationFrame(checkGamepad);
 
-    /* BLUE PILL */
+}
 
-    function startJB() {
+requestAnimationFrame(checkGamepad);
 
-        window.location.href =
-            "https://raw13g.github.io/";
+document
+    .querySelector(".red-pill")
+    .addEventListener(
+        "mouseenter",
+        () => {
 
-    }
+            selected = 0;
+
+            updateSelection();
+
+        }
+    );
+
+document
+    .querySelector(".blue-pill")
+    .addEventListener(
+        "mouseenter",
+        () => {
+
+            selected = 1;
+
+            updateSelection();
+
+        }
+    );
+
+document
+    .querySelector(".red-pill")
+    .addEventListener(
+        "touchstart",
+        startupSound,
+        { passive: true }
+    );
+
+document
+    .querySelector(".blue-pill")
+    .addEventListener(
+        "touchstart",
+        startupSound,
+        { passive: true }
+    );
+
+updateSelection();
 
 </script>
 
 </body>
 </html>
-```
+
+   
