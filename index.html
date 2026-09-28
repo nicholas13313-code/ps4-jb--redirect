@@ -35,9 +35,7 @@ html,body{
   transition:opacity 2.5s ease;
 }
 
-#bg.on{
-  opacity:1;
-}
+#bg.on{opacity:1;}
 
 #scanlines{
   position:fixed;
@@ -79,9 +77,7 @@ html,body{
   );
 }
 
-#flash.on{
-  opacity:1;
-}
+#flash.on{opacity:1;}
 
 #startGate{
   position:fixed;
@@ -249,9 +245,6 @@ h1{
   color:#cfe8ff;
 }
 
-
-/* THREE BUTTON LAYOUT */
-
 .choices{
   position:relative;
   width:100%;
@@ -270,9 +263,6 @@ h1{
   justify-content:center;
   cursor:pointer;
 }
-
-
-/* SLIGHTLY SMALLER BUTTONS */
 
 .pill{
   position:relative;
@@ -367,29 +357,6 @@ footer{
   text-shadow:0 2px 10px #000;
 }
 
-.labels{
-  display:flex;
-  justify-content:space-between;
-  width:100%;
-  max-width:900px;
-  gap:2vw;
-}
-
-.label{
-  flex:1;
-  font-size:.62rem;
-  letter-spacing:.15em;
-  color:#7fb0dc;
-  line-height:1.8;
-}
-
-.label b{
-  display:block;
-  font-size:.82rem;
-  letter-spacing:.15em;
-  color:#d6ecff;
-}
-
 .hint{
   font-size:.6rem;
   letter-spacing:.22em;
@@ -414,7 +381,6 @@ footer{
 <body>
 
 <canvas id="bg"></canvas>
-
 <div id="vignette"></div>
 <div id="scanlines"></div>
 <div id="flash"></div>
@@ -438,25 +404,11 @@ footer{
   </button>
 
   <header>
-
-    <div class="tag">
-      CREATED FOR THE COMMUNITY
-    </div>
-
-    <div class="logo">
-      Raw13G
-    </div>
-
-    <h1>
-      PS4 WEBKIT LAUNCHER
-    </h1>
-
-    <div class="subtitle">
-      SELECT YOUR PATH
-    </div>
-
+    <div class="tag">CREATED FOR THE COMMUNITY</div>
+    <div class="logo">Raw13G</div>
+    <h1>PS4 WEBKIT LAUNCHER</h1>
+    <div class="subtitle">SELECT YOUR PATH</div>
   </header>
-
 
   <div class="choices">
 
@@ -466,41 +418,21 @@ footer{
       </div>
     </div>
 
-    <div class="choice center" id="choiceStore">
-      <div class="pill blue">
-        🛍 HOMEBREW STORE
-      </div>
-    </div>
-
-    <div class="choice right" id="choiceContinue">
+    <div class="choice center" id="choiceContinue">
       <div class="pill blue">
         GOLDHEN JB
       </div>
     </div>
 
+    <div class="choice right" id="choiceStore">
+      <div class="pill blue">
+        🛍 HOMEBREW STORE
+      </div>
+    </div>
+
   </div>
 
-
   <footer>
-
-    <div class="labels">
-
-      <div class="label">
-        <b>NO JB 😢</b>
-        EXIT PAGE
-      </div>
-
-      <div class="label">
-        <b>HOMEBREW STORE</b>
-        OPEN PKG-ZONE
-      </div>
-
-      <div class="label">
-        <b>GOLDHEN JB</b>
-        OPEN RAW13G
-      </div>
-
-    </div>
 
     <div class="hint">
       <b>◀ ▶</b>
@@ -518,7 +450,6 @@ footer{
 
 </div>
 
-
 <script>
 
 const $=id=>document.getElementById(id);
@@ -530,9 +461,7 @@ const RM=
   matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 
-/* =========================
-   BACKGROUND
-========================= */
+/* BACKGROUND */
 
 const cv=$('bg');
 const ctx=cv.getContext('2d');
@@ -1119,9 +1048,7 @@ function frame(now){
 requestAnimationFrame(frame);
 
 
-/* =========================
-   AUDIO
-========================= */
+/* AUDIO */
 
 let ac=null;
 let master=null;
@@ -1372,9 +1299,7 @@ function toggleMute(){
 }
 
 
-/* =========================
-   EXPERIENCE
-========================= */
+/* EXPERIENCE */
 
 const bootEl=$('boot');
 const sceneEl=$('scene');
@@ -1383,11 +1308,11 @@ const gate=$('startGate');
 const choiceClose=
   $('choiceClose');
 
-const choiceStore=
-  $('choiceStore');
-
 const choiceContinue=
   $('choiceContinue');
+
+const choiceStore=
+  $('choiceStore');
 
 
 let started=false;
@@ -1496,9 +1421,7 @@ function finishBoot(){
 }
 
 
-/* =========================
-   SELECTION
-========================= */
+/* SELECTION */
 
 function setSel(v){
 
@@ -1516,15 +1439,15 @@ function setSel(v){
   );
 
 
-  choiceStore.classList.toggle(
-    'active',
-    v==='store'
-  );
-
-
   choiceContinue.classList.toggle(
     'active',
     v==='continue'
+  );
+
+
+  choiceStore.classList.toggle(
+    'active',
+    v==='store'
   );
 }
 
@@ -1533,18 +1456,16 @@ choiceClose.classList.remove(
   'active'
 );
 
-choiceStore.classList.remove(
-  'active'
-);
-
 choiceContinue.classList.add(
   'active'
 );
 
+choiceStore.classList.remove(
+  'active'
+);
 
-/* =========================
-   ACTIVATE
-========================= */
+
+/* ACTIVATE */
 
 function activate(){
 
@@ -1554,8 +1475,6 @@ function activate(){
 
   confirmSnd();
 
-
-  /* GOLDHEN */
 
   if(selected==='continue'){
 
@@ -1575,8 +1494,6 @@ function activate(){
   }
 
 
-  /* HOMEBREW STORE */
-
   else if(selected==='store'){
 
     $('flash')
@@ -1594,8 +1511,6 @@ function activate(){
 
   }
 
-
-  /* NO JB */
 
   else{
 
@@ -1627,9 +1542,7 @@ function activate(){
 }
 
 
-/* =========================
-   START
-========================= */
+/* START */
 
 gate.addEventListener(
   'click',
@@ -1646,18 +1559,11 @@ bootEl.addEventListener(
 );
 
 
-/* =========================
-   POINTER
-========================= */
+/* POINTER */
 
 choiceClose.addEventListener(
   'pointerenter',
   ()=>setSel('close')
-);
-
-choiceStore.addEventListener(
-  'pointerenter',
-  ()=>setSel('store')
 );
 
 choiceContinue.addEventListener(
@@ -1665,24 +1571,18 @@ choiceContinue.addEventListener(
   ()=>setSel('continue')
 );
 
+choiceStore.addEventListener(
+  'pointerenter',
+  ()=>setSel('store')
+);
 
-/* =========================
-   CLICK
-========================= */
+
+/* CLICK */
 
 choiceClose.addEventListener(
   'click',
   ()=>{
     setSel('close');
-    activate();
-  }
-);
-
-
-choiceStore.addEventListener(
-  'click',
-  ()=>{
-    setSel('store');
     activate();
   }
 );
@@ -1697,9 +1597,16 @@ choiceContinue.addEventListener(
 );
 
 
-/* =========================
-   SOUND
-========================= */
+choiceStore.addEventListener(
+  'click',
+  ()=>{
+    setSel('store');
+    activate();
+  }
+);
+
+
+/* SOUND */
 
 $('snd').addEventListener(
   'click',
@@ -1713,15 +1620,7 @@ $('snd').addEventListener(
 );
 
 
-/*
-  PS4-FRIENDLY CONTROLS
-
-  LEFT  = previous
-  RIGHT = next
-  ENTER = confirm
-
-  M / F shortcuts removed.
-*/
+/* CONTROLS */
 
 addEventListener(
   'keydown',
@@ -1746,41 +1645,35 @@ addEventListener(
     const k=e.key;
 
 
-    /* LEFT */
-
     if(k==='ArrowLeft'){
 
       e.preventDefault();
 
-      if(selected==='continue')
-        setSel('store');
+      if(selected==='store')
+        setSel('continue');
 
-      else if(selected==='store')
+      else if(selected==='continue')
         setSel('close');
 
       else
-        setSel('continue');
+        setSel('store');
     }
 
-
-    /* RIGHT */
 
     else if(k==='ArrowRight'){
 
       e.preventDefault();
 
       if(selected==='close')
-        setSel('store');
-
-      else if(selected==='store')
         setSel('continue');
+
+      else if(selected==='continue')
+        setSel('store');
 
       else
         setSel('close');
     }
 
-
-    /* CONFIRM */
 
     else if(
       k==='Enter'||
@@ -1796,9 +1689,7 @@ addEventListener(
 );
 
 
-/* =========================
-   POINTER CAMERA
-========================= */
+/* POINTER CAMERA */
 
 addEventListener(
   'pointermove',
@@ -1823,9 +1714,7 @@ addEventListener(
 );
 
 
-/* =========================
-   GAMEPAD FALLBACK
-========================= */
+/* GAMEPAD FALLBACK */
 
 const pp={
   l:false,
@@ -1890,24 +1779,24 @@ setInterval(
 
     if(l&&!pp.l){
 
-      if(selected==='continue')
-        setSel('store');
+      if(selected==='store')
+        setSel('continue');
 
-      else if(selected==='store')
+      else if(selected==='continue')
         setSel('close');
 
       else
-        setSel('continue');
+        setSel('store');
     }
 
 
     if(r&&!pp.r){
 
       if(selected==='close')
-        setSel('store');
-
-      else if(selected==='store')
         setSel('continue');
+
+      else if(selected==='continue')
+        setSel('store');
 
       else
         setSel('close');
