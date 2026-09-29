@@ -43,24 +43,10 @@ html,body{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:18px;transition:opacity 1.4s ease;cursor:pointer;
 }
-#boot .b1{
-  font-size:2.6rem;letter-spacing:.4em;font-weight:200;opacity:0;
-  color:#cfe8ff;text-shadow:0 0 30px #3fa9ff,0 2px 14px #000;
-  transition:opacity 1.2s ease;
-}
-#boot .b2{
-  font-size:1rem;letter-spacing:.5em;opacity:0;color:#8fc0ec;
-  text-shadow:0 2px 12px #000;transition:opacity 1.2s ease;
-}
-#boot .bar{
-  width:220px;height:2px;background:rgba(10,37,64,.8);
-  overflow:hidden;opacity:0;transition:opacity 1s ease;
-}
-#boot .bar i{
-  display:block;height:100%;width:0%;
-  background:linear-gradient(90deg,#1a4f7a,#8fd0ff);
-  transition:width 2.2s ease;
-}
+#boot .b1{font-size:2.6rem;letter-spacing:.4em;font-weight:200;opacity:0;color:#cfe8ff;text-shadow:0 0 30px #3fa9ff,0 2px 14px #000;transition:opacity 1.2s ease;}
+#boot .b2{font-size:1rem;letter-spacing:.5em;opacity:0;color:#8fc0ec;text-shadow:0 2px 12px #000;transition:opacity 1.2s ease;}
+#boot .bar{width:220px;height:2px;background:rgba(10,37,64,.8);overflow:hidden;opacity:0;transition:opacity 1s ease;}
+#boot .bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#1a4f7a,#8fd0ff);transition:width 2.2s ease;}
 #scene{
   position:fixed;inset:0;z-index:10;
   display:flex;flex-direction:column;align-items:center;justify-content:space-between;
@@ -68,52 +54,37 @@ html,body{
   opacity:0;transition:opacity 2s ease;text-align:center;pointer-events:none;
 }
 #scene.on{pointer-events:auto;}
-header{
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  text-shadow:0 2px 14px #000;
-}
+header{display:flex;flex-direction:column;align-items:center;gap:6px;text-shadow:0 2px 14px #000;}
 .tag{font-size:.65rem;letter-spacing:.35em;color:#7fa9d4;font-weight:300;}
-.logo{
-  font-size:1.1rem;letter-spacing:.3em;color:#a8dcff;
-  text-shadow:0 0 18px rgba(63,169,255,.7),0 2px 10px #000;margin-top:4px;
-}
+.logo{font-size:1.1rem;letter-spacing:.3em;color:#a8dcff;text-shadow:0 0 18px rgba(63,169,255,.7),0 2px 10px #000;margin-top:4px;}
 h1{
   font-size:clamp(1.8rem,5vw,3.2rem);font-weight:200;letter-spacing:.12em;margin-top:10px;
   background:linear-gradient(180deg,#eaf6ff,#7fc4ff 70%,#2a70a8);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 0 22px rgba(63,169,255,.4)) drop-shadow(0 3px 10px #000);
 }
-.subtitle{
-  font-size:.85rem;letter-spacing:.5em;color:#6fa3cf;margin-top:6px;font-weight:300;
-}
+.subtitle{font-size:.85rem;letter-spacing:.5em;color:#6fa3cf;margin-top:6px;font-weight:300;}
 #snd{
   position:absolute;top:calc(2vh + env(safe-area-inset-top,0px));right:3vw;
-  background:rgba(2,6,16,.5);border:1px solid rgba(111,163,207,.35);
-  color:#7fb0dc;font:inherit;font-size:.6rem;letter-spacing:.2em;
-  padding:6px 12px;border-radius:999px;cursor:pointer;
+  background:rgba(2,6,16,.5);border:1px solid rgba(111,163,207,.35);color:#7fb0dc;
+  font:inherit;font-size:.6rem;letter-spacing:.2em;padding:6px 12px;border-radius:999px;cursor:pointer;
 }
 #snd:hover{border-color:#8fd0ff;color:#cfe8ff;}
-
 .choices{
-  position:relative;width:100%;max-width:1100px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex:1;gap:2vw;
+  position:relative;width:100%;max-width:1000px;
+  display:flex;align-items:center;justify-content:space-between;flex:1;gap:4vw;
 }
-.choice{
-  flex:1;display:flex;align-items:center;justify-content:center;cursor:pointer;
-}
+.choice{flex:1;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 .pill{
-  position:relative;width:90%;max-width:270px;height:15vh;max-height:72px;min-height:52px;
+  position:relative;width:90%;max-width:300px;height:15vh;max-height:78px;min-height:52px;
   border-radius:999px;display:flex;align-items:center;justify-content:center;
-  font-weight:600;font-size:clamp(.78rem,1.5vw,1rem);letter-spacing:.08em;
-  white-space:nowrap;padding:0 5%;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.5);
+  font-weight:600;font-size:clamp(.85rem,1.8vw,1.2rem);letter-spacing:.1em;
+  white-space:nowrap;padding:0 6%;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.5);
   transition:transform .35s ease,box-shadow .35s ease,filter .35s ease;
 }
 .pill::after{
-  content:"";position:absolute;left:8%;right:8%;top:6%;height:38%;
-  border-radius:999px;
-  background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0));
-  pointer-events:none;
+  content:"";position:absolute;left:8%;right:8%;top:6%;height:38%;border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0));pointer-events:none;
 }
 .pill.red{
   background:linear-gradient(160deg,#ff8a8a,#c11f1f 60%,#6e0d0d);
@@ -123,292 +94,19 @@ h1{
   background:linear-gradient(160deg,#a9ddff,#1c7fd6 60%,#0a3c6e);
   box-shadow:0 0 20px rgba(63,169,255,.5),inset 0 2px 6px rgba(255,255,255,.4);
 }
-.pill.green{
-  background:linear-gradient(160deg,#8dffb2,#16a34a 60%,#075c29);
-  box-shadow:0 0 20px rgba(53,255,121,.5),inset 0 2px 6px rgba(255,255,255,.4);
-}
 .choice:not(.active) .pill{filter:brightness(.72) saturate(.85);}
 .choice.active .pill{transform:translateY(-8px) scale(1.08);}
 .choice.active.left .pill{box-shadow:0 0 50px rgba(255,60,60,.95),inset 0 2px 6px rgba(255,255,255,.5);}
-.choice.active.middle .pill{box-shadow:0 0 50px rgba(63,169,255,.95),inset 0 2px 6px rgba(255,255,255,.5);}
-.choice.active.right .pill{box-shadow:0 0 50px rgba(53,255,121,.95),inset 0 2px 6px rgba(255,255,255,.5);}
-
-#controllerStatus{
-  position:absolute;
-  top:calc(2vh + env(safe-area-inset-top,0px));
-  left:3vw;
-  display:flex;
-  align-items:center;
-  gap:7px;
-  background:rgba(2,6,16,.55);
-  border:1px solid rgba(111,163,207,.35);
-  padding:6px 11px;
-  border-radius:999px;
-  font-size:.58rem;
-  letter-spacing:.12em;
-  color:#7fb0dc;
-  z-index:20;
-}
-.statusDot{
-  width:7px;height:7px;border-radius:50%;
-  background:#ff3030;
-  box-shadow:0 0 9px #ff3030;
-}
-#controllerStatus.connected .statusDot{
-  background:#35ff79;
-  box-shadow:0 0 10px #35ff79;
-}
-#controllerStatus.connected{color:#8dffb2;border-color:rgba(53,255,121,.4);}
-
-footer{
-  display:flex;flex-direction:column;align-items:center;width:100%;
-  text-shadow:0 2px 10px #000;
-}
-.labels{
-  display:flex;justify-content:space-between;width:100%;
-  max-width:1100px;gap:2vw;
-}
-.label{
-  flex:1;font-size:.65rem;letter-spacing:.18em;color:#7fb0dc;line-height:1.8;
-}
-.label b{
-  display:block;font-size:.82rem;letter-spacing:.2em;color:#d6ecff;
-}
-.hint{
-  font-size:.56rem;letter-spacing:.18em;color:#5f8fb8;margin-top:12px;
-}
+.choice.active.right .pill{box-shadow:0 0 50px rgba(63,169,255,.95),inset 0 2px 6px rgba(255,255,255,.5);}
+footer{display:flex;flex-direction:column;align-items:center;width:100%;text-shadow:0 2px 10px #000;}
+.labels{display:flex;justify-content:space-between;width:100%;max-width:1000px;gap:4vw;}
+.label{flex:1;font-size:.7rem;letter-spacing:.2em;color:#7fb0dc;line-height:1.8;}
+.label b{display:block;font-size:.95rem;letter-spacing:.25em;color:#d6ecff;}
+.hint{font-size:.6rem;letter-spacing:.22em;color:#5f8fb8;margin-top:12px;}
 .hint b{color:#a8d4f5;font-weight:600;}
-.credit{
-  font-size:.55rem;letter-spacing:.18em;color:#4f79a0;margin-top:8px;
-}
-
-#controllerSettings{
-  position:fixed;
-  inset:0;
-  z-index:200;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(8px);
-}
-#controllerSettings.show{display:flex;}
-.settingsBox{
-  width:min(92vw,560px);
-  max-height:88vh;
-  overflow:auto;
-  background:linear-gradient(145deg,rgba(5,12,28,.97),rgba(2,5,14,.98));
-  border:1px solid rgba(100,170,230,.4);
-  border-radius:22px;
-  box-shadow:0 0 60px rgba(30,130,255,.25);
-  padding:25px;
-  text-align:center;
-}
-.settingsTitle{
-  font-size:1.1rem;
-  letter-spacing:.28em;
-  color:#cfe8ff;
-  margin-bottom:18px;
-}
-.virtualController{
-  position:relative;
-  width:260px;
-  height:145px;
-  margin:0 auto 20px;
-  background:linear-gradient(145deg,#242b35,#0b0f15);
-  border-radius:70px 70px 55px 55px;
-  border:2px solid #394655;
-  box-shadow:inset 0 5px 15px rgba(255,255,255,.08),0 15px 35px rgba(0,0,0,.5);
-}
-.virtualController:before,
-.virtualController:after{
-  content:"";
-  position:absolute;
-  width:82px;
-  height:92px;
-  bottom:-5px;
-  background:inherit;
-  border:inherit;
-  border-top:0;
-}
-.virtualController:before{
-  left:-12px;
-  transform:rotate(8deg);
-  border-radius:0 0 45px 55px;
-}
-.virtualController:after{
-  right:-12px;
-  transform:rotate(-8deg);
-  border-radius:0 0 55px 45px;
-}
-.virtualTouchpad{
-  position:absolute;
-  width:86px;
-  height:34px;
-  left:87px;
-  top:19px;
-  border-radius:8px;
-  border:1px solid #566474;
-  background:#111722;
-}
-.virtualLightbar{
-  position:absolute;
-  width:62px;
-  height:4px;
-  left:99px;
-  top:11px;
-  border-radius:10px;
-  background:#3fa9ff;
-  box-shadow:0 0 12px #3fa9ff;
-}
-.virtualDpad{
-  position:absolute;
-  left:48px;
-  top:67px;
-  width:43px;
-  height:43px;
-}
-.virtualDpad:before,
-.virtualDpad:after{
-  content:"";
-  position:absolute;
-  background:#080b10;
-  border-radius:3px;
-}
-.virtualDpad:before{
-  width:15px;height:43px;left:14px;top:0;
-}
-.virtualDpad:after{
-  width:43px;height:15px;left:0;top:14px;
-}
-.virtualButtons{
-  position:absolute;
-  right:42px;
-  top:66px;
-  width:48px;
-  height:48px;
-}
-.vb{
-  position:absolute;
-  width:17px;height:17px;
-  border:1px solid #68798a;
-  border-radius:50%;
-  font-size:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#a9b7c6;
-}
-.vb.t{left:16px;top:0;}
-.vb.r{right:0;top:16px;}
-.vb.b{left:16px;bottom:0;}
-.vb.l{left:0;top:16px;}
-
-.settingGroup{
-  margin-top:18px;
-  padding-top:16px;
-  border-top:1px solid rgba(111,163,207,.18);
-}
-.settingLabel{
-  color:#8fbce2;
-  font-size:.65rem;
-  letter-spacing:.2em;
-  margin-bottom:10px;
-}
-.settingRow{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:8px;
-}
-.settingBtn{
-  border:1px solid rgba(111,163,207,.3);
-  background:rgba(20,30,48,.8);
-  color:#8fbce2;
-  border-radius:999px;
-  padding:8px 13px;
-  font:inherit;
-  font-size:.62rem;
-  letter-spacing:.08em;
-  cursor:pointer;
-}
-.settingBtn:hover,
-.settingBtn.active{
-  border-color:#8fd0ff;
-  color:#fff;
-  background:rgba(45,90,135,.65);
-  box-shadow:0 0 15px rgba(63,169,255,.25);
-}
-.colorBtn{
-  width:30px;
-  height:30px;
-  padding:0;
-  border-radius:50%;
-  position:relative;
-}
-.colorBtn.active:after{
-  content:"";
-  position:absolute;
-  inset:-4px;
-  border:2px solid #fff;
-  border-radius:50%;
-}
-.color-blue{background:#3fa9ff;}
-.color-red{background:#ff3030;}
-.color-green{background:#35ff79;}
-.color-purple{background:#a15cff;}
-.color-gold{background:#ffd43b;}
-.color-white{background:#fff;}
-#settingsClose{
-  margin-top:20px;
-  min-width:130px;
-}
-.settingsDivider{
-  height:1px;
-  background:rgba(111,163,207,.18);
-  margin:16px 0 0;
-}
-.settingsHint{
-  margin-top:12px;
-  color:#557da3;
-  font-size:.52rem;
-  letter-spacing:.12em;
-  line-height:1.7;
-}
-.toggleBtn.active{
-  border-color:#35ff79;
-  color:#baffd2;
-  background:rgba(25,110,65,.38);
-  box-shadow:0 0 15px rgba(53,255,121,.18);
-}
-#settingsReset{
-  margin-top:8px;
-  border-color:rgba(255,80,80,.28);
-  color:#e79a9a;
-}
-#settingsReset:hover{
-  border-color:#ff7070;
-  color:#fff;
-  background:rgba(130,35,35,.45);
-}
-.choice:focus-visible .pill,
-#snd:focus-visible,
-.settingBtn:focus-visible{
-  outline:2px solid #cfe8ff;
-  outline-offset:4px;
-}
-@media(max-width:700px){
-  .choices{gap:1vw;}
-  .pill{font-size:.68rem;padding:0 2%;}
-  .label{font-size:.52rem;}
-  .label b{font-size:.65rem;}
-  .hint{font-size:.45rem;letter-spacing:.1em;}
-  #controllerStatus{font-size:.45rem;}
-  #snd{font-size:.48rem;}
-}
+.credit{font-size:.6rem;letter-spacing:.2em;color:#4f79a0;margin-top:8px;}
 </style>
 </head>
-
 <body>
 <canvas id="bg"></canvas>
 <div id="vignette"></div>
@@ -424,13 +122,7 @@ footer{
 </div>
 
 <div id="scene">
-  <div id="controllerStatus">
-    <span class="statusDot"></span>
-    <span id="statusText">CONTROLLER NOT CONNECTED</span>
-  </div>
-
-  <button id="snd" type="button" aria-label="Toggle sound">SOUND ON</button>
-
+  <button id="snd" type="button">SOUND ON</button>
   <header>
     <div class="tag">CREATED FOR THE COMMUNITY</div>
     <div class="logo">Raw13G</div>
@@ -442,1320 +134,329 @@ footer{
     <div class="choice left" id="choiceClose">
       <div class="pill red">NO JB 😢</div>
     </div>
-
-    <div class="choice middle" id="choiceContinue">
+    <div class="choice right" id="choiceContinue">
       <div class="pill blue">GOLDHEN JB</div>
-    </div>
-
-    <div class="choice right" id="choiceStore">
-      <div class="pill green">🛍 HOMEBREW STORE</div>
     </div>
   </div>
 
   <footer>
     <div class="labels">
-      <div class="label">
-        <b>NO JB 😢</b>
-        EXIT PAGE
-      </div>
-      <div class="label">
-        <b>GOLDHEN JB</b>
-        OPEN RAW13G
-      </div>
-      <div class="label">
-        <b>🛍 HOMEBREW STORE</b>
-        OPEN PKG-ZONE
-      </div>
+      <div class="label"><b>NO JB 😢</b>EXIT PAGE</div>
+      <div class="label"><b>GOLDHEN JB</b>OPEN RAW13G</div>
     </div>
-
-    <div class="hint">
-      <b>◀ ▶</b> SELECT
-      &nbsp;&nbsp;
-      <b>✕ / ENTER</b> CONFIRM
-      &nbsp;&nbsp;
-      <b>OPTIONS</b> SETTINGS
-      &nbsp;&nbsp;
-      <b>M</b> SOUND
-      &nbsp;&nbsp;
-      <b>F</b> FULLSCREEN
-    </div>
-
+    <div class="hint"><b>◀ ▶</b> SELECT &nbsp;&nbsp; <b>✕ / ENTER</b> CONFIRM &nbsp;&nbsp; <b>M</b> SOUND &nbsp;&nbsp; <b>F</b> FULLSCREEN</div>
     <div class="credit">LAUNCHER AND INTERFACE CREATED BY NIXHOLAS</div>
   </footer>
 </div>
 
-<div id="controllerSettings">
-  <div class="settingsBox">
-    <div class="settingsTitle">PS4 CONTROLLER</div>
-
-    <div class="virtualController">
-      <div class="virtualLightbar" id="virtualLightbar"></div>
-      <div class="virtualTouchpad"></div>
-      <div class="virtualDpad"></div>
-
-      <div class="virtualButtons">
-        <div class="vb t">△</div>
-        <div class="vb r">○</div>
-        <div class="vb b">×</div>
-        <div class="vb l">□</div>
-      </div>
-    </div>
-
-    <div class="settingGroup">
-      <div class="settingLabel">LIGHT BAR COLOR</div>
-      <div class="settingRow">
-        <button class="settingBtn colorBtn color-blue" data-color="#3fa9ff" title="Blue"></button>
-        <button class="settingBtn colorBtn color-red" data-color="#ff3030" title="Red"></button>
-        <button class="settingBtn colorBtn color-green" data-color="#35ff79" title="Green"></button>
-        <button class="settingBtn colorBtn color-purple" data-color="#a15cff" title="Purple"></button>
-        <button class="settingBtn colorBtn color-gold" data-color="#ffd43b" title="Gold"></button>
-        <button class="settingBtn colorBtn color-white" data-color="#ffffff" title="White"></button>
-      </div>
-    </div>
-
-    <div class="settingGroup">
-      <div class="settingLabel">VIBRATION STRENGTH</div>
-      <div class="settingRow">
-        <button class="settingBtn vibrationLevel" data-level="low">LOW</button>
-        <button class="settingBtn vibrationLevel" data-level="medium">MEDIUM</button>
-        <button class="settingBtn vibrationLevel" data-level="high">HIGH</button>
-      </div>
-    </div>
-
-    <div class="settingGroup">
-      <div class="settingLabel">VIBRATION</div>
-      <div class="settingRow">
-        <button class="settingBtn vibrationEnabled" data-enabled="true">ON</button>
-        <button class="settingBtn vibrationEnabled" data-enabled="false">OFF</button>
-      </div>
-    </div>
-
-    <div class="settingGroup">
-      <div class="settingLabel">INTERFACE EFFECTS</div>
-      <div class="settingRow">
-        <button class="settingBtn toggleBtn" id="motionToggle">MOTION</button>
-        <button class="settingBtn toggleBtn" id="parallaxToggle">PARALLAX</button>
-        <button class="settingBtn toggleBtn" id="scanlineToggle">SCANLINES</button>
-      </div>
-    </div>
-
-    <div class="settingGroup">
-      <div class="settingLabel">CONTROLLER RESPONSE</div>
-      <div class="settingRow">
-        <button class="settingBtn toggleBtn" id="rumbleMenuToggle">MENU RUMBLE</button>
-        <button class="settingBtn" id="settingsReset">RESET SETTINGS</button>
-      </div>
-    </div>
-
-    <div class="settingsDivider"></div>
-
-    <div class="settingsHint">
-      OPTIONS / ESC CLOSE &nbsp; • &nbsp; ARROWS SELECT &nbsp; • &nbsp; × CONFIRM
-    </div>
-
-    <button class="settingBtn" id="settingsClose">CLOSE</button>
-  </div>
-</div>
-
 <script>
 const $=id=>document.getElementById(id);
-
 const URL_GO='https://raw13g.github.io/';
-const URL_STORE='https://pkg-zone.com/';
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const savedMotion=localStorage.getItem('ps4_motion')!=='false';
-const savedParallax=localStorage.getItem('ps4_parallax')!=='false';
-const savedScanlines=localStorage.getItem('ps4_scanlines')!=='false';
-const savedMenuRumble=localStorage.getItem('ps4_menu_rumble')!=='false';
-
-let motionEnabled=RM?false:savedMotion;
-let parallaxEnabled=savedParallax;
-let scanlinesEnabled=savedScanlines;
-let menuRumbleEnabled=savedMenuRumble;
-
 const cv=$('bg'),ctx=cv.getContext('2d');
-
 let W,H,DPR;
-
 function resize(){
   DPR=Math.min(devicePixelRatio||1,1.5);
-  W=cv.width=innerWidth*DPR;
-  H=cv.height=innerHeight*DPR;
-  cv.style.width=innerWidth+'px';
-  cv.style.height=innerHeight+'px';
+  W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;
+  cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';
 }
+resize();addEventListener('resize',resize);
 
-resize();
-addEventListener('resize',resize);
-
-const nc=document.createElement('canvas');
-nc.width=nc.height=128;
-
+const nc=document.createElement('canvas');nc.width=nc.height=128;
 const nctx=nc.getContext('2d');
 const nd=nctx.createImageData(128,128);
-
 for(let i=0;i<nd.data.length;i+=4){
   const v=Math.random()*255;
-  nd.data[i]=v;
-  nd.data[i+1]=v;
-  nd.data[i+2]=v;
-  nd.data[i+3]=255;
+  nd.data[i]=nd.data[i+1]=nd.data[i+2]=v;nd.data[i+3]=255;
 }
-
 nctx.putImageData(nd,0,0);
-
 const grain=ctx.createPattern(nc,'repeat');
 
 const Z=48;
 const boxes=[];
-
 for(let n=0;n<170;n++){
   let gx,gy;
-
   do{
     gx=Math.round((Math.random()*2-1)*7);
     gy=Math.round((Math.random()*2-1)*4);
   }while(Math.abs(gx)<1&&Math.abs(gy)<1);
-
   const s=1.5+(Math.random()<.3?.6:0);
-
   boxes.push({
     x:gx*2.4+(Math.random()-.5)*.5,
     y:gy*2.4+(Math.random()-.5)*.5,
     z:Math.random()*Z,
-    s
+    w:s*(.8+Math.random()*.4),
+    h:s*(.8+Math.random()*.4),
+    l:Math.random()<.55?1.4+Math.random()*1.6:5+Math.random()*9
   });
 }
-
 const dots=[
   {a:1,r:.30,s:.20,c:'255,50,60'},
-  {a:2,r:.24,s:.12,c:'60,160,255'},
-  {a:1.5,r:.18,s:-.20,c:'60,255,150'},
+  {a:3,r:.42,s:-.15,c:'70,255,130'},
+  {a:5,r:.50,s:.10,c:'255,60,80'},
   {a:2,r:.20,s:-.30,c:'150,120,255'}
 ];
 
-function tint(m){
-  return `rgb(${(8+157*m)|0},${(10+168*m)|0},${(26+196*m)|0})`;
-}
-
+function tint(m){return `rgb(${(8+157*m)|0},${(10+168*m)|0},${(26+196*m)|0})`;}
 function poly(p,col,a){
-  ctx.globalAlpha=a;
-  ctx.fillStyle=col;
-  ctx.beginPath();
-  ctx.moveTo(p[0][0],p[0][1]);
-
+  ctx.globalAlpha=a;ctx.fillStyle=col;
+  ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);
   for(let i=1;i<p.length;i++)ctx.lineTo(p[i][0],p[i][1]);
-
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.strokeStyle='rgba(0,0,14,.55)';
-  ctx.lineWidth=Math.max(1,DPR);
-  ctx.stroke();
+  ctx.closePath();ctx.fill();
+  ctx.strokeStyle='rgba(0,0,14,.55)';ctx.lineWidth=Math.max(1,DPR);ctx.stroke();
 }
 
 let last=performance.now(),t=0,camZ=0,flow=3,flowT=3;
 let mx=0,my=0,tx=0,ty=0;
-
-function setFlow(v){
-  flowT=v*((RM||!motionEnabled)?.35:1);
-}
-
+function setFlow(v){flowT=v*(RM?.35:1);}
 setFlow(3);
 
 function frame(now){
-  const dt=Math.min(.05,(now-last)/1000);
-  last=now;
-
-  t+=motionEnabled?dt:dt*.15;
-
+  const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;
   flow+=(flowT-flow)*Math.min(1,dt*1.6);
   camZ+=flow*dt;
-
   mx+=(tx-mx)*Math.min(1,dt*2);
   my+=(ty-my)*Math.min(1,dt*2);
 
-  const w=innerWidth;
-  const h=innerHeight;
+  const cx=W/2,cy=H/2,f=Math.min(W,H)*1.05;
+  const camX=Math.sin(t*.27)*.7+mx*1.4;
+  const camY=Math.cos(t*.21)*.5+my*.9;
+  const P=(x,y,z)=>[cx+x*f/z,cy+y*f/z];
 
-  ctx.setTransform(DPR,0,0,DPR,0,0);
-  ctx.clearRect(0,0,w,h);
+  ctx.globalCompositeOperation='source-over';
+  ctx.globalAlpha=1;
+  ctx.fillStyle='#02030a';ctx.fillRect(0,0,W,H);
 
-  const sky=ctx.createLinearGradient(0,0,0,h);
-  sky.addColorStop(0,'#02030a');
-  sky.addColorStop(.55,'#020611');
-  sky.addColorStop(1,'#010208');
+  let g=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.max(W,H)*.55);
+  g.addColorStop(0,'rgba(60,70,190,.55)');
+  g.addColorStop(.4,'rgba(30,35,110,.22)');
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
 
-  ctx.fillStyle=sky;
-  ctx.fillRect(0,0,w,h);
+  const list=[];
+  for(const b of boxes)list.push([((b.z-camZ)%Z+Z)%Z+.5,b]);
+  list.sort((a,c)=>c[0]-a[0]);
 
-  const horizon=h*.55;
-
-  ctx.save();
-
-  if(parallaxEnabled){
-    ctx.translate(mx*16,my*10);
-  }
-
-  const cx=w*.5;
-  const cy=h*.55;
-
-  ctx.globalAlpha=.7;
-
-  for(let i=0;i<boxes.length;i++){
-    const b=boxes[i];
-
-    let zz=(b.z+camZ)%Z;
-    if(zz<0)zz+=Z;
-
-    const perspective=Z/(Z-zz);
-
-    const x=cx+b.x*perspective*55;
-    const y=cy+b.y*perspective*55;
-
-    const size=b.s*perspective*2.4;
-
-    if(
-      x<-100||
-      x>w+100||
-      y<-100||
-      y>h+100
-    )continue;
-
-    const m=Math.min(1,Math.max(0,1-zz/Z));
-
-    ctx.fillStyle=tint(m);
-
-    ctx.fillRect(
-      x-size*.5,
-      y-size*.5,
-      Math.max(1,size),
-      Math.max(1,size)
-    );
+  for(const [d,b] of list){
+    const a=Math.min(1,(d-.5)/1.6)*Math.min(1,(Z-d)/6);
+    if(a<=.01)continue;
+    const x0=b.x-b.w/2-camX,x1=x0+b.w;
+    const y0=b.y-b.h/2-camY,y1=y0+b.h;
+    const z0=d,z1=d+b.l;
+    const fog=Math.pow(Math.max(0,1-d/Z),1.2);
+    if(y0>0)poly([P(x0,y0,z0),P(x1,y0,z0),P(x1,y0,z1),P(x0,y0,z1)],tint(fog*.78),a);
+    if(y1<0)poly([P(x0,y1,z0),P(x1,y1,z0),P(x1,y1,z1),P(x0,y1,z1)],tint(fog*.36),a);
+    if(x0>0)poly([P(x0,y0,z0),P(x0,y1,z0),P(x0,y1,z1),P(x0,y0,z1)],tint(fog*.55),a);
+    if(x1<0)poly([P(x1,y0,z0),P(x1,y1,z0),P(x1,y1,z1),P(x1,y0,z1)],tint(fog*.55),a);
+    poly([P(x0,y0,z0),P(x1,y0,z0),P(x1,y1,z0),P(x0,y1,z0)],tint(fog),a);
   }
 
   ctx.globalAlpha=1;
-
-  const horizonGlow=ctx.createRadialGradient(
-    cx,horizon,0,
-    cx,horizon,w*.65
-  );
-
-  horizonGlow.addColorStop(
-    0,
-    'rgba(25,105,190,.18)'
-  );
-
-  horizonGlow.addColorStop(
-    .45,
-    'rgba(20,65,130,.06)'
-  );
-
-  horizonGlow.addColorStop(
-    1,
-    'rgba(0,0,0,0)'
-  );
-
-  ctx.fillStyle=horizonGlow;
-  ctx.fillRect(0,0,w,h);
+  ctx.globalCompositeOperation='lighter';
+  g=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.min(W,H)*.35);
+  g.addColorStop(0,'rgba(70,80,200,.28)');
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
 
   for(const d of dots){
-    const ang=t*d.s;
-    const r=Math.min(w,h)*d.r;
-
-    const x=cx+Math.cos(ang)*r;
-    const y=cy+Math.sin(ang*.7)*r*.5;
-
-    const grad=ctx.createRadialGradient(
-      x,y,0,
-      x,y,70*d.a
-    );
-
-    grad.addColorStop(
-      0,
-      `rgba(${d.c},.18)`
-    );
-
-    grad.addColorStop(
-      1,
-      `rgba(${d.c},0)`
-    );
-
-    ctx.fillStyle=grad;
-    ctx.fillRect(x-100,y-100,200,200);
+    d.a+=d.s*dt;
+    const px=cx+Math.cos(d.a)*d.r*W*.5;
+    const py=cy+Math.sin(d.a*1.3)*d.r*H*.6;
+    ctx.shadowBlur=16*DPR;ctx.shadowColor=`rgba(${d.c},1)`;
+    ctx.fillStyle=`rgba(${d.c},.95)`;
+    ctx.beginPath();ctx.arc(px,py,2.2*DPR,0,Math.PI*2);ctx.fill();
+    ctx.shadowBlur=0;
   }
 
+  ctx.globalCompositeOperation='overlay';
+  ctx.globalAlpha=.22;
+  ctx.save();
+  ctx.translate(-(Math.random()*128|0),-(Math.random()*128|0));
+  ctx.fillStyle=grain;ctx.fillRect(0,0,W+128,H+128);
   ctx.restore();
-
-  ctx.globalAlpha=.08;
-  ctx.fillStyle=grain;
-  ctx.fillRect(0,0,w,h);
+  ctx.globalCompositeOperation='source-over';
   ctx.globalAlpha=1;
 
   requestAnimationFrame(frame);
 }
-
 requestAnimationFrame(frame);
 
-const scene=$('scene');
-const boot=$('boot');
-const startGate=$('startGate');
-const flash=$('flash');
+let ac=null,master=null,muted=false,droneOn=false;
+function ensureAudio(){
+  try{
+    if(!ac){
+      ac=new (window.AudioContext||window.webkitAudioContext)();
+      master=ac.createGain();
+      master.gain.value=muted?0:1;
+      master.connect(ac.destination);
+    }
+    if(ac.state==='suspended')ac.resume();
+  }catch(e){}
+}
+function tone(type,f0,f1,t0,dur,vol){
+  if(!ac)return;
+  const o=ac.createOscillator(),g=ac.createGain();
+  o.type=type;
+  o.frequency.setValueAtTime(f0,t0);
+  if(f1!==f0)o.frequency.exponentialRampToValueAtTime(f1,t0+dur);
+  g.gain.setValueAtTime(.0001,t0);
+  g.gain.exponentialRampToValueAtTime(vol,t0+dur*.25);
+  g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
+  o.connect(g).connect(master);
+  o.start(t0);o.stop(t0+dur+.05);
+}
+function bootSound(){
+  if(!ac)return;
+  const n=ac.currentTime;
+  tone('sine',70,320,n,2.4,.28);
+  tone('triangle',520,680,n+.3,1.3,.12);
+  tone('sine',880,1320,n+1.1,1.6,.07);
+  tone('sine',1320,1320,n+1.5,1.4,.05);
+}
+function blip(){if(ac)tone('square',660,880,ac.currentTime,.09,.05);}
+function confirmSnd(){
+  if(!ac)return;
+  const n=ac.currentTime;
+  tone('triangle',440,880,n,.25,.12);
+  tone('sine',880,1760,n+.08,.3,.08);
+}
+function drone(){
+  if(!ac||droneOn)return;
+  droneOn=true;
+  const g=ac.createGain();
+  g.gain.value=0;
+  g.gain.linearRampToValueAtTime(.05,ac.currentTime+3);
+  g.connect(master);
+  [55,55.7,110.4].forEach((fr,i)=>{
+    const o=ac.createOscillator();
+    o.type=i===2?'triangle':'sine';
+    o.frequency.value=fr;
+    const q=ac.createGain();
+    q.gain.value=i===2?.3:1;
+    o.connect(q).connect(g);
+    o.start();
+  });
+}
+function toggleMute(){
+  muted=!muted;
+  if(master)master.gain.setTargetAtTime(muted?0:1,ac.currentTime,.05);
+  $('snd').textContent=muted?'SOUND OFF':'SOUND ON';
+}
 
-let started=false;
-let ready=false;
+const bootEl=$('boot'),sceneEl=$('scene'),gate=$('startGate');
+const choiceClose=$('choiceClose'),choiceContinue=$('choiceContinue');
+let started=false,ready=false,busy=false,selected='continue';
+const timers=[];
 
 function startExperience(){
   if(started)return;
-
   started=true;
-
-  startGate.style.opacity='0';
-
-  setTimeout(()=>{
-    startGate.style.display='none';
-  },450);
-
-  setTimeout(()=>{
-    $('bootLine1').style.opacity='1';
-  },150);
-
-  setTimeout(()=>{
-    $('bootLine2').style.opacity='1';
-  },550);
-
-  setTimeout(()=>{
-    $('bootBar').style.opacity='1';
+  ensureAudio();
+  bootSound();
+  gate.style.pointerEvents='none';
+  gate.style.opacity='0';
+  setTimeout(()=>{gate.style.display='none';},450);
+  cv.classList.add('on');
+  setFlow(14);
+  timers.push(setTimeout(()=>{$('bootLine1').style.opacity=1;},600));
+  timers.push(setTimeout(()=>{$('bootLine2').style.opacity=1;},1300));
+  timers.push(setTimeout(()=>{
+    $('bootBar').style.opacity=1;
     $('bootFill').style.width='100%';
-  },850);
-
-  setTimeout(()=>{
-    finishBoot();
-  },3100);
+  },1900));
+  timers.push(setTimeout(finishBoot,4400));
 }
-
 function finishBoot(){
   if(ready)return;
-
   ready=true;
-
-  flash.classList.add('on');
-
-  setTimeout(()=>{
-    flash.classList.remove('on');
-  },180);
-
-  boot.style.opacity='0';
-
-  setTimeout(()=>{
-    boot.style.display='none';
-  },1400);
-
-  scene.style.opacity='1';
-  scene.classList.add('on');
-
-  document.querySelectorAll('.choice')
-    .forEach(c=>c.classList.remove('active'));
-
-  $('choiceClose').classList.add('active');
-
-  selected='close';
+  timers.forEach(clearTimeout);
+  bootEl.style.opacity=0;
+  bootEl.style.pointerEvents='none';
+  sceneEl.style.opacity=1;
+  sceneEl.classList.add('on');
+  setFlow(1.3);
+  drone();
 }
 
-startGate.addEventListener(
-  'click',
-  startExperience
-);
-
-boot.addEventListener(
-  'click',
-  ()=>{
-    if(started&&!ready)finishBoot();
-  }
-);
-
-let selected='close';
-
-function vibrateController(){
-  if(!vibrationEnabled)return;
-
-  const gp=connectedGamepad;
-
-  if(!gp)return;
-
-  const actuator=gp.vibrationActuator;
-
-  if(!actuator)return;
-
-  let duration=250;
-  let strong=.55;
-  let weak=.4;
-
-  if(vibrationLevel==='low'){
-    duration=140;
-    strong=.25;
-    weak=.15;
-  }
-
-  if(vibrationLevel==='high'){
-    duration=380;
-    strong=1;
-    weak=.8;
-  }
-
-  try{
-    actuator.playEffect(
-      'dual-rumble',
-      {
-        duration,
-        strongMagnitude:strong,
-        weakMagnitude:weak
-      }
-    );
-  }catch(e){}
+function setSel(v){
+  if(busy||!ready)return;
+  if(selected!==v)blip();
+  selected=v;
+  choiceClose.classList.toggle('active',v==='close');
+  choiceContinue.classList.toggle('active',v==='continue');
 }
-
-function setSel(name){
-  if(name===selected)return;
-
-  selected=name;
-
-  document.querySelectorAll('.choice')
-    .forEach(c=>c.classList.remove('active'));
-
-  if(name==='close'){
-    $('choiceClose').classList.add('active');
-  }
-
-  if(name==='continue'){
-    $('choiceContinue').classList.add('active');
-  }
-
-  if(name==='store'){
-    $('choiceStore').classList.add('active');
-  }
-
-  if(menuRumbleEnabled){
-    vibrateController();
-  }
-}
+choiceClose.classList.remove('active');
+choiceContinue.classList.add('active');
 
 function activate(){
-  if(!ready)return;
-
-  if(menuRumbleEnabled){
-    vibrateController();
-  }
-
-  if(selected==='close'){
-    flash.classList.add('on');
-
-    setTimeout(()=>{
-      location.href='about:blank';
-    },180);
-
-    return;
-  }
-
+  if(busy||!ready)return;
+  busy=true;
+  confirmSnd();
   if(selected==='continue'){
-    location.href=URL_GO;
-    return;
-  }
-
-  if(selected==='store'){
-    location.href=URL_STORE;
-  }
-}
-
-$('choiceClose').addEventListener(
-  'pointerenter',
-  ()=>setSel('close')
-);
-
-$('choiceContinue').addEventListener(
-  'pointerenter',
-  ()=>setSel('continue')
-);
-
-$('choiceStore').addEventListener(
-  'pointerenter',
-  ()=>setSel('store')
-);
-
-$('choiceClose').addEventListener(
-  'click',
-  ()=>{
-    setSel('close');
-    activate();
-  }
-);
-
-$('choiceContinue').addEventListener(
-  'click',
-  ()=>{
-    setSel('continue');
-    activate();
-  }
-);
-
-$('choiceStore').addEventListener(
-  'click',
-  ()=>{
-    setSel('store');
-    activate();
-  }
-);
-
-let muted=false;
-let audioCtx=null;
-let masterGain=null;
-
-function ensureAudio(){
-  if(audioCtx)return;
-
-  try{
-    audioCtx=new(
-      window.AudioContext||
-      window.webkitAudioContext
-    )();
-
-    masterGain=audioCtx.createGain();
-    masterGain.gain.value=.055;
-    masterGain.connect(audioCtx.destination);
-  }catch(e){}
-}
-
-function beep(
-  frequency=440,
-  duration=.07
-){
-  if(muted)return;
-
-  ensureAudio();
-
-  if(!audioCtx||!masterGain)return;
-
-  try{
-    const osc=audioCtx.createOscillator();
-    const gain=audioCtx.createGain();
-
-    osc.type='sine';
-    osc.frequency.value=frequency;
-
-    gain.gain.setValueAtTime(
-      .0001,
-      audioCtx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      .12,
-      audioCtx.currentTime+.008
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      .0001,
-      audioCtx.currentTime+duration
-    );
-
-    osc.connect(gain);
-    gain.connect(masterGain);
-
-    osc.start();
-
-    osc.stop(
-      audioCtx.currentTime+
-      duration+
-      .01
-    );
-  }catch(e){}
-}
-
-$('snd').addEventListener(
-  'click',
-  ()=>{
-    ensureAudio();
-
-    muted=!muted;
-
-    $('snd').textContent=
-      muted?'SOUND OFF':'SOUND ON';
-
-    if(masterGain){
-      masterGain.gain.value=
-        muted?0:.055;
-    }
-
-    if(!muted){
-      beep(650,.08);
-    }
-  }
-);
-
-function goFullscreen(){
-  try{
-    if(!document.fullscreenElement){
-      document.documentElement.requestFullscreen();
-    }else{
-      document.exitFullscreen();
-    }
-  }catch(e){}
-}
-
-let pointerX=0;
-let pointerY=0;
-
-addEventListener(
-  'pointermove',
-  e=>{
-    pointerX=e.clientX/innerWidth-.5;
-    pointerY=e.clientY/innerHeight-.5;
-
-    tx=pointerX;
-    ty=pointerY;
-
-    if(parallaxEnabled){
-      scene.style.transform=
-        `translate(${pointerX*8}px,${pointerY*6}px)`;
-    }else{
-      scene.style.transform=
-        'translate(0,0)';
-    }
-  }
-);
-
-let touchStartX=0;
-
-addEventListener(
-  'touchstart',
-  e=>{
-    if(e.touches.length){
-      touchStartX=
-        e.touches[0].clientX;
-    }
-  },
-  {passive:true}
-);
-
-addEventListener(
-  'touchend',
-  e=>{
-    if(!ready||!e.changedTouches.length)return;
-
-    const endX=
-      e.changedTouches[0].clientX;
-
-    const dx=endX-touchStartX;
-
-    if(Math.abs(dx)<45)return;
-
-    if(dx<0){
-      if(selected==='close'){
-        setSel('continue');
-      }else if(selected==='continue'){
-        setSel('store');
-      }
-    }else{
-      if(selected==='store'){
-        setSel('continue');
-      }else if(selected==='continue'){
-        setSel('close');
-      }
-    }
-  },
-  {passive:true}
-);
-
-addEventListener(
-  'keydown',
-  e=>{
-    const key=e.key.toLowerCase();
-
-    if(!started){
-      startExperience();
-      return;
-    }
-
-    if(!ready){
-      finishBoot();
-      return;
-    }
-
-    if(
-      $('controllerSettings')
-      .classList.contains('show')
-    ){
-      if(key==='escape'){
-        $('controllerSettings')
-          .classList.remove('show');
-      }
-
-      if(key==='o'){
-        $('controllerSettings')
-          .classList.remove('show');
-      }
-
-      return;
-    }
-
-    if(key==='o'){
-      openSettings();
-      return;
-    }
-
-    if(key==='escape'){
-      openSettings();
-      return;
-    }
-
-    if(e.key==='ArrowLeft'){
-      e.preventDefault();
-
-      if(selected==='continue'){
-        setSel('close');
-      }else if(selected==='store'){
-        setSel('continue');
-      }
-    }
-
-    if(e.key==='ArrowRight'){
-      e.preventDefault();
-
-      if(selected==='close'){
-        setSel('continue');
-      }else if(selected==='continue'){
-        setSel('store');
-      }
-    }
-
-    if(
-      key==='enter'||
-      key==='x'||
-      e.key===' '
-    ){
-      e.preventDefault();
-      activate();
-    }
-
-    if(key==='m'){
-      $('snd').click();
-    }
-
-    if(key==='f'){
-      goFullscreen();
-    }
-  }
-);
-
-const controllerStatus=
-  $('controllerStatus');
-
-const statusText=
-  $('statusText');
-
-let connectedGamepad=null;
-
-function controllerLabel(gp){
-  if(!gp){
-    return 'CONTROLLER NOT CONNECTED';
-  }
-
-  const id=(gp.id||'GAMEPAD')
-    .replace(/\s+/g,' ')
-    .trim();
-
-  return id.length>30
-    ?id.slice(0,30)+'…'
-    :id;
-}
-
-function updateControllerStatus(){
-  const pads=
-    navigator.getGamepads?
-    [...navigator.getGamepads()]:
-    [];
-
-  const gp=pads.find(Boolean);
-
-  connectedGamepad=gp||null;
-
-  if(gp){
-    controllerStatus.classList.add(
-      'connected'
-    );
-
-    statusText.textContent=
-      controllerLabel(gp);
+    $('flash').classList.add('on');
+    setFlow(70);
+    setTimeout(()=>{window.location.href=URL_GO;},700);
   }else{
-    controllerStatus.classList.remove(
-      'connected'
-    );
-
-    statusText.textContent=
-      'CONTROLLER NOT CONNECTED';
+    try{window.close();}catch(e){}
+    setTimeout(()=>{
+      sceneEl.style.transition='opacity 1.2s ease';
+      sceneEl.style.opacity=0;
+      cv.style.transition='opacity 1.6s ease';
+      cv.style.opacity=0;
+      document.body.style.background='#000';
+    },300);
   }
 }
-
-addEventListener(
-  'gamepadconnected',
-  e=>{
-    connectedGamepad=e.gamepad;
-
-    controllerStatus.classList.add(
-      'connected'
-    );
-
-    statusText.textContent=
-      controllerLabel(e.gamepad);
-  }
-);
-
-addEventListener(
-  'gamepaddisconnected',
-  ()=>{
-    connectedGamepad=null;
-
-    controllerStatus.classList.remove(
-      'connected'
-    );
-
-    statusText.textContent=
-      'CONTROLLER NOT CONNECTED';
-  }
-);
-
-setInterval(
-  updateControllerStatus,
-  500
-);
-
-const settings=
-  $('controllerSettings');
-
-const virtualLightbar=
-  $('virtualLightbar');
-
-let ps4Color=
-  localStorage.getItem(
-    'ps4_controller_color'
-  )||'#3fa9ff';
-
-let vibrationLevel=
-  localStorage.getItem(
-    'ps4_vibration_level'
-  )||'medium';
-
-let vibrationEnabled=
-  localStorage.getItem(
-    'ps4_vibration_enabled'
-  )!=='false';
-
-function applyControllerColor(){
-  virtualLightbar.style.background=
-    ps4Color;
-
-  virtualLightbar.style.boxShadow=
-    `0 0 12px ${ps4Color}`;
-
-  document
-    .querySelectorAll('.colorBtn')
-    .forEach(btn=>{
-      btn.classList.toggle(
-        'active',
-        btn.dataset.color.toLowerCase()===
-        ps4Color.toLowerCase()
-      );
-    });
+function goFull(){
+  const el=document.documentElement;
+  if(document.fullscreenElement){document.exitFullscreen&&document.exitFullscreen();}
+  else if(el.requestFullscreen){el.requestFullscreen().catch(()=>{});}
 }
 
-function applyVibrationSettings(){
-  document
-    .querySelectorAll('.vibrationLevel')
-    .forEach(btn=>{
-      btn.classList.toggle(
-        'active',
-        btn.dataset.level===
-        vibrationLevel
-      );
-    });
+gate.addEventListener('click',startExperience);
+bootEl.addEventListener('click',()=>{if(started&&!ready)finishBoot();});
+choiceClose.addEventListener('pointerenter',()=>setSel('close'));
+choiceContinue.addEventListener('pointerenter',()=>setSel('continue'));
+choiceClose.addEventListener('click',()=>{setSel('close');activate();});
+choiceContinue.addEventListener('click',()=>{setSel('continue');activate();});
+$('snd').addEventListener('click',e=>{e.stopPropagation();ensureAudio();toggleMute();});
 
-  document
-    .querySelectorAll('.vibrationEnabled')
-    .forEach(btn=>{
-      btn.classList.toggle(
-        'active',
-        String(vibrationEnabled)===
-        btn.dataset.enabled
-      );
-    });
-}
+addEventListener('keydown',e=>{
+  if(!started){startExperience();return;}
+  if(!ready){finishBoot();return;}
+  const k=e.key;
+  if(k==='ArrowLeft')setSel('close');
+  else if(k==='ArrowRight')setSel('continue');
+  else if(k==='Enter'||k===' '||k.toLowerCase()==='x')activate();
+  else if(k.toLowerCase()==='m')toggleMute();
+  else if(k.toLowerCase()==='f')goFull();
+});
 
-function refreshSettingsUI(){
-  $('motionToggle')
-    .classList.toggle(
-      'active',
-      motionEnabled
-    );
+addEventListener('pointermove',e=>{
+  tx=e.clientX/innerWidth-.5;
+  ty=e.clientY/innerHeight-.5;
+  sceneEl.style.transform=`translate(${tx*8}px,${ty*6}px)`;
+});
 
-  $('parallaxToggle')
-    .classList.toggle(
-      'active',
-      parallaxEnabled
-    );
-
-  $('scanlineToggle')
-    .classList.toggle(
-      'active',
-      scanlinesEnabled
-    );
-
-  $('rumbleMenuToggle')
-    .classList.toggle(
-      'active',
-      menuRumbleEnabled
-    );
-
-  $('scanlines').style.display=
-    scanlinesEnabled?'block':'none';
-}
-
-function saveInterfaceSettings(){
-  localStorage.setItem(
-    'ps4_motion',
-    String(motionEnabled)
-  );
-
-  localStorage.setItem(
-    'ps4_parallax',
-    String(parallaxEnabled)
-  );
-
-  localStorage.setItem(
-    'ps4_scanlines',
-    String(scanlinesEnabled)
-  );
-
-  localStorage.setItem(
-    'ps4_menu_rumble',
-    String(menuRumbleEnabled)
-  );
-
-  refreshSettingsUI();
-}
-
-function openSettings(){
-  refreshSettingsUI();
-
-  settings.classList.add('show');
-
-  beep(520,.06);
-}
-
-document
-  .querySelectorAll('.colorBtn')
-  .forEach(btn=>{
-    btn.addEventListener(
-      'click',
-      ()=>{
-        ps4Color=
-          btn.dataset.color;
-
-        localStorage.setItem(
-          'ps4_controller_color',
-          ps4Color
-        );
-
-        applyControllerColor();
-
-        vibrateController();
-      }
-    );
-  });
-
-document
-  .querySelectorAll('.vibrationLevel')
-  .forEach(btn=>{
-    btn.addEventListener(
-      'click',
-      ()=>{
-        vibrationLevel=
-          btn.dataset.level;
-
-        localStorage.setItem(
-          'ps4_vibration_level',
-          vibrationLevel
-        );
-
-        applyVibrationSettings();
-
-        vibrateController();
-      }
-    );
-  });
-
-document
-  .querySelectorAll('.vibrationEnabled')
-  .forEach(btn=>{
-    btn.addEventListener(
-      'click',
-      ()=>{
-        vibrationEnabled=
-          btn.dataset.enabled==='true';
-
-        localStorage.setItem(
-          'ps4_vibration_enabled',
-          String(vibrationEnabled)
-        );
-
-        applyVibrationSettings();
-
-        if(vibrationEnabled){
-          vibrateController();
-        }
-      }
-    );
-  });
-
-$('motionToggle').addEventListener(
-  'click',
-  ()=>{
-    motionEnabled=!motionEnabled;
-
-    saveInterfaceSettings();
-
-    setFlow(3);
-  }
-);
-
-$('parallaxToggle').addEventListener(
-  'click',
-  ()=>{
-    parallaxEnabled=!parallaxEnabled;
-
-    saveInterfaceSettings();
-
-    if(!parallaxEnabled){
-      scene.style.transform=
-        'translate(0,0)';
-    }
-  }
-);
-
-$('scanlineToggle').addEventListener(
-  'click',
-  ()=>{
-    scanlinesEnabled=
-      !scanlinesEnabled;
-
-    saveInterfaceSettings();
-  }
-);
-
-$('rumbleMenuToggle').addEventListener(
-  'click',
-  ()=>{
-    menuRumbleEnabled=
-      !menuRumbleEnabled;
-
-    saveInterfaceSettings();
-
-    if(menuRumbleEnabled){
-      vibrateController();
-    }
-  }
-);
-
-$('settingsReset').addEventListener(
-  'click',
-  ()=>{
-    ps4Color='#3fa9ff';
-    vibrationLevel='medium';
-    vibrationEnabled=true;
-
-    motionEnabled=!RM;
-    parallaxEnabled=true;
-    scanlinesEnabled=true;
-    menuRumbleEnabled=true;
-
-    localStorage.removeItem(
-      'ps4_controller_color'
-    );
-
-    localStorage.removeItem(
-      'ps4_vibration_level'
-    );
-
-    localStorage.removeItem(
-      'ps4_vibration_enabled'
-    );
-
-    localStorage.removeItem(
-      'ps4_motion'
-    );
-
-    localStorage.removeItem(
-      'ps4_parallax'
-    );
-
-    localStorage.removeItem(
-      'ps4_scanlines'
-    );
-
-    localStorage.removeItem(
-      'ps4_menu_rumble'
-    );
-
-    applyControllerColor();
-    applyVibrationSettings();
-    saveInterfaceSettings();
-
-    beep(700,.08);
-  }
-);
-
-$('settingsClose').addEventListener(
-  'click',
-  ()=>{
-    settings.classList.remove('show');
-  }
-);
-
-settings.addEventListener(
-  'click',
-  e=>{
-    if(e.target===settings){
-      settings.classList.remove('show');
-    }
-  }
-);
-
-applyControllerColor();
-applyVibrationSettings();
-refreshSettingsUI();
-
-let lastButtons=[];
-
-function controllerLoop(){
-  const pads=
-    navigator.getGamepads?
-    [...navigator.getGamepads()]:
-    [];
-
+const pp={l:false,r:false,a:false,any:false};
+setInterval(()=>{
+  const pads=navigator.getGamepads?[...navigator.getGamepads()]:[];
   const gp=pads.find(Boolean);
-
-  if(gp){
-    connectedGamepad=gp;
-
-    controllerStatus.classList.add(
-      'connected'
-    );
-
-    statusText.textContent=
-      controllerLabel(gp);
-
-    const b=
-      gp.buttons.map(x=>x.pressed);
-
-    const pressed=i=>
-      !!(b[i]&&!lastButtons[i]);
-
-    const left=
-      (gp.axes[0]??0)<-.5||
-      !!b[14];
-
-    const right=
-      (gp.axes[0]??0)>.5||
-      !!b[15];
-
-    const up=
-      (gp.axes[1]??0)<-.5||
-      !!b[12];
-
-    const down=
-      (gp.axes[1]??0)>.5||
-      !!b[13];
-
-    if(!settings.classList.contains('show')){
-      if(left&&!lastButtons._left){
-        if(selected==='continue'){
-          setSel('close');
-        }else if(selected==='store'){
-          setSel('continue');
-        }
-      }
-
-      if(right&&!lastButtons._right){
-        if(selected==='close'){
-          setSel('continue');
-        }else if(selected==='continue'){
-          setSel('store');
-        }
-      }
-
-      if(up&&!lastButtons._up){
-        if(selected==='store'){
-          setSel('continue');
-        }else if(selected==='continue'){
-          setSel('close');
-        }
-      }
-
-      if(down&&!lastButtons._down){
-        if(selected==='close'){
-          setSel('continue');
-        }else if(selected==='continue'){
-          setSel('store');
-        }
-      }
-
-      if(
-        pressed(0)||
-        pressed(9)||
-        pressed(16)
-      ){
-        if(pressed(0)){
-          activate();
-        }
-
-        if(
-          pressed(9)||
-          pressed(16)
-        ){
-          openSettings();
-        }
-      }
-
-      if(pressed(8)){
-        goFullscreen();
-      }
-    }else{
-      if(
-        pressed(1)||
-        pressed(9)||
-        pressed(16)
-      ){
-        settings.classList.remove(
-          'show'
-        );
-      }
-    }
-
-    lastButtons=b;
-
-    lastButtons._left=left;
-    lastButtons._right=right;
-    lastButtons._up=up;
-    lastButtons._down=down;
+  if(!gp)return;
+  const l=gp.axes[0]<-.5||!!(gp.buttons[14]&&gp.buttons[14].pressed);
+  const r=gp.axes[0]>.5||!!(gp.buttons[15]&&gp.buttons[15].pressed);
+  const a=!!(gp.buttons[0]&&gp.buttons[0].pressed);
+  const any=gp.buttons.some(b=>b.pressed);
+  if(any&&!pp.any){
+    if(!started)startExperience();
+    else if(!ready)finishBoot();
   }
-
-  requestAnimationFrame(
-    controllerLoop
-  );
-}
-
-requestAnimationFrame(
-  controllerLoop
-);
+  if(l&&!pp.l)setSel('close');
+  if(r&&!pp.r)setSel('continue');
+  if(a&&!pp.a)activate();
+  pp.l=l;pp.r=r;pp.a=a;pp.any=any;
+},100);
 </script>
 </body>
 </html>
