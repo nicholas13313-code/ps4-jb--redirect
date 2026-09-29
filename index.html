@@ -93,7 +93,6 @@ h1{
   padding:6px 12px;border-radius:999px;cursor:pointer;
 }
 #snd:hover{border-color:#8fd0ff;color:#cfe8ff;}
-
 .choices{
   position:relative;width:100%;max-width:1100px;
   display:flex;align-items:center;justify-content:space-between;
@@ -132,7 +131,6 @@ h1{
 .choice.active.left .pill{box-shadow:0 0 50px rgba(255,60,60,.95),inset 0 2px 6px rgba(255,255,255,.5);}
 .choice.active.middle .pill{box-shadow:0 0 50px rgba(63,169,255,.95),inset 0 2px 6px rgba(255,255,255,.5);}
 .choice.active.right .pill{box-shadow:0 0 50px rgba(53,255,121,.95),inset 0 2px 6px rgba(255,255,255,.5);}
-
 #controllerStatus{
   position:absolute;
   top:calc(2vh + env(safe-area-inset-top,0px));
@@ -159,7 +157,6 @@ h1{
   box-shadow:0 0 10px #35ff79;
 }
 #controllerStatus.connected{color:#8dffb2;border-color:rgba(53,255,121,.4);}
-
 footer{
   display:flex;flex-direction:column;align-items:center;width:100%;
   text-shadow:0 2px 10px #000;
@@ -181,7 +178,6 @@ footer{
 .credit{
   font-size:.55rem;letter-spacing:.18em;color:#4f79a0;margin-top:8px;
 }
-
 #controllerSettings{
   position:fixed;
   inset:0;
@@ -303,7 +299,6 @@ footer{
 .vb.r{right:0;top:16px;}
 .vb.b{left:16px;bottom:0;}
 .vb.l{left:0;top:16px;}
-
 .settingGroup{
   margin-top:18px;
   padding-top:16px;
@@ -356,57 +351,87 @@ footer{
 .color-blue{background:#3fa9ff;}
 .color-red{background:#ff3030;}
 .color-green{background:#35ff79;}
-.color-purple{background:#a15cff;}
-.color-gold{background:#ffd43b;}
+.color-purple{background:#b65cff;}
+.color-gold{background:#ffd34f;}
 .color-white{background:#fff;}
-#settingsClose{
-  margin-top:20px;
-  min-width:130px;
+.settingsDivider{
+  height:1px;
+  background:rgba(111,163,207,.18);
+  margin:18px 0;
 }
-
+.settingsHint{
+  margin-top:15px;
+  color:#628bad;
+  font-size:.55rem;
+  letter-spacing:.12em;
+  line-height:1.8;
+}
+#settingsClose,
+#settingsReset{
+  min-width:120px;
+}
+.toggleBtn.active{
+  border-color:#35ff79;
+  color:#8dffb2;
+  background:rgba(20,80,45,.55);
+}
+#settingsReset{
+  border-color:rgba(255,100,100,.35);
+  color:#ff9b9b;
+}
+#settingsReset:hover{
+  border-color:#ff7070;
+  color:#fff;
+  background:rgba(110,35,35,.55);
+}
+button:focus-visible{
+  outline:2px solid #8fd0ff;
+  outline-offset:3px;
+}
 @media(max-width:700px){
   .choices{gap:1vw;}
-  .pill{font-size:.68rem;padding:0 2%;}
-  .label{font-size:.52rem;}
-  .label b{font-size:.65rem;}
-  .hint{font-size:.45rem;letter-spacing:.1em;}
-  #controllerStatus{font-size:.45rem;}
-  #snd{font-size:.48rem;}
+  .pill{width:96%;font-size:.65rem;}
+  .labels{gap:1vw;}
+  .label{font-size:.5rem;}
+  .label b{font-size:.62rem;}
+  .virtualController{transform:scale(.88);}
+  .settingsBox{padding:18px;}
 }
 </style>
 </head>
-
 <body>
 <canvas id="bg"></canvas>
-<div id="vignette"></div>
 <div id="scanlines"></div>
+<div id="vignette"></div>
 <div id="flash"></div>
 
-<div id="startGate"><span>PRESS START</span></div>
+<div id="startGate">
+  <span>CLICK TO START</span>
+</div>
 
 <div id="boot">
-  <div class="b1" id="bootLine1">PS4</div>
-  <div class="b2" id="bootLine2">WEBKIT LAUNCHER</div>
-  <div class="bar" id="bootBar"><i id="bootFill"></i></div>
+  <div class="b1">PLAYSTATION</div>
+  <div class="b2">WEBKIT LAUNCHER</div>
+  <div class="bar"><i></i></div>
 </div>
 
 <div id="scene">
+  <button id="snd" type="button" aria-label="Toggle sound">SOUND ON</button>
+
   <div id="controllerStatus">
     <span class="statusDot"></span>
     <span id="statusText">CONTROLLER NOT CONNECTED</span>
   </div>
 
-  <button id="snd" type="button">SOUND ON</button>
-
   <header>
-    <div class="tag">CREATED FOR THE COMMUNITY</div>
-    <div class="logo">Raw13G</div>
-    <h1>PS4 WEBKIT LAUNCHER</h1>
-    <div class="subtitle">SELECT YOUR PATH</div>
+    <div class="tag">PLAYSTATION 4</div>
+    <div class="logo">WEBKIT</div>
+    <h1>LAUNCHER</h1>
+    <div class="subtitle">SYSTEM READY</div>
   </header>
 
   <div class="choices">
-    <div class="choice left" id="choiceClose">
+    <div class="choice active left" id="choiceClose">
       <div class="pill red">NO JB 😢</div>
     </div>
 
@@ -422,48 +447,41 @@ footer{
   <footer>
     <div class="labels">
       <div class="label">
-        <b>NO JB 😢</b>
-        EXIT PAGE
+        <b>○</b>
+        EXIT
       </div>
       <div class="label">
-        <b>GOLDHEN JB</b>
-        OPEN RAW13G
+        <b>✕</b>
+        SELECT
       </div>
       <div class="label">
-        <b>🛍 HOMEBREW STORE</b>
-        OPEN PKG-ZONE
+        <b>OPTIONS</b>
+        SETTINGS
       </div>
     </div>
-
     <div class="hint">
-      <b>◀ ▶</b> SELECT
-      &nbsp;&nbsp;
-      <b>✕ / ENTER</b> CONFIRM
-      &nbsp;&nbsp;
-      <b>OPTIONS</b> SETTINGS
-      &nbsp;&nbsp;
-      <b>M</b> SOUND
-      &nbsp;&nbsp;
-      <b>F</b> FULLSCREEN
+      <b>ARROWS / D-PAD</b> NAVIGATE
+      &nbsp;&nbsp;•&nbsp;&nbsp;
+      <b>X / ENTER</b> SELECT
+      &nbsp;&nbsp;•&nbsp;&nbsp;
+      <b>O / ESC</b> SETTINGS
     </div>
-
-    <div class="credit">LAUNCHER AND INTERFACE CREATED BY NIXHOLAS</div>
+    <div class="credit">PS4 WEBKIT LAUNCHER</div>
   </footer>
 </div>
 
 <div id="controllerSettings">
   <div class="settingsBox">
-    <div class="settingsTitle">PS4 CONTROLLER</div>
+    <div class="settingsTitle">CONTROLLER SETTINGS</div>
 
     <div class="virtualController">
       <div class="virtualLightbar" id="virtualLightbar"></div>
       <div class="virtualTouchpad"></div>
       <div class="virtualDpad"></div>
-
       <div class="virtualButtons">
         <div class="vb t">△</div>
         <div class="vb r">○</div>
-        <div class="vb b">×</div>
+        <div class="vb b">✕</div>
         <div class="vb l">□</div>
       </div>
     </div>
@@ -471,12 +489,12 @@ footer{
     <div class="settingGroup">
       <div class="settingLabel">LIGHT BAR COLOR</div>
       <div class="settingRow">
-        <button class="settingBtn colorBtn color-blue" data-color="#3fa9ff" title="Blue"></button>
-        <button class="settingBtn colorBtn color-red" data-color="#ff3030" title="Red"></button>
-        <button class="settingBtn colorBtn color-green" data-color="#35ff79" title="Green"></button>
-        <button class="settingBtn colorBtn color-purple" data-color="#a15cff" title="Purple"></button>
-        <button class="settingBtn colorBtn color-gold" data-color="#ffd43b" title="Gold"></button>
-        <button class="settingBtn colorBtn color-white" data-color="#ffffff" title="White"></button>
+        <button class="settingBtn colorBtn color-blue" data-color="#3fa9ff"></button>
+        <button class="settingBtn colorBtn color-red" data-color="#ff3030"></button>
+        <button class="settingBtn colorBtn color-green" data-color="#35ff79"></button>
+        <button class="settingBtn colorBtn color-purple" data-color="#b65cff"></button>
+        <button class="settingBtn colorBtn color-gold" data-color="#ffd34f"></button>
+        <button class="settingBtn colorBtn color-white" data-color="#ffffff"></button>
       </div>
     </div>
 
@@ -497,421 +515,209 @@ footer{
       </div>
     </div>
 
-    <button class="settingBtn" id="settingsClose">CLOSE</button>
+    <div class="settingGroup">
+      <div class="settingLabel">MOTION</div>
+      <div class="settingRow">
+        <button class="settingBtn toggleBtn" id="motionToggle">MOTION</button>
+        <button class="settingBtn toggleBtn" id="parallaxToggle">PARALLAX</button>
+        <button class="settingBtn toggleBtn" id="scanlineToggle">SCANLINES</button>
+        <button class="settingBtn toggleBtn" id="rumbleMenuToggle">MENU RUMBLE</button>
+      </div>
+    </div>
+
+    <div class="settingsDivider"></div>
+
+    <div class="settingRow">
+      <button class="settingBtn" id="settingsReset">RESET SETTINGS</button>
+      <button class="settingBtn" id="settingsClose">CLOSE</button>
+    </div>
+
+    <div class="settingsHint">
+      OPTIONS / O OPEN SETTINGS &nbsp;•&nbsp;
+      ESC CLOSE &nbsp;•&nbsp;
+      D-PAD / STICK NAVIGATE &nbsp;•&nbsp;
+      X SELECT
+    </div>
   </div>
 </div>
 
 <script>
 const $=id=>document.getElementById(id);
 
-const URL_GO='https://raw13g.github.io/';
-const URL_STORE='https://pkg-zone.com/';
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas=$('bg');
+const ctx=canvas.getContext('2d');
+const sceneEl=$('scene');
+const boot=$('boot');
+const startGate=$('startGate');
+const flash=$('flash');
 
-const cv=$('bg'),ctx=cv.getContext('2d');
+let started=false;
+let ready=false;
+let muted=false;
+let selected='close';
+let audioCtx=null;
+let masterGain=null;
+let tx=0;
+let ty=0;
 
-let W,H,DPR;
+const RM=window.matchMedia &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let motionEnabled=
+  localStorage.getItem('ps4_motion')!=='false';
+let parallaxEnabled=
+  localStorage.getItem('ps4_parallax')!=='false';
+let scanlinesEnabled=
+  localStorage.getItem('ps4_scanlines')!=='false';
+let menuRumbleEnabled=
+  localStorage.getItem('ps4_menu_rumble')!=='false';
+
+if(RM){
+  motionEnabled=false;
+}
 
 function resize(){
-  DPR=Math.min(devicePixelRatio||1,1.5);
-  W=cv.width=innerWidth*DPR;
-  H=cv.height=innerHeight*DPR;
-  cv.style.width=innerWidth+'px';
-  cv.style.height=innerHeight+'px';
+  canvas.width=innerWidth*devicePixelRatio;
+  canvas.height=innerHeight*devicePixelRatio;
+  canvas.style.width=innerWidth+'px';
+  canvas.style.height=innerHeight+'px';
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
 }
-
-resize();
 addEventListener('resize',resize);
+resize();
 
-const nc=document.createElement('canvas');
-nc.width=nc.height=128;
-
-const nctx=nc.getContext('2d');
-const nd=nctx.createImageData(128,128);
-
-for(let i=0;i<nd.data.length;i+=4){
-  const v=Math.random()*255;
-  nd.data[i]=nd.data[i+1]=nd.data[i+2]=v;
-  nd.data[i+3]=255;
-}
-
-nctx.putImageData(nd,0,0);
-
-const grain=ctx.createPattern(nc,'repeat');
-
-const Z=48;
-const boxes=[];
-
-for(let n=0;n<170;n++){
-  let gx,gy;
-
-  do{
-    gx=Math.round((Math.random()*2-1)*7);
-    gy=Math.round((Math.random()*2-1)*4);
-  }while(Math.abs(gx)<1&&Math.abs(gy)<1);
-
-  const s=1.5+(Math.random()<.3?.6:0);
-
-  boxes.push({
-    x:gx*2.4+(Math.random()-.5)*.5,
-    y:gy*2.4+(Math.random()-.5)*.5,
-    z:Math.random()*Z,
-    w:s*(.8+Math.random()*.4),
-    h:s*(.8+Math.random()*.4),
-    l:Math.random()<.55?1.4+Math.random()*1.6:5+Math.random()*9
+const stars=[];
+for(let i=0;i<150;i++){
+  stars.push({
+    x:Math.random(),
+    y:Math.random(),
+    z:Math.random(),
+    s:.3+Math.random()*1.5
   });
 }
 
-const dots=[
-  {a:1,r:.30,s:.20,c:'255,50,60'},
-  {a:3,r:.42,s:-.15,c:'70,255,130'},
-  {a:5,r:.50,s:.10,c:'255,60,80'},
-  {a:2,r:.20,s:-.30,c:'150,120,255'}
-];
+function drawBackground(t){
+  const w=innerWidth;
+  const h=innerHeight;
 
-function tint(m){
-  return `rgb(${(8+157*m)|0},${(10+168*m)|0},${(26+196*m)|0})`;
-}
+  ctx.clearRect(0,0,w,h);
 
-function poly(p,col,a){
-  ctx.globalAlpha=a;
-  ctx.fillStyle=col;
-  ctx.beginPath();
-  ctx.moveTo(p[0][0],p[0][1]);
-
-  for(let i=1;i<p.length;i++)ctx.lineTo(p[i][0],p[i][1]);
-
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.strokeStyle='rgba(0,0,14,.55)';
-  ctx.lineWidth=Math.max(1,DPR);
-  ctx.stroke();
-}
-
-let last=performance.now(),t=0,camZ=0,flow=3,flowT=3;
-let mx=0,my=0,tx=0,ty=0;
-
-function setFlow(v){
-  flowT=v*(RM?.35:1);
-}
-
-setFlow(3);
-
-function frame(now){
-  const dt=Math.min(.05,(now-last)/1000);
-  last=now;
-  t+=dt;
-
-  flow+=(flowT-flow)*Math.min(1,dt*1.6);
-  camZ+=flow*dt;
-
-  mx+=(tx-mx)*Math.min(1,dt*2);
-  my+=(ty-my)*Math.min(1,dt*2);
-
-  const cx=W/2,cy=H/2,f=Math.min(W,H)*1.05;
-
-  const camX=Math.sin(t*.27)*.7+mx*1.4;
-  const camY=Math.cos(t*.21)*.5+my*.9;
-
-  const P=(x,y,z)=>[
-    cx+x*f/z,
-    cy+y*f/z
-  ];
-
-  ctx.globalCompositeOperation='source-over';
-  ctx.globalAlpha=1;
-
-  ctx.fillStyle='#02030a';
-  ctx.fillRect(0,0,W,H);
-
-  let g=ctx.createRadialGradient(
-    cx,cy,0,
-    cx,cy,Math.max(W,H)*.55
+  const g=ctx.createRadialGradient(
+    w*.5,h*.45,0,
+    w*.5,h*.5,Math.max(w,h)*.75
   );
-
-  g.addColorStop(0,'rgba(60,70,190,.55)');
-  g.addColorStop(.4,'rgba(30,35,110,.22)');
-  g.addColorStop(1,'rgba(0,0,0,0)');
-
+  g.addColorStop(0,'#07172b');
+  g.addColorStop(.45,'#020916');
+  g.addColorStop(1,'#000207');
   ctx.fillStyle=g;
-  ctx.fillRect(0,0,W,H);
+  ctx.fillRect(0,0,w,h);
 
-  const list=[];
+  const drift=motionEnabled?t*.000012:0;
 
-  for(const b of boxes){
-    list.push([
-      ((b.z-camZ)%Z+Z)%Z+.5,
-      b
-    ]);
+  for(const star of stars){
+    let x=(star.x+drift*star.z)%1;
+    if(x<0)x+=1;
+
+    const y=star.y;
+    const px=x*w;
+    const py=y*h;
+    const a=.12+star.z*.4;
+
+    ctx.fillStyle=`rgba(120,190,255,${a})`;
+    ctx.fillRect(px,py,star.s,star.s);
   }
 
-  list.sort((a,c)=>c[0]-a[0]);
-
-  for(const [d,b] of list){
-    const a=
-      Math.min(1,(d-.5)/1.6)*
-      Math.min(1,(Z-d)/6);
-
-    if(a<=.01)continue;
-
-    const x0=b.x-b.w/2-camX;
-    const x1=x0+b.w;
-
-    const y0=b.y-b.h/2-camY;
-    const y1=y0+b.h;
-
-    const z0=d;
-    const z1=d+b.l;
-
-    const fog=Math.pow(Math.max(0,1-d/Z),1.2);
-
-    if(y0>0)
-      poly(
-        [P(x0,y0,z0),P(x1,y0,z0),P(x1,y0,z1),P(x0,y0,z1)],
-        tint(fog*.78),
-        a
-      );
-
-    if(y1<0)
-      poly(
-        [P(x0,y1,z0),P(x1,y1,z0),P(x1,y1,z1),P(x0,y1,z1)],
-        tint(fog*.36),
-        a
-      );
-
-    if(x0>0)
-      poly(
-        [P(x0,y0,z0),P(x0,y1,z0),P(x0,y1,z1),P(x0,y0,z1)],
-        tint(fog*.55),
-        a
-      );
-
-    if(x1<0)
-      poly(
-        [P(x1,y0,z0),P(x1,y1,z0),P(x1,y1,z1),P(x1,y0,z1)],
-        tint(fog*.55),
-        a
-      );
-
-    poly(
-      [P(x0,y0,z0),P(x1,y0,z0),P(x1,y1,z0),P(x0,y1,z0)],
-      tint(fog),
-      a
-    );
-  }
-
-  ctx.globalAlpha=1;
-  ctx.globalCompositeOperation='lighter';
-
-  g=ctx.createRadialGradient(
-    cx,cy,0,
-    cx,cy,Math.min(W,H)*.35
+  const glow=ctx.createRadialGradient(
+    w*.5,h*.52,0,
+    w*.5,h*.52,w*.42
   );
+  glow.addColorStop(0,'rgba(20,110,190,.13)');
+  glow.addColorStop(.45,'rgba(20,70,140,.04)');
+  glow.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=glow;
+  ctx.fillRect(0,0,w,h);
 
-  g.addColorStop(0,'rgba(70,80,200,.28)');
-  g.addColorStop(1,'rgba(0,0,0,0)');
-
-  ctx.fillStyle=g;
-  ctx.fillRect(0,0,W,H);
-
-  for(const d of dots){
-    d.a+=d.s*dt;
-
-    const px=cx+Math.cos(d.a)*d.r*W*.5;
-    const py=cy+Math.sin(d.a*1.3)*d.r*H*.6;
-
-    ctx.shadowBlur=16*DPR;
-    ctx.shadowColor=`rgba(${d.c},1)`;
-    ctx.fillStyle=`rgba(${d.c},.95)`;
-
-    ctx.beginPath();
-    ctx.arc(px,py,2.2*DPR,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.shadowBlur=0;
-  }
-
-  ctx.globalCompositeOperation='overlay';
-  ctx.globalAlpha=.22;
-
-  ctx.save();
-
-  ctx.translate(
-    -(Math.random()*128|0),
-    -(Math.random()*128|0)
-  );
-
-  ctx.fillStyle=grain;
-  ctx.fillRect(0,0,W+128,H+128);
-
-  ctx.restore();
-
-  ctx.globalCompositeOperation='source-over';
-  ctx.globalAlpha=1;
-
-  requestAnimationFrame(frame);
+  requestAnimationFrame(drawBackground);
 }
-
-requestAnimationFrame(frame);
-
-let ac=null,master=null,muted=false,droneOn=false;
+requestAnimationFrame(drawBackground);
 
 function ensureAudio(){
+  if(audioCtx)return;
+
   try{
-    if(!ac){
-      ac=new (window.AudioContext||window.webkitAudioContext)();
-
-      master=ac.createGain();
-      master.gain.value=muted?0:1;
-      master.connect(ac.destination);
-    }
-
-    if(ac.state==='suspended')ac.resume();
+    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    masterGain=audioCtx.createGain();
+    masterGain.gain.value=.08;
+    masterGain.connect(audioCtx.destination);
   }catch(e){}
 }
 
-function tone(type,f0,f1,t0,dur,vol){
-  if(!ac)return;
+function blip(freq=480,duration=.06){
+  if(muted||!audioCtx||!masterGain)return;
 
-  const o=ac.createOscillator();
-  const g=ac.createGain();
+  try{
+    const osc=audioCtx.createOscillator();
+    const gain=audioCtx.createGain();
 
-  o.type=type;
-  o.frequency.setValueAtTime(f0,t0);
+    osc.type='sine';
+    osc.frequency.value=freq;
 
-  if(f1!==f0)
-    o.frequency.exponentialRampToValueAtTime(f1,t0+dur);
+    gain.gain.setValueAtTime(.0001,audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      .2,
+      audioCtx.currentTime+.008
+    );
+    gain.gain.exponentialRampToValueAtTime(
+      .0001,
+      audioCtx.currentTime+duration
+    );
 
-  g.gain.setValueAtTime(.0001,t0);
-  g.gain.exponentialRampToValueAtTime(vol,t0+dur*.25);
-  g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
+    osc.connect(gain);
+    gain.connect(masterGain);
 
-  o.connect(g).connect(master);
-
-  o.start(t0);
-  o.stop(t0+dur+.05);
-}
-
-function bootSound(){
-  if(!ac)return;
-
-  const n=ac.currentTime;
-
-  tone('sine',70,320,n,2.4,.28);
-  tone('triangle',520,680,n+.3,1.3,.12);
-  tone('sine',880,1320,n+1.1,1.6,.07);
-  tone('sine',1320,1320,n+1.5,1.4,.05);
-}
-
-function blip(){
-  if(ac)
-    tone('square',660,880,ac.currentTime,.09,.05);
-}
-
-function confirmSnd(){
-  if(!ac)return;
-
-  const n=ac.currentTime;
-
-  tone('triangle',440,880,n,.25,.12);
-  tone('sine',880,1760,n+.08,.3,.08);
-}
-
-function drone(){
-  if(!ac||droneOn)return;
-
-  droneOn=true;
-
-  const g=ac.createGain();
-
-  g.gain.value=0;
-  g.gain.linearRampToValueAtTime(.05,ac.currentTime+3);
-  g.connect(master);
-
-  [55,55.7,110.4].forEach((fr,i)=>{
-    const o=ac.createOscillator();
-
-    o.type=i===2?'triangle':'sine';
-    o.frequency.value=fr;
-
-    const q=ac.createGain();
-    q.gain.value=i===2?.3:1;
-
-    o.connect(q).connect(g);
-    o.start();
-  });
+    osc.start();
+    osc.stop(audioCtx.currentTime+duration+.01);
+  }catch(e){}
 }
 
 function toggleMute(){
   muted=!muted;
-
-  if(master)
-    master.gain.setTargetAtTime(
-      muted?0:1,
-      ac.currentTime,
-      .05
-    );
-
   $('snd').textContent=muted?'SOUND OFF':'SOUND ON';
+
+  if(masterGain){
+    masterGain.gain.value=muted?0:.08;
+  }
+
+  blip(muted?180:650,.08);
 }
 
-const bootEl=$('boot');
-const sceneEl=$('scene');
-const gate=$('startGate');
+function goFull(){
+  try{
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen();
+    }else{
+      document.exitFullscreen();
+    }
+  }catch(e){}
+}
 
-const choiceClose=$('choiceClose');
-const choiceContinue=$('choiceContinue');
-const choiceStore=$('choiceStore');
+function setFlow(speed=1){
+  if(!motionEnabled){
+    boot.style.opacity='1';
+    return;
+  }
 
-let started=false;
-let ready=false;
-let busy=false;
-
-let selected='continue';
-
-const timers=[];
-
-function startExperience(){
-  if(started)return;
-
-  started=true;
-
-  ensureAudio();
-  bootSound();
-
-  gate.style.pointerEvents='none';
-  gate.style.opacity='0';
-
-  setTimeout(()=>{
-    gate.style.display='none';
-  },450);
-
-  cv.classList.add('on');
-
-  setFlow(14);
-
-  timers.push(
-    setTimeout(()=>{
-      $('bootLine1').style.opacity=1;
-    },600)
-  );
-
-  timers.push(
-    setTimeout(()=>{
-      $('bootLine2').style.opacity=1;
-    },1300)
-  );
-
-  timers.push(
-    setTimeout(()=>{
-      $('bootBar').style.opacity=1;
-      $('bootFill').style.width='100%';
-    },1900)
-  );
-
-  timers.push(
-    setTimeout(finishBoot,4400)
+  boot.style.transform='translateY(0)';
+  boot.animate(
+    [
+      {transform:'translateY(0)',filter:'blur(0px)'},
+      {transform:'translateY(-4px)',filter:'blur(.2px)'},
+      {transform:'translateY(0)',filter:'blur(0px)'}
+    ],
+    {
+      duration:1600/speed,
+      iterations:Infinity
+    }
   );
 }
 
@@ -919,108 +725,117 @@ function finishBoot(){
   if(ready)return;
 
   ready=true;
+  boot.style.opacity='0';
 
-  timers.forEach(clearTimeout);
+  setTimeout(()=>{
+    boot.style.display='none';
+  },1500);
 
-  bootEl.style.opacity=0;
-  bootEl.style.pointerEvents='none';
-
-  sceneEl.style.opacity=1;
+  sceneEl.style.opacity='1';
   sceneEl.classList.add('on');
 
-  setFlow(1.3);
-  drone();
+  flash.classList.add('on');
+
+  setTimeout(()=>{
+    flash.classList.remove('on');
+  },120);
+
+  blip(760,.1);
 }
 
-function setSel(v){
-  if(busy||!ready)return;
+function startExperience(){
+  if(started)return;
 
-  if(selected!==v)
-    blip();
+  started=true;
+  startGate.style.opacity='0';
+  ensureAudio();
 
-  selected=v;
+  setTimeout(()=>{
+    startGate.style.display='none';
+  },500);
 
-  choiceClose.classList.toggle(
-    'active',
-    v==='close'
-  );
+  setTimeout(()=>{
+    boot.querySelector('.b1').style.opacity='1';
+  },150);
 
-  choiceContinue.classList.toggle(
-    'active',
-    v==='continue'
-  );
+  setTimeout(()=>{
+    boot.querySelector('.b2').style.opacity='1';
+  },500);
 
-  choiceStore.classList.toggle(
-    'active',
-    v==='store'
-  );
+  setTimeout(()=>{
+    boot.querySelector('.bar').style.opacity='1';
+    boot.querySelector('.bar i').style.width='100%';
+  },800);
+
+  setTimeout(()=>{
+    finishBoot();
+  },3000);
 }
 
-choiceClose.classList.remove('active');
-choiceContinue.classList.add('active');
-choiceStore.classList.remove('active');
+startGate.addEventListener('click',startExperience);
+boot.addEventListener('click',()=>{
+  if(started&&!ready)finishBoot();
+});
+
+function setSel(name){
+  if(!['close','continue','store'].includes(name))return;
+  if(selected===name)return;
+
+  selected=name;
+
+  document.querySelectorAll('.choice').forEach(el=>{
+    el.classList.remove('active');
+  });
+
+  if(name==='close'){
+    $('choiceClose').classList.add('active');
+  }else if(name==='continue'){
+    $('choiceContinue').classList.add('active');
+  }else{
+    $('choiceStore').classList.add('active');
+  }
+
+  blip(
+    name==='close'?260:
+    name==='continue'?430:
+    620,
+    .055
+  );
+
+  if(menuRumbleEnabled){
+    vibrateController();
+  }
+}
 
 function activate(){
-  if(busy||!ready)return;
+  if(!ready)return;
 
-  busy=true;
+  if(menuRumbleEnabled){
+    vibrateController();
+  }
 
-  confirmSnd();
+  blip(780,.1);
+
+  if(selected==='close'){
+    flash.classList.add('on');
+
+    setTimeout(()=>{
+      window.location.href='about:blank';
+    },180);
+  }
 
   if(selected==='continue'){
-    $('flash').classList.add('on');
+    window.location.href='https://raw13g.github.io/';
+  }
 
-    setFlow(70);
-
-    setTimeout(()=>{
-      window.location.href=URL_GO;
-    },700);
-
-  }else if(selected==='store'){
-    $('flash').classList.add('on');
-
-    setFlow(50);
-
-    setTimeout(()=>{
-      window.location.href=URL_STORE;
-    },700);
-
-  }else{
-    try{
-      window.close();
-    }catch(e){}
-
-    setTimeout(()=>{
-      sceneEl.style.transition='opacity 1.2s ease';
-      sceneEl.style.opacity=0;
-
-      cv.style.transition='opacity 1.6s ease';
-      cv.style.opacity=0;
-
-      document.body.style.background='#000';
-    },300);
+  if(selected==='store'){
+    window.location.href='https://pkg-zone.com/';
   }
 }
 
-function goFull(){
-  const el=document.documentElement;
-
-  if(document.fullscreenElement){
-    document.exitFullscreen&&document.exitFullscreen();
-  }else if(el.requestFullscreen){
-    el.requestFullscreen().catch(()=>{});
-  }
-}
-
-gate.addEventListener('click',startExperience);
-
-bootEl.addEventListener(
-  'click',
-  ()=>{
-    if(started&&!ready)
-      finishBoot();
-  }
-);
+const choiceClose=$('choiceClose');
+const choiceContinue=$('choiceContinue');
+const choiceStore=$('choiceStore');
 
 choiceClose.addEventListener(
   'pointerenter',
@@ -1083,8 +898,24 @@ addEventListener('keydown',e=>{
 
   const k=e.key.toLowerCase();
 
+  if(k==='o' || k==='escape'){
+    if($('controllerSettings').classList.contains('show')){
+      $('controllerSettings').classList.remove('show');
+    }else if(k==='o'){
+      openSettings();
+    }
+    return;
+  }
+
+  if($('controllerSettings').classList.contains('show')){
+    if(k==='enter' || k==='x'){
+      return;
+    }
+  }
+
   if(e.key==='ArrowLeft'){
     e.preventDefault();
+
     setSel(
       selected==='continue'
         ?'close'
@@ -1096,6 +927,7 @@ addEventListener('keydown',e=>{
 
   else if(e.key==='ArrowRight'){
     e.preventDefault();
+
     setSel(
       selected==='close'
         ?'continue'
@@ -1122,9 +954,7 @@ addEventListener('keydown',e=>{
     goFull();
   }
 
-  else if(
-    e.key==='Escape'
-  ){
+  else if(e.key==='Escape'){
     $('controllerSettings').classList.remove('show');
   }
 });
@@ -1133,14 +963,80 @@ addEventListener('pointermove',e=>{
   tx=e.clientX/innerWidth-.5;
   ty=e.clientY/innerHeight-.5;
 
-  sceneEl.style.transform=
-    `translate(${tx*8}px,${ty*6}px)`;
+  if(parallaxEnabled){
+    sceneEl.style.transform=
+      `translate(${tx*8}px,${ty*6}px)`;
+  }
 });
+
+let touchStartX=0;
+
+addEventListener('touchstart',e=>{
+  if(e.touches.length){
+    touchStartX=e.touches[0].clientX;
+  }
+},{passive:true});
+
+addEventListener('touchend',e=>{
+  if(!ready||!e.changedTouches.length)return;
+
+  const endX=e.changedTouches[0].clientX;
+  const dx=endX-touchStartX;
+
+  if(Math.abs(dx)<45)return;
+
+  if(dx<0){
+    setSel(
+      selected==='close'
+        ?'continue'
+        :selected==='continue'
+          ?'store'
+          :'store'
+    );
+  }else{
+    setSel(
+      selected==='store'
+        ?'continue'
+        :selected==='continue'
+          ?'close'
+          :'close'
+    );
+  }
+},{passive:true});
 
 const controllerStatus=$('controllerStatus');
 const statusText=$('statusText');
 
 let connectedGamepad=null;
+
+function controllerLabel(gp){
+  if(!gp)return 'CONTROLLER NOT CONNECTED';
+
+  const id=(gp.id||'GAMEPAD')
+    .replace(/\s+/g,' ')
+    .trim();
+
+  return id.length>30
+    ?id.slice(0,30)+'…'
+    :id;
+}
+
+function refreshSettingsUI(){
+  $('motionToggle')
+    .classList.toggle('active',motionEnabled);
+
+  $('parallaxToggle')
+    .classList.toggle('active',parallaxEnabled);
+
+  $('scanlineToggle')
+    .classList.toggle('active',scanlinesEnabled);
+
+  $('rumbleMenuToggle')
+    .classList.toggle('active',menuRumbleEnabled);
+
+  $('scanlines').style.display=
+    scanlinesEnabled?'block':'none';
+}
 
 function updateControllerStatus(){
   const pads=navigator.getGamepads?
@@ -1153,7 +1049,7 @@ function updateControllerStatus(){
 
   if(gp){
     controllerStatus.classList.add('connected');
-    statusText.textContent='CONTROLLER CONNECTED';
+    statusText.textContent=controllerLabel(gp);
   }else{
     controllerStatus.classList.remove('connected');
     statusText.textContent='CONTROLLER NOT CONNECTED';
@@ -1164,9 +1060,8 @@ addEventListener(
   'gamepadconnected',
   e=>{
     connectedGamepad=e.gamepad;
-
     controllerStatus.classList.add('connected');
-    statusText.textContent='CONTROLLER CONNECTED';
+    statusText.textContent=controllerLabel(e.gamepad);
   }
 );
 
@@ -1174,7 +1069,6 @@ addEventListener(
   'gamepaddisconnected',
   ()=>{
     connectedGamepad=null;
-
     controllerStatus.classList.remove('connected');
     statusText.textContent='CONTROLLER NOT CONNECTED';
   }
@@ -1201,6 +1095,7 @@ let vibrationEnabled=
 
 function applyControllerColor(){
   virtualLightbar.style.background=ps4Color;
+
   virtualLightbar.style.boxShadow=
     `0 0 12px ${ps4Color}`;
 
@@ -1263,8 +1158,7 @@ function vibrateController(){
 
   if(!gp)return;
 
-  const actuator=
-    gp.vibrationActuator;
+  const actuator=gp.vibrationActuator;
 
   if(!actuator)return;
 
@@ -1335,10 +1229,55 @@ document.querySelectorAll('.vibrationEnabled')
 
       applyVibrationSettings();
 
-      if(vibrationEnabled)
+      if(vibrationEnabled){
         vibrateController();
+      }
     }
   );
+});
+
+$('motionToggle').addEventListener('click',()=>{
+  motionEnabled=!motionEnabled;
+  saveInterfaceSettings();
+  setFlow(1.3);
+});
+
+$('parallaxToggle').addEventListener('click',()=>{
+  parallaxEnabled=!parallaxEnabled;
+  saveInterfaceSettings();
+
+  if(!parallaxEnabled){
+    sceneEl.style.transform='translate(0,0)';
+  }
+});
+
+$('scanlineToggle').addEventListener('click',()=>{
+  scanlinesEnabled=!scanlinesEnabled;
+  saveInterfaceSettings();
+});
+
+$('rumbleMenuToggle').addEventListener('click',()=>{
+  menuRumbleEnabled=!menuRumbleEnabled;
+  saveInterfaceSettings();
+});
+
+$('settingsReset').addEventListener('click',()=>{
+  ps4Color='#3fa9ff';
+  vibrationLevel='medium';
+  vibrationEnabled=true;
+  motionEnabled=!RM;
+  parallaxEnabled=true;
+  scanlinesEnabled=true;
+  menuRumbleEnabled=true;
+
+  localStorage.removeItem('ps4_controller_color');
+  localStorage.removeItem('ps4_vibration_level');
+  localStorage.removeItem('ps4_vibration_enabled');
+
+  saveInterfaceSettings();
+  applyControllerColor();
+  applyVibrationSettings();
+  blip();
 });
 
 $('settingsClose').addEventListener(
@@ -1351,15 +1290,42 @@ $('settingsClose').addEventListener(
 settings.addEventListener(
   'click',
   e=>{
-    if(e.target===settings)
+    if(e.target===settings){
       settings.classList.remove('show');
+    }
   }
 );
 
 applyControllerColor();
 applyVibrationSettings();
+refreshSettingsUI();
+
+function saveInterfaceSettings(){
+  localStorage.setItem(
+    'ps4_motion',
+    String(motionEnabled)
+  );
+
+  localStorage.setItem(
+    'ps4_parallax',
+    String(parallaxEnabled)
+  );
+
+  localStorage.setItem(
+    'ps4_scanlines',
+    String(scanlinesEnabled)
+  );
+
+  localStorage.setItem(
+    'ps4_menu_rumble',
+    String(menuRumbleEnabled)
+  );
+
+  refreshSettingsUI();
+}
 
 function openSettings(){
+  refreshSettingsUI();
   settings.classList.add('show');
 }
 
@@ -1378,9 +1344,8 @@ function controllerLoop(){
   }
 
   connectedGamepad=gp;
-
   controllerStatus.classList.add('connected');
-  statusText.textContent='CONTROLLER CONNECTED';
+  statusText.textContent=controllerLabel(gp);
 
   const buttons=gp.buttons.map(
     b=>b.pressed
@@ -1391,90 +1356,107 @@ function controllerLoop(){
 
   const left=
     (gp.axes[0]??0)<-.5||
-    !!(buttons[14]);
+    !!buttons[14];
 
   const right=
     (gp.axes[0]??0)>.5||
-    !!(buttons[15]);
+    !!buttons[15];
 
   const up=
     (gp.axes[1]??0)<-.5||
-    !!(buttons[12]);
+    !!buttons[12];
 
   const down=
     (gp.axes[1]??0)>.5||
-    !!(buttons[13]);
+    !!buttons[13];
 
   if(
     buttons.some(Boolean)&&
     !lastButtons.some(Boolean)
   ){
-    if(!started)
+    if(!started){
       startExperience();
-    else if(!ready)
+    }else if(!ready){
       finishBoot();
+    }
   }
 
   if(left&&!lastButtons._left){
     if(ready){
-      if(selected==='continue')
+      if(selected==='continue'){
         setSel('close');
-      else if(selected==='store')
+      }else if(selected==='store'){
         setSel('continue');
-      else
+      }else{
         setSel('close');
+      }
     }
   }
 
   if(right&&!lastButtons._right){
     if(ready){
-      if(selected==='close')
+      if(selected==='close'){
         setSel('continue');
-      else
+      }else{
         setSel('store');
+      }
     }
   }
 
   if(up&&!lastButtons._up){
-    if(ready)
+    if(ready){
       setSel(
         selected==='store'
           ?'continue'
           :'close'
       );
+    }
   }
 
   if(down&&!lastButtons._down){
-    if(ready)
+    if(ready){
       setSel(
         selected==='close'
           ?'continue'
           :'store'
       );
+    }
   }
 
   if(pressed(0)){
-    if(!started)
+    if(!started){
       startExperience();
-    else if(!ready)
+    }else if(!ready){
       finishBoot();
-    else
+    }else{
       activate();
+    }
+  }
+
+  if(pressed(1)){
+    if(settings.classList.contains('show')){
+      settings.classList.remove('show');
+    }else if(ready){
+      setSel(selected);
+    }
   }
 
   if(pressed(9)){
-    if(ready)
+    if(ready){
       openSettings();
+    }
   }
 
   if(pressed(8)){
-    if(ready)
+    if(ready){
       goFull();
+    }
   }
 
   if(pressed(16)){
-    if(ready)
+    if(ready){
       openSettings();
+    }
   }
 
   lastButtons=buttons;
@@ -1488,12 +1470,6 @@ function controllerLoop(){
 }
 
 requestAnimationFrame(controllerLoop);
-
-setInterval(()=>{
-  if(connectedGamepad)
-    vibrateController();
-},1000);
-
 </script>
 </body>
 </html>
