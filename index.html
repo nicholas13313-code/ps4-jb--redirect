@@ -93,6 +93,7 @@ h1{
   padding:6px 12px;border-radius:999px;cursor:pointer;
 }
 #snd:hover{border-color:#8fd0ff;color:#cfe8ff;}
+
 .choices{
   position:relative;width:100%;max-width:1100px;
   display:flex;align-items:center;justify-content:space-between;
@@ -131,6 +132,7 @@ h1{
 .choice.active.left .pill{box-shadow:0 0 50px rgba(255,60,60,.95),inset 0 2px 6px rgba(255,255,255,.5);}
 .choice.active.middle .pill{box-shadow:0 0 50px rgba(63,169,255,.95),inset 0 2px 6px rgba(255,255,255,.5);}
 .choice.active.right .pill{box-shadow:0 0 50px rgba(53,255,121,.95),inset 0 2px 6px rgba(255,255,255,.5);}
+
 #controllerStatus{
   position:absolute;
   top:calc(2vh + env(safe-area-inset-top,0px));
@@ -157,6 +159,7 @@ h1{
   box-shadow:0 0 10px #35ff79;
 }
 #controllerStatus.connected{color:#8dffb2;border-color:rgba(53,255,121,.4);}
+
 footer{
   display:flex;flex-direction:column;align-items:center;width:100%;
   text-shadow:0 2px 10px #000;
@@ -178,6 +181,7 @@ footer{
 .credit{
   font-size:.55rem;letter-spacing:.18em;color:#4f79a0;margin-top:8px;
 }
+
 #controllerSettings{
   position:fixed;
   inset:0;
@@ -299,6 +303,7 @@ footer{
 .vb.r{right:0;top:16px;}
 .vb.b{left:16px;bottom:0;}
 .vb.l{left:0;top:16px;}
+
 .settingGroup{
   margin-top:18px;
   padding-top:16px;
@@ -351,87 +356,90 @@ footer{
 .color-blue{background:#3fa9ff;}
 .color-red{background:#ff3030;}
 .color-green{background:#35ff79;}
-.color-purple{background:#b65cff;}
-.color-gold{background:#ffd34f;}
+.color-purple{background:#a15cff;}
+.color-gold{background:#ffd43b;}
 .color-white{background:#fff;}
+#settingsClose{
+  margin-top:20px;
+  min-width:130px;
+}
 .settingsDivider{
   height:1px;
   background:rgba(111,163,207,.18);
-  margin:18px 0;
+  margin:16px 0 0;
 }
 .settingsHint{
-  margin-top:15px;
-  color:#628bad;
-  font-size:.55rem;
+  margin-top:12px;
+  color:#557da3;
+  font-size:.52rem;
   letter-spacing:.12em;
-  line-height:1.8;
-}
-#settingsClose,
-#settingsReset{
-  min-width:120px;
+  line-height:1.7;
 }
 .toggleBtn.active{
   border-color:#35ff79;
-  color:#8dffb2;
-  background:rgba(20,80,45,.55);
+  color:#baffd2;
+  background:rgba(25,110,65,.38);
+  box-shadow:0 0 15px rgba(53,255,121,.18);
 }
 #settingsReset{
-  border-color:rgba(255,100,100,.35);
-  color:#ff9b9b;
+  margin-top:8px;
+  border-color:rgba(255,80,80,.28);
+  color:#e79a9a;
 }
 #settingsReset:hover{
   border-color:#ff7070;
   color:#fff;
-  background:rgba(110,35,35,.55);
+  background:rgba(130,35,35,.45);
 }
-button:focus-visible{
-  outline:2px solid #8fd0ff;
-  outline-offset:3px;
+.choice:focus-visible .pill,
+#snd:focus-visible,
+.settingBtn:focus-visible{
+  outline:2px solid #cfe8ff;
+  outline-offset:4px;
 }
 @media(max-width:700px){
   .choices{gap:1vw;}
-  .pill{width:96%;font-size:.65rem;}
-  .labels{gap:1vw;}
-  .label{font-size:.5rem;}
-  .label b{font-size:.62rem;}
-  .virtualController{transform:scale(.88);}
-  .settingsBox{padding:18px;}
+  .pill{font-size:.68rem;padding:0 2%;}
+  .label{font-size:.52rem;}
+  .label b{font-size:.65rem;}
+  .hint{font-size:.45rem;letter-spacing:.1em;}
+  #controllerStatus{font-size:.45rem;}
+  #snd{font-size:.48rem;}
 }
 </style>
 </head>
+
 <body>
 <canvas id="bg"></canvas>
-<div id="scanlines"></div>
 <div id="vignette"></div>
+<div id="scanlines"></div>
 <div id="flash"></div>
 
-<div id="startGate">
-  <span>CLICK TO START</span>
-</div>
+<div id="startGate"><span>PRESS START</span></div>
 
 <div id="boot">
-  <div class="b1">PLAYSTATION</div>
-  <div class="b2">WEBKIT LAUNCHER</div>
-  <div class="bar"><i></i></div>
+  <div class="b1" id="bootLine1">PS4</div>
+  <div class="b2" id="bootLine2">WEBKIT LAUNCHER</div>
+  <div class="bar" id="bootBar"><i id="bootFill"></i></div>
 </div>
 
 <div id="scene">
-  <button id="snd" type="button" aria-label="Toggle sound">SOUND ON</button>
-
   <div id="controllerStatus">
     <span class="statusDot"></span>
     <span id="statusText">CONTROLLER NOT CONNECTED</span>
   </div>
 
+  <button id="snd" type="button" aria-label="Toggle sound">SOUND ON</button>
+
   <header>
-    <div class="tag">PLAYSTATION 4</div>
-    <div class="logo">WEBKIT</div>
-    <h1>LAUNCHER</h1>
-    <div class="subtitle">SYSTEM READY</div>
+    <div class="tag">CREATED FOR THE COMMUNITY</div>
+    <div class="logo">Raw13G</div>
+    <h1>PS4 WEBKIT LAUNCHER</h1>
+    <div class="subtitle">SELECT YOUR PATH</div>
   </header>
 
   <div class="choices">
-    <div class="choice active left" id="choiceClose">
+    <div class="choice left" id="choiceClose">
       <div class="pill red">NO JB 😢</div>
     </div>
 
@@ -447,41 +455,48 @@ button:focus-visible{
   <footer>
     <div class="labels">
       <div class="label">
-        <b>○</b>
-        EXIT
+        <b>NO JB 😢</b>
+        EXIT PAGE
       </div>
       <div class="label">
-        <b>✕</b>
-        SELECT
+        <b>GOLDHEN JB</b>
+        OPEN RAW13G
       </div>
       <div class="label">
-        <b>OPTIONS</b>
-        SETTINGS
+        <b>🛍 HOMEBREW STORE</b>
+        OPEN PKG-ZONE
       </div>
     </div>
+
     <div class="hint">
-      <b>ARROWS / D-PAD</b> NAVIGATE
-      &nbsp;&nbsp;•&nbsp;&nbsp;
-      <b>X / ENTER</b> SELECT
-      &nbsp;&nbsp;•&nbsp;&nbsp;
-      <b>O / ESC</b> SETTINGS
+      <b>◀ ▶</b> SELECT
+      &nbsp;&nbsp;
+      <b>✕ / ENTER</b> CONFIRM
+      &nbsp;&nbsp;
+      <b>OPTIONS</b> SETTINGS
+      &nbsp;&nbsp;
+      <b>M</b> SOUND
+      &nbsp;&nbsp;
+      <b>F</b> FULLSCREEN
     </div>
-    <div class="credit">PS4 WEBKIT LAUNCHER</div>
+
+    <div class="credit">LAUNCHER AND INTERFACE CREATED BY NIXHOLAS</div>
   </footer>
 </div>
 
 <div id="controllerSettings">
   <div class="settingsBox">
-    <div class="settingsTitle">CONTROLLER SETTINGS</div>
+    <div class="settingsTitle">PS4 CONTROLLER</div>
 
     <div class="virtualController">
       <div class="virtualLightbar" id="virtualLightbar"></div>
       <div class="virtualTouchpad"></div>
       <div class="virtualDpad"></div>
+
       <div class="virtualButtons">
         <div class="vb t">△</div>
         <div class="vb r">○</div>
-        <div class="vb b">✕</div>
+        <div class="vb b">×</div>
         <div class="vb l">□</div>
       </div>
     </div>
@@ -489,12 +504,12 @@ button:focus-visible{
     <div class="settingGroup">
       <div class="settingLabel">LIGHT BAR COLOR</div>
       <div class="settingRow">
-        <button class="settingBtn colorBtn color-blue" data-color="#3fa9ff"></button>
-        <button class="settingBtn colorBtn color-red" data-color="#ff3030"></button>
-        <button class="settingBtn colorBtn color-green" data-color="#35ff79"></button>
-        <button class="settingBtn colorBtn color-purple" data-color="#b65cff"></button>
-        <button class="settingBtn colorBtn color-gold" data-color="#ffd34f"></button>
-        <button class="settingBtn colorBtn color-white" data-color="#ffffff"></button>
+        <button class="settingBtn colorBtn color-blue" data-color="#3fa9ff" title="Blue"></button>
+        <button class="settingBtn colorBtn color-red" data-color="#ff3030" title="Red"></button>
+        <button class="settingBtn colorBtn color-green" data-color="#35ff79" title="Green"></button>
+        <button class="settingBtn colorBtn color-purple" data-color="#a15cff" title="Purple"></button>
+        <button class="settingBtn colorBtn color-gold" data-color="#ffd43b" title="Gold"></button>
+        <button class="settingBtn colorBtn color-white" data-color="#ffffff" title="White"></button>
       </div>
     </div>
 
@@ -516,291 +531,410 @@ button:focus-visible{
     </div>
 
     <div class="settingGroup">
-      <div class="settingLabel">MOTION</div>
+      <div class="settingLabel">INTERFACE EFFECTS</div>
       <div class="settingRow">
         <button class="settingBtn toggleBtn" id="motionToggle">MOTION</button>
         <button class="settingBtn toggleBtn" id="parallaxToggle">PARALLAX</button>
         <button class="settingBtn toggleBtn" id="scanlineToggle">SCANLINES</button>
+      </div>
+    </div>
+
+    <div class="settingGroup">
+      <div class="settingLabel">CONTROLLER RESPONSE</div>
+      <div class="settingRow">
         <button class="settingBtn toggleBtn" id="rumbleMenuToggle">MENU RUMBLE</button>
+        <button class="settingBtn" id="settingsReset">RESET SETTINGS</button>
       </div>
     </div>
 
     <div class="settingsDivider"></div>
 
-    <div class="settingRow">
-      <button class="settingBtn" id="settingsReset">RESET SETTINGS</button>
-      <button class="settingBtn" id="settingsClose">CLOSE</button>
+    <div class="settingsHint">
+      OPTIONS / ESC CLOSE &nbsp; • &nbsp; ARROWS SELECT &nbsp; • &nbsp; × CONFIRM
     </div>
 
-    <div class="settingsHint">
-      OPTIONS / O OPEN SETTINGS &nbsp;•&nbsp;
-      ESC CLOSE &nbsp;•&nbsp;
-      D-PAD / STICK NAVIGATE &nbsp;•&nbsp;
-      X SELECT
-    </div>
+    <button class="settingBtn" id="settingsClose">CLOSE</button>
   </div>
 </div>
 
 <script>
 const $=id=>document.getElementById(id);
 
-const canvas=$('bg');
-const ctx=canvas.getContext('2d');
-const sceneEl=$('scene');
+const URL_GO='https://raw13g.github.io/';
+const URL_STORE='https://pkg-zone.com/';
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const savedMotion=localStorage.getItem('ps4_motion')!=='false';
+const savedParallax=localStorage.getItem('ps4_parallax')!=='false';
+const savedScanlines=localStorage.getItem('ps4_scanlines')!=='false';
+const savedMenuRumble=localStorage.getItem('ps4_menu_rumble')!=='false';
+
+let motionEnabled=RM?false:savedMotion;
+let parallaxEnabled=savedParallax;
+let scanlinesEnabled=savedScanlines;
+let menuRumbleEnabled=savedMenuRumble;
+
+const cv=$('bg'),ctx=cv.getContext('2d');
+
+let W,H,DPR;
+
+function resize(){
+  DPR=Math.min(devicePixelRatio||1,1.5);
+  W=cv.width=innerWidth*DPR;
+  H=cv.height=innerHeight*DPR;
+  cv.style.width=innerWidth+'px';
+  cv.style.height=innerHeight+'px';
+}
+
+resize();
+addEventListener('resize',resize);
+
+const nc=document.createElement('canvas');
+nc.width=nc.height=128;
+
+const nctx=nc.getContext('2d');
+const nd=nctx.createImageData(128,128);
+
+for(let i=0;i<nd.data.length;i+=4){
+  const v=Math.random()*255;
+  nd.data[i]=v;
+  nd.data[i+1]=v;
+  nd.data[i+2]=v;
+  nd.data[i+3]=255;
+}
+
+nctx.putImageData(nd,0,0);
+
+const grain=ctx.createPattern(nc,'repeat');
+
+const Z=48;
+const boxes=[];
+
+for(let n=0;n<170;n++){
+  let gx,gy;
+
+  do{
+    gx=Math.round((Math.random()*2-1)*7);
+    gy=Math.round((Math.random()*2-1)*4);
+  }while(Math.abs(gx)<1&&Math.abs(gy)<1);
+
+  const s=1.5+(Math.random()<.3?.6:0);
+
+  boxes.push({
+    x:gx*2.4+(Math.random()-.5)*.5,
+    y:gy*2.4+(Math.random()-.5)*.5,
+    z:Math.random()*Z,
+    s
+  });
+}
+
+const dots=[
+  {a:1,r:.30,s:.20,c:'255,50,60'},
+  {a:2,r:.24,s:.12,c:'60,160,255'},
+  {a:1.5,r:.18,s:-.20,c:'60,255,150'},
+  {a:2,r:.20,s:-.30,c:'150,120,255'}
+];
+
+function tint(m){
+  return `rgb(${(8+157*m)|0},${(10+168*m)|0},${(26+196*m)|0})`;
+}
+
+function poly(p,col,a){
+  ctx.globalAlpha=a;
+  ctx.fillStyle=col;
+  ctx.beginPath();
+  ctx.moveTo(p[0][0],p[0][1]);
+
+  for(let i=1;i<p.length;i++)ctx.lineTo(p[i][0],p[i][1]);
+
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle='rgba(0,0,14,.55)';
+  ctx.lineWidth=Math.max(1,DPR);
+  ctx.stroke();
+}
+
+let last=performance.now(),t=0,camZ=0,flow=3,flowT=3;
+let mx=0,my=0,tx=0,ty=0;
+
+function setFlow(v){
+  flowT=v*((RM||!motionEnabled)?.35:1);
+}
+
+setFlow(3);
+
+function frame(now){
+  const dt=Math.min(.05,(now-last)/1000);
+  last=now;
+
+  t+=motionEnabled?dt:dt*.15;
+
+  flow+=(flowT-flow)*Math.min(1,dt*1.6);
+  camZ+=flow*dt;
+
+  mx+=(tx-mx)*Math.min(1,dt*2);
+  my+=(ty-my)*Math.min(1,dt*2);
+
+  const w=innerWidth;
+  const h=innerHeight;
+
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.clearRect(0,0,w,h);
+
+  const sky=ctx.createLinearGradient(0,0,0,h);
+  sky.addColorStop(0,'#02030a');
+  sky.addColorStop(.55,'#020611');
+  sky.addColorStop(1,'#010208');
+
+  ctx.fillStyle=sky;
+  ctx.fillRect(0,0,w,h);
+
+  const horizon=h*.55;
+
+  ctx.save();
+
+  if(parallaxEnabled){
+    ctx.translate(mx*16,my*10);
+  }
+
+  const cx=w*.5;
+  const cy=h*.55;
+
+  ctx.globalAlpha=.7;
+
+  for(let i=0;i<boxes.length;i++){
+    const b=boxes[i];
+
+    let zz=(b.z+camZ)%Z;
+    if(zz<0)zz+=Z;
+
+    const perspective=Z/(Z-zz);
+
+    const x=cx+b.x*perspective*55;
+    const y=cy+b.y*perspective*55;
+
+    const size=b.s*perspective*2.4;
+
+    if(
+      x<-100||
+      x>w+100||
+      y<-100||
+      y>h+100
+    )continue;
+
+    const m=Math.min(1,Math.max(0,1-zz/Z));
+
+    ctx.fillStyle=tint(m);
+
+    ctx.fillRect(
+      x-size*.5,
+      y-size*.5,
+      Math.max(1,size),
+      Math.max(1,size)
+    );
+  }
+
+  ctx.globalAlpha=1;
+
+  const horizonGlow=ctx.createRadialGradient(
+    cx,horizon,0,
+    cx,horizon,w*.65
+  );
+
+  horizonGlow.addColorStop(
+    0,
+    'rgba(25,105,190,.18)'
+  );
+
+  horizonGlow.addColorStop(
+    .45,
+    'rgba(20,65,130,.06)'
+  );
+
+  horizonGlow.addColorStop(
+    1,
+    'rgba(0,0,0,0)'
+  );
+
+  ctx.fillStyle=horizonGlow;
+  ctx.fillRect(0,0,w,h);
+
+  for(const d of dots){
+    const ang=t*d.s;
+    const r=Math.min(w,h)*d.r;
+
+    const x=cx+Math.cos(ang)*r;
+    const y=cy+Math.sin(ang*.7)*r*.5;
+
+    const grad=ctx.createRadialGradient(
+      x,y,0,
+      x,y,70*d.a
+    );
+
+    grad.addColorStop(
+      0,
+      `rgba(${d.c},.18)`
+    );
+
+    grad.addColorStop(
+      1,
+      `rgba(${d.c},0)`
+    );
+
+    ctx.fillStyle=grad;
+    ctx.fillRect(x-100,y-100,200,200);
+  }
+
+  ctx.restore();
+
+  ctx.globalAlpha=.08;
+  ctx.fillStyle=grain;
+  ctx.fillRect(0,0,w,h);
+  ctx.globalAlpha=1;
+
+  requestAnimationFrame(frame);
+}
+
+requestAnimationFrame(frame);
+
+const scene=$('scene');
 const boot=$('boot');
 const startGate=$('startGate');
 const flash=$('flash');
 
 let started=false;
 let ready=false;
-let muted=false;
-let selected='close';
-let audioCtx=null;
-let masterGain=null;
-let tx=0;
-let ty=0;
 
-const RM=window.matchMedia &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function startExperience(){
+  if(started)return;
 
-let motionEnabled=
-  localStorage.getItem('ps4_motion')!=='false';
-let parallaxEnabled=
-  localStorage.getItem('ps4_parallax')!=='false';
-let scanlinesEnabled=
-  localStorage.getItem('ps4_scanlines')!=='false';
-let menuRumbleEnabled=
-  localStorage.getItem('ps4_menu_rumble')!=='false';
+  started=true;
 
-if(RM){
-  motionEnabled=false;
-}
+  startGate.style.opacity='0';
 
-function resize(){
-  canvas.width=innerWidth*devicePixelRatio;
-  canvas.height=innerHeight*devicePixelRatio;
-  canvas.style.width=innerWidth+'px';
-  canvas.style.height=innerHeight+'px';
-  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
-}
-addEventListener('resize',resize);
-resize();
+  setTimeout(()=>{
+    startGate.style.display='none';
+  },450);
 
-const stars=[];
-for(let i=0;i<150;i++){
-  stars.push({
-    x:Math.random(),
-    y:Math.random(),
-    z:Math.random(),
-    s:.3+Math.random()*1.5
-  });
-}
+  setTimeout(()=>{
+    $('bootLine1').style.opacity='1';
+  },150);
 
-function drawBackground(t){
-  const w=innerWidth;
-  const h=innerHeight;
+  setTimeout(()=>{
+    $('bootLine2').style.opacity='1';
+  },550);
 
-  ctx.clearRect(0,0,w,h);
+  setTimeout(()=>{
+    $('bootBar').style.opacity='1';
+    $('bootFill').style.width='100%';
+  },850);
 
-  const g=ctx.createRadialGradient(
-    w*.5,h*.45,0,
-    w*.5,h*.5,Math.max(w,h)*.75
-  );
-  g.addColorStop(0,'#07172b');
-  g.addColorStop(.45,'#020916');
-  g.addColorStop(1,'#000207');
-  ctx.fillStyle=g;
-  ctx.fillRect(0,0,w,h);
-
-  const drift=motionEnabled?t*.000012:0;
-
-  for(const star of stars){
-    let x=(star.x+drift*star.z)%1;
-    if(x<0)x+=1;
-
-    const y=star.y;
-    const px=x*w;
-    const py=y*h;
-    const a=.12+star.z*.4;
-
-    ctx.fillStyle=`rgba(120,190,255,${a})`;
-    ctx.fillRect(px,py,star.s,star.s);
-  }
-
-  const glow=ctx.createRadialGradient(
-    w*.5,h*.52,0,
-    w*.5,h*.52,w*.42
-  );
-  glow.addColorStop(0,'rgba(20,110,190,.13)');
-  glow.addColorStop(.45,'rgba(20,70,140,.04)');
-  glow.addColorStop(1,'rgba(0,0,0,0)');
-  ctx.fillStyle=glow;
-  ctx.fillRect(0,0,w,h);
-
-  requestAnimationFrame(drawBackground);
-}
-requestAnimationFrame(drawBackground);
-
-function ensureAudio(){
-  if(audioCtx)return;
-
-  try{
-    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    masterGain=audioCtx.createGain();
-    masterGain.gain.value=.08;
-    masterGain.connect(audioCtx.destination);
-  }catch(e){}
-}
-
-function blip(freq=480,duration=.06){
-  if(muted||!audioCtx||!masterGain)return;
-
-  try{
-    const osc=audioCtx.createOscillator();
-    const gain=audioCtx.createGain();
-
-    osc.type='sine';
-    osc.frequency.value=freq;
-
-    gain.gain.setValueAtTime(.0001,audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(
-      .2,
-      audioCtx.currentTime+.008
-    );
-    gain.gain.exponentialRampToValueAtTime(
-      .0001,
-      audioCtx.currentTime+duration
-    );
-
-    osc.connect(gain);
-    gain.connect(masterGain);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime+duration+.01);
-  }catch(e){}
-}
-
-function toggleMute(){
-  muted=!muted;
-  $('snd').textContent=muted?'SOUND OFF':'SOUND ON';
-
-  if(masterGain){
-    masterGain.gain.value=muted?0:.08;
-  }
-
-  blip(muted?180:650,.08);
-}
-
-function goFull(){
-  try{
-    if(!document.fullscreenElement){
-      document.documentElement.requestFullscreen();
-    }else{
-      document.exitFullscreen();
-    }
-  }catch(e){}
-}
-
-function setFlow(speed=1){
-  if(!motionEnabled){
-    boot.style.opacity='1';
-    return;
-  }
-
-  boot.style.transform='translateY(0)';
-  boot.animate(
-    [
-      {transform:'translateY(0)',filter:'blur(0px)'},
-      {transform:'translateY(-4px)',filter:'blur(.2px)'},
-      {transform:'translateY(0)',filter:'blur(0px)'}
-    ],
-    {
-      duration:1600/speed,
-      iterations:Infinity
-    }
-  );
+  setTimeout(()=>{
+    finishBoot();
+  },3100);
 }
 
 function finishBoot(){
   if(ready)return;
 
   ready=true;
-  boot.style.opacity='0';
-
-  setTimeout(()=>{
-    boot.style.display='none';
-  },1500);
-
-  sceneEl.style.opacity='1';
-  sceneEl.classList.add('on');
 
   flash.classList.add('on');
 
   setTimeout(()=>{
     flash.classList.remove('on');
-  },120);
+  },180);
 
-  blip(760,.1);
+  boot.style.opacity='0';
+
+  setTimeout(()=>{
+    boot.style.display='none';
+  },1400);
+
+  scene.style.opacity='1';
+  scene.classList.add('on');
+
+  document.querySelectorAll('.choice')
+    .forEach(c=>c.classList.remove('active'));
+
+  $('choiceClose').classList.add('active');
+
+  selected='close';
 }
 
-function startExperience(){
-  if(started)return;
+startGate.addEventListener(
+  'click',
+  startExperience
+);
 
-  started=true;
-  startGate.style.opacity='0';
-  ensureAudio();
+boot.addEventListener(
+  'click',
+  ()=>{
+    if(started&&!ready)finishBoot();
+  }
+);
 
-  setTimeout(()=>{
-    startGate.style.display='none';
-  },500);
+let selected='close';
 
-  setTimeout(()=>{
-    boot.querySelector('.b1').style.opacity='1';
-  },150);
+function vibrateController(){
+  if(!vibrationEnabled)return;
 
-  setTimeout(()=>{
-    boot.querySelector('.b2').style.opacity='1';
-  },500);
+  const gp=connectedGamepad;
 
-  setTimeout(()=>{
-    boot.querySelector('.bar').style.opacity='1';
-    boot.querySelector('.bar i').style.width='100%';
-  },800);
+  if(!gp)return;
 
-  setTimeout(()=>{
-    finishBoot();
-  },3000);
+  const actuator=gp.vibrationActuator;
+
+  if(!actuator)return;
+
+  let duration=250;
+  let strong=.55;
+  let weak=.4;
+
+  if(vibrationLevel==='low'){
+    duration=140;
+    strong=.25;
+    weak=.15;
+  }
+
+  if(vibrationLevel==='high'){
+    duration=380;
+    strong=1;
+    weak=.8;
+  }
+
+  try{
+    actuator.playEffect(
+      'dual-rumble',
+      {
+        duration,
+        strongMagnitude:strong,
+        weakMagnitude:weak
+      }
+    );
+  }catch(e){}
 }
-
-startGate.addEventListener('click',startExperience);
-boot.addEventListener('click',()=>{
-  if(started&&!ready)finishBoot();
-});
 
 function setSel(name){
-  if(!['close','continue','store'].includes(name))return;
-  if(selected===name)return;
+  if(name===selected)return;
 
   selected=name;
 
-  document.querySelectorAll('.choice').forEach(el=>{
-    el.classList.remove('active');
-  });
+  document.querySelectorAll('.choice')
+    .forEach(c=>c.classList.remove('active'));
 
   if(name==='close'){
     $('choiceClose').classList.add('active');
-  }else if(name==='continue'){
-    $('choiceContinue').classList.add('active');
-  }else{
-    $('choiceStore').classList.add('active');
   }
 
-  blip(
-    name==='close'?260:
-    name==='continue'?430:
-    620,
-    .055
-  );
+  if(name==='continue'){
+    $('choiceContinue').classList.add('active');
+  }
+
+  if(name==='store'){
+    $('choiceStore').classList.add('active');
+  }
 
   if(menuRumbleEnabled){
     vibrateController();
@@ -814,45 +948,42 @@ function activate(){
     vibrateController();
   }
 
-  blip(780,.1);
-
   if(selected==='close'){
     flash.classList.add('on');
 
     setTimeout(()=>{
-      window.location.href='about:blank';
+      location.href='about:blank';
     },180);
+
+    return;
   }
 
   if(selected==='continue'){
-    window.location.href='https://raw13g.github.io/';
+    location.href=URL_GO;
+    return;
   }
 
   if(selected==='store'){
-    window.location.href='https://pkg-zone.com/';
+    location.href=URL_STORE;
   }
 }
 
-const choiceClose=$('choiceClose');
-const choiceContinue=$('choiceContinue');
-const choiceStore=$('choiceStore');
-
-choiceClose.addEventListener(
+$('choiceClose').addEventListener(
   'pointerenter',
   ()=>setSel('close')
 );
 
-choiceContinue.addEventListener(
+$('choiceContinue').addEventListener(
   'pointerenter',
   ()=>setSel('continue')
 );
 
-choiceStore.addEventListener(
+$('choiceStore').addEventListener(
   'pointerenter',
   ()=>setSel('store')
 );
 
-choiceClose.addEventListener(
+$('choiceClose').addEventListener(
   'click',
   ()=>{
     setSel('close');
@@ -860,7 +991,7 @@ choiceClose.addEventListener(
   }
 );
 
-choiceContinue.addEventListener(
+$('choiceContinue').addEventListener(
   'click',
   ()=>{
     setSel('continue');
@@ -868,7 +999,7 @@ choiceContinue.addEventListener(
   }
 );
 
-choiceStore.addEventListener(
+$('choiceStore').addEventListener(
   'click',
   ()=>{
     setSel('store');
@@ -876,141 +1007,258 @@ choiceStore.addEventListener(
   }
 );
 
+let muted=false;
+let audioCtx=null;
+let masterGain=null;
+
+function ensureAudio(){
+  if(audioCtx)return;
+
+  try{
+    audioCtx=new(
+      window.AudioContext||
+      window.webkitAudioContext
+    )();
+
+    masterGain=audioCtx.createGain();
+    masterGain.gain.value=.055;
+    masterGain.connect(audioCtx.destination);
+  }catch(e){}
+}
+
+function beep(
+  frequency=440,
+  duration=.07
+){
+  if(muted)return;
+
+  ensureAudio();
+
+  if(!audioCtx||!masterGain)return;
+
+  try{
+    const osc=audioCtx.createOscillator();
+    const gain=audioCtx.createGain();
+
+    osc.type='sine';
+    osc.frequency.value=frequency;
+
+    gain.gain.setValueAtTime(
+      .0001,
+      audioCtx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .12,
+      audioCtx.currentTime+.008
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .0001,
+      audioCtx.currentTime+duration
+    );
+
+    osc.connect(gain);
+    gain.connect(masterGain);
+
+    osc.start();
+
+    osc.stop(
+      audioCtx.currentTime+
+      duration+
+      .01
+    );
+  }catch(e){}
+}
+
 $('snd').addEventListener(
   'click',
-  e=>{
-    e.stopPropagation();
+  ()=>{
     ensureAudio();
-    toggleMute();
+
+    muted=!muted;
+
+    $('snd').textContent=
+      muted?'SOUND OFF':'SOUND ON';
+
+    if(masterGain){
+      masterGain.gain.value=
+        muted?0:.055;
+    }
+
+    if(!muted){
+      beep(650,.08);
+    }
   }
 );
 
-addEventListener('keydown',e=>{
-  if(!started){
-    startExperience();
-    return;
-  }
-
-  if(!ready){
-    finishBoot();
-    return;
-  }
-
-  const k=e.key.toLowerCase();
-
-  if(k==='o' || k==='escape'){
-    if($('controllerSettings').classList.contains('show')){
-      $('controllerSettings').classList.remove('show');
-    }else if(k==='o'){
-      openSettings();
+function goFullscreen(){
+  try{
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen();
+    }else{
+      document.exitFullscreen();
     }
-    return;
-  }
+  }catch(e){}
+}
 
-  if($('controllerSettings').classList.contains('show')){
-    if(k==='enter' || k==='x'){
-      return;
+let pointerX=0;
+let pointerY=0;
+
+addEventListener(
+  'pointermove',
+  e=>{
+    pointerX=e.clientX/innerWidth-.5;
+    pointerY=e.clientY/innerHeight-.5;
+
+    tx=pointerX;
+    ty=pointerY;
+
+    if(parallaxEnabled){
+      scene.style.transform=
+        `translate(${pointerX*8}px,${pointerY*6}px)`;
+    }else{
+      scene.style.transform=
+        'translate(0,0)';
     }
   }
-
-  if(e.key==='ArrowLeft'){
-    e.preventDefault();
-
-    setSel(
-      selected==='continue'
-        ?'close'
-        :selected==='store'
-          ?'continue'
-          :'close'
-    );
-  }
-
-  else if(e.key==='ArrowRight'){
-    e.preventDefault();
-
-    setSel(
-      selected==='close'
-        ?'continue'
-        :selected==='continue'
-          ?'store'
-          :'store'
-    );
-  }
-
-  else if(
-    e.key==='Enter'||
-    e.key===' '||
-    k==='x'
-  ){
-    e.preventDefault();
-    activate();
-  }
-
-  else if(k==='m'){
-    toggleMute();
-  }
-
-  else if(k==='f'){
-    goFull();
-  }
-
-  else if(e.key==='Escape'){
-    $('controllerSettings').classList.remove('show');
-  }
-});
-
-addEventListener('pointermove',e=>{
-  tx=e.clientX/innerWidth-.5;
-  ty=e.clientY/innerHeight-.5;
-
-  if(parallaxEnabled){
-    sceneEl.style.transform=
-      `translate(${tx*8}px,${ty*6}px)`;
-  }
-});
+);
 
 let touchStartX=0;
 
-addEventListener('touchstart',e=>{
-  if(e.touches.length){
-    touchStartX=e.touches[0].clientX;
+addEventListener(
+  'touchstart',
+  e=>{
+    if(e.touches.length){
+      touchStartX=
+        e.touches[0].clientX;
+    }
+  },
+  {passive:true}
+);
+
+addEventListener(
+  'touchend',
+  e=>{
+    if(!ready||!e.changedTouches.length)return;
+
+    const endX=
+      e.changedTouches[0].clientX;
+
+    const dx=endX-touchStartX;
+
+    if(Math.abs(dx)<45)return;
+
+    if(dx<0){
+      if(selected==='close'){
+        setSel('continue');
+      }else if(selected==='continue'){
+        setSel('store');
+      }
+    }else{
+      if(selected==='store'){
+        setSel('continue');
+      }else if(selected==='continue'){
+        setSel('close');
+      }
+    }
+  },
+  {passive:true}
+);
+
+addEventListener(
+  'keydown',
+  e=>{
+    const key=e.key.toLowerCase();
+
+    if(!started){
+      startExperience();
+      return;
+    }
+
+    if(!ready){
+      finishBoot();
+      return;
+    }
+
+    if(
+      $('controllerSettings')
+      .classList.contains('show')
+    ){
+      if(key==='escape'){
+        $('controllerSettings')
+          .classList.remove('show');
+      }
+
+      if(key==='o'){
+        $('controllerSettings')
+          .classList.remove('show');
+      }
+
+      return;
+    }
+
+    if(key==='o'){
+      openSettings();
+      return;
+    }
+
+    if(key==='escape'){
+      openSettings();
+      return;
+    }
+
+    if(e.key==='ArrowLeft'){
+      e.preventDefault();
+
+      if(selected==='continue'){
+        setSel('close');
+      }else if(selected==='store'){
+        setSel('continue');
+      }
+    }
+
+    if(e.key==='ArrowRight'){
+      e.preventDefault();
+
+      if(selected==='close'){
+        setSel('continue');
+      }else if(selected==='continue'){
+        setSel('store');
+      }
+    }
+
+    if(
+      key==='enter'||
+      key==='x'||
+      e.key===' '
+    ){
+      e.preventDefault();
+      activate();
+    }
+
+    if(key==='m'){
+      $('snd').click();
+    }
+
+    if(key==='f'){
+      goFullscreen();
+    }
   }
-},{passive:true});
+);
 
-addEventListener('touchend',e=>{
-  if(!ready||!e.changedTouches.length)return;
+const controllerStatus=
+  $('controllerStatus');
 
-  const endX=e.changedTouches[0].clientX;
-  const dx=endX-touchStartX;
-
-  if(Math.abs(dx)<45)return;
-
-  if(dx<0){
-    setSel(
-      selected==='close'
-        ?'continue'
-        :selected==='continue'
-          ?'store'
-          :'store'
-    );
-  }else{
-    setSel(
-      selected==='store'
-        ?'continue'
-        :selected==='continue'
-          ?'close'
-          :'close'
-    );
-  }
-},{passive:true});
-
-const controllerStatus=$('controllerStatus');
-const statusText=$('statusText');
+const statusText=
+  $('statusText');
 
 let connectedGamepad=null;
 
 function controllerLabel(gp){
-  if(!gp)return 'CONTROLLER NOT CONNECTED';
+  if(!gp){
+    return 'CONTROLLER NOT CONNECTED';
+  }
 
   const id=(gp.id||'GAMEPAD')
     .replace(/\s+/g,' ')
@@ -1021,25 +1269,9 @@ function controllerLabel(gp){
     :id;
 }
 
-function refreshSettingsUI(){
-  $('motionToggle')
-    .classList.toggle('active',motionEnabled);
-
-  $('parallaxToggle')
-    .classList.toggle('active',parallaxEnabled);
-
-  $('scanlineToggle')
-    .classList.toggle('active',scanlinesEnabled);
-
-  $('rumbleMenuToggle')
-    .classList.toggle('active',menuRumbleEnabled);
-
-  $('scanlines').style.display=
-    scanlinesEnabled?'block':'none';
-}
-
 function updateControllerStatus(){
-  const pads=navigator.getGamepads?
+  const pads=
+    navigator.getGamepads?
     [...navigator.getGamepads()]:
     [];
 
@@ -1048,11 +1280,19 @@ function updateControllerStatus(){
   connectedGamepad=gp||null;
 
   if(gp){
-    controllerStatus.classList.add('connected');
-    statusText.textContent=controllerLabel(gp);
+    controllerStatus.classList.add(
+      'connected'
+    );
+
+    statusText.textContent=
+      controllerLabel(gp);
   }else{
-    controllerStatus.classList.remove('connected');
-    statusText.textContent='CONTROLLER NOT CONNECTED';
+    controllerStatus.classList.remove(
+      'connected'
+    );
+
+    statusText.textContent=
+      'CONTROLLER NOT CONNECTED';
   }
 }
 
@@ -1060,8 +1300,13 @@ addEventListener(
   'gamepadconnected',
   e=>{
     connectedGamepad=e.gamepad;
-    controllerStatus.classList.add('connected');
-    statusText.textContent=controllerLabel(e.gamepad);
+
+    controllerStatus.classList.add(
+      'connected'
+    );
+
+    statusText.textContent=
+      controllerLabel(e.gamepad);
   }
 );
 
@@ -1069,8 +1314,13 @@ addEventListener(
   'gamepaddisconnected',
   ()=>{
     connectedGamepad=null;
-    controllerStatus.classList.remove('connected');
-    statusText.textContent='CONTROLLER NOT CONNECTED';
+
+    controllerStatus.classList.remove(
+      'connected'
+    );
+
+    statusText.textContent=
+      'CONTROLLER NOT CONNECTED';
   }
 );
 
@@ -1079,27 +1329,36 @@ setInterval(
   500
 );
 
-const settings=$('controllerSettings');
-const virtualLightbar=$('virtualLightbar');
+const settings=
+  $('controllerSettings');
+
+const virtualLightbar=
+  $('virtualLightbar');
 
 let ps4Color=
-  localStorage.getItem('ps4_controller_color')||
-  '#3fa9ff';
+  localStorage.getItem(
+    'ps4_controller_color'
+  )||'#3fa9ff';
 
 let vibrationLevel=
-  localStorage.getItem('ps4_vibration_level')||
-  'medium';
+  localStorage.getItem(
+    'ps4_vibration_level'
+  )||'medium';
 
 let vibrationEnabled=
-  localStorage.getItem('ps4_vibration_enabled')!=='false';
+  localStorage.getItem(
+    'ps4_vibration_enabled'
+  )!=='false';
 
 function applyControllerColor(){
-  virtualLightbar.style.background=ps4Color;
+  virtualLightbar.style.background=
+    ps4Color;
 
   virtualLightbar.style.boxShadow=
     `0 0 12px ${ps4Color}`;
 
-  document.querySelectorAll('.colorBtn')
+  document
+    .querySelectorAll('.colorBtn')
     .forEach(btn=>{
       btn.classList.toggle(
         'active',
@@ -1110,195 +1369,55 @@ function applyControllerColor(){
 }
 
 function applyVibrationSettings(){
-  document.querySelectorAll('.vibrationLevel')
+  document
+    .querySelectorAll('.vibrationLevel')
     .forEach(btn=>{
       btn.classList.toggle(
         'active',
-        btn.dataset.level===vibrationLevel
-      );
-    });
-
-  document.querySelectorAll('.vibrationEnabled')
-    .forEach(btn=>{
-      btn.classList.toggle(
-        'active',
-        String(vibrationEnabled)===btn.dataset.enabled
-      );
-    });
-}
-
-function vibrationValues(){
-  if(vibrationLevel==='low'){
-    return {
-      duration:180,
-      strong:0.25,
-      weak:0.15
-    };
-  }
-
-  if(vibrationLevel==='high'){
-    return {
-      duration:400,
-      strong:1,
-      weak:.8
-    };
-  }
-
-  return {
-    duration:280,
-    strong:.65,
-    weak:.45
-  };
-}
-
-function vibrateController(){
-  if(!vibrationEnabled)return;
-
-  const gp=connectedGamepad;
-
-  if(!gp)return;
-
-  const actuator=gp.vibrationActuator;
-
-  if(!actuator)return;
-
-  const v=vibrationValues();
-
-  try{
-    if(actuator.playEffect){
-      actuator.playEffect(
-        'dual-rumble',
-        {
-          duration:v.duration,
-          strongMagnitude:v.strong,
-          weakMagnitude:v.weak
-        }
-      );
-    }
-  }catch(e){}
-}
-
-document.querySelectorAll('.colorBtn')
-.forEach(btn=>{
-  btn.addEventListener(
-    'click',
-    ()=>{
-      ps4Color=btn.dataset.color;
-
-      localStorage.setItem(
-        'ps4_controller_color',
-        ps4Color
-      );
-
-      applyControllerColor();
-      vibrateController();
-    }
-  );
-});
-
-document.querySelectorAll('.vibrationLevel')
-.forEach(btn=>{
-  btn.addEventListener(
-    'click',
-    ()=>{
-      vibrationLevel=btn.dataset.level;
-
-      localStorage.setItem(
-        'ps4_vibration_level',
+        btn.dataset.level===
         vibrationLevel
       );
+    });
 
-      applyVibrationSettings();
-      vibrateController();
-    }
-  );
-});
-
-document.querySelectorAll('.vibrationEnabled')
-.forEach(btn=>{
-  btn.addEventListener(
-    'click',
-    ()=>{
-      vibrationEnabled=
-        btn.dataset.enabled==='true';
-
-      localStorage.setItem(
-        'ps4_vibration_enabled',
-        String(vibrationEnabled)
+  document
+    .querySelectorAll('.vibrationEnabled')
+    .forEach(btn=>{
+      btn.classList.toggle(
+        'active',
+        String(vibrationEnabled)===
+        btn.dataset.enabled
       );
+    });
+}
 
-      applyVibrationSettings();
+function refreshSettingsUI(){
+  $('motionToggle')
+    .classList.toggle(
+      'active',
+      motionEnabled
+    );
 
-      if(vibrationEnabled){
-        vibrateController();
-      }
-    }
-  );
-});
+  $('parallaxToggle')
+    .classList.toggle(
+      'active',
+      parallaxEnabled
+    );
 
-$('motionToggle').addEventListener('click',()=>{
-  motionEnabled=!motionEnabled;
-  saveInterfaceSettings();
-  setFlow(1.3);
-});
+  $('scanlineToggle')
+    .classList.toggle(
+      'active',
+      scanlinesEnabled
+    );
 
-$('parallaxToggle').addEventListener('click',()=>{
-  parallaxEnabled=!parallaxEnabled;
-  saveInterfaceSettings();
+  $('rumbleMenuToggle')
+    .classList.toggle(
+      'active',
+      menuRumbleEnabled
+    );
 
-  if(!parallaxEnabled){
-    sceneEl.style.transform='translate(0,0)';
-  }
-});
-
-$('scanlineToggle').addEventListener('click',()=>{
-  scanlinesEnabled=!scanlinesEnabled;
-  saveInterfaceSettings();
-});
-
-$('rumbleMenuToggle').addEventListener('click',()=>{
-  menuRumbleEnabled=!menuRumbleEnabled;
-  saveInterfaceSettings();
-});
-
-$('settingsReset').addEventListener('click',()=>{
-  ps4Color='#3fa9ff';
-  vibrationLevel='medium';
-  vibrationEnabled=true;
-  motionEnabled=!RM;
-  parallaxEnabled=true;
-  scanlinesEnabled=true;
-  menuRumbleEnabled=true;
-
-  localStorage.removeItem('ps4_controller_color');
-  localStorage.removeItem('ps4_vibration_level');
-  localStorage.removeItem('ps4_vibration_enabled');
-
-  saveInterfaceSettings();
-  applyControllerColor();
-  applyVibrationSettings();
-  blip();
-});
-
-$('settingsClose').addEventListener(
-  'click',
-  ()=>{
-    settings.classList.remove('show');
-  }
-);
-
-settings.addEventListener(
-  'click',
-  e=>{
-    if(e.target===settings){
-      settings.classList.remove('show');
-    }
-  }
-);
-
-applyControllerColor();
-applyVibrationSettings();
-refreshSettingsUI();
+  $('scanlines').style.display=
+    scanlinesEnabled?'block':'none';
+}
 
 function saveInterfaceSettings(){
   localStorage.setItem(
@@ -1326,150 +1445,317 @@ function saveInterfaceSettings(){
 
 function openSettings(){
   refreshSettingsUI();
+
   settings.classList.add('show');
+
+  beep(520,.06);
 }
 
-let lastButtons={};
+document
+  .querySelectorAll('.colorBtn')
+  .forEach(btn=>{
+    btn.addEventListener(
+      'click',
+      ()=>{
+        ps4Color=
+          btn.dataset.color;
+
+        localStorage.setItem(
+          'ps4_controller_color',
+          ps4Color
+        );
+
+        applyControllerColor();
+
+        vibrateController();
+      }
+    );
+  });
+
+document
+  .querySelectorAll('.vibrationLevel')
+  .forEach(btn=>{
+    btn.addEventListener(
+      'click',
+      ()=>{
+        vibrationLevel=
+          btn.dataset.level;
+
+        localStorage.setItem(
+          'ps4_vibration_level',
+          vibrationLevel
+        );
+
+        applyVibrationSettings();
+
+        vibrateController();
+      }
+    );
+  });
+
+document
+  .querySelectorAll('.vibrationEnabled')
+  .forEach(btn=>{
+    btn.addEventListener(
+      'click',
+      ()=>{
+        vibrationEnabled=
+          btn.dataset.enabled==='true';
+
+        localStorage.setItem(
+          'ps4_vibration_enabled',
+          String(vibrationEnabled)
+        );
+
+        applyVibrationSettings();
+
+        if(vibrationEnabled){
+          vibrateController();
+        }
+      }
+    );
+  });
+
+$('motionToggle').addEventListener(
+  'click',
+  ()=>{
+    motionEnabled=!motionEnabled;
+
+    saveInterfaceSettings();
+
+    setFlow(3);
+  }
+);
+
+$('parallaxToggle').addEventListener(
+  'click',
+  ()=>{
+    parallaxEnabled=!parallaxEnabled;
+
+    saveInterfaceSettings();
+
+    if(!parallaxEnabled){
+      scene.style.transform=
+        'translate(0,0)';
+    }
+  }
+);
+
+$('scanlineToggle').addEventListener(
+  'click',
+  ()=>{
+    scanlinesEnabled=
+      !scanlinesEnabled;
+
+    saveInterfaceSettings();
+  }
+);
+
+$('rumbleMenuToggle').addEventListener(
+  'click',
+  ()=>{
+    menuRumbleEnabled=
+      !menuRumbleEnabled;
+
+    saveInterfaceSettings();
+
+    if(menuRumbleEnabled){
+      vibrateController();
+    }
+  }
+);
+
+$('settingsReset').addEventListener(
+  'click',
+  ()=>{
+    ps4Color='#3fa9ff';
+    vibrationLevel='medium';
+    vibrationEnabled=true;
+
+    motionEnabled=!RM;
+    parallaxEnabled=true;
+    scanlinesEnabled=true;
+    menuRumbleEnabled=true;
+
+    localStorage.removeItem(
+      'ps4_controller_color'
+    );
+
+    localStorage.removeItem(
+      'ps4_vibration_level'
+    );
+
+    localStorage.removeItem(
+      'ps4_vibration_enabled'
+    );
+
+    localStorage.removeItem(
+      'ps4_motion'
+    );
+
+    localStorage.removeItem(
+      'ps4_parallax'
+    );
+
+    localStorage.removeItem(
+      'ps4_scanlines'
+    );
+
+    localStorage.removeItem(
+      'ps4_menu_rumble'
+    );
+
+    applyControllerColor();
+    applyVibrationSettings();
+    saveInterfaceSettings();
+
+    beep(700,.08);
+  }
+);
+
+$('settingsClose').addEventListener(
+  'click',
+  ()=>{
+    settings.classList.remove('show');
+  }
+);
+
+settings.addEventListener(
+  'click',
+  e=>{
+    if(e.target===settings){
+      settings.classList.remove('show');
+    }
+  }
+);
+
+applyControllerColor();
+applyVibrationSettings();
+refreshSettingsUI();
+
+let lastButtons=[];
 
 function controllerLoop(){
-  const pads=navigator.getGamepads?
+  const pads=
+    navigator.getGamepads?
     [...navigator.getGamepads()]:
     [];
 
   const gp=pads.find(Boolean);
 
-  if(!gp){
-    requestAnimationFrame(controllerLoop);
-    return;
-  }
+  if(gp){
+    connectedGamepad=gp;
 
-  connectedGamepad=gp;
-  controllerStatus.classList.add('connected');
-  statusText.textContent=controllerLabel(gp);
+    controllerStatus.classList.add(
+      'connected'
+    );
 
-  const buttons=gp.buttons.map(
-    b=>b.pressed
-  );
+    statusText.textContent=
+      controllerLabel(gp);
 
-  const pressed=i=>
-    !!(buttons[i]&&!lastButtons[i]);
+    const b=
+      gp.buttons.map(x=>x.pressed);
 
-  const left=
-    (gp.axes[0]??0)<-.5||
-    !!buttons[14];
+    const pressed=i=>
+      !!(b[i]&&!lastButtons[i]);
 
-  const right=
-    (gp.axes[0]??0)>.5||
-    !!buttons[15];
+    const left=
+      (gp.axes[0]??0)<-.5||
+      !!b[14];
 
-  const up=
-    (gp.axes[1]??0)<-.5||
-    !!buttons[12];
+    const right=
+      (gp.axes[0]??0)>.5||
+      !!b[15];
 
-  const down=
-    (gp.axes[1]??0)>.5||
-    !!buttons[13];
+    const up=
+      (gp.axes[1]??0)<-.5||
+      !!b[12];
 
-  if(
-    buttons.some(Boolean)&&
-    !lastButtons.some(Boolean)
-  ){
-    if(!started){
-      startExperience();
-    }else if(!ready){
-      finishBoot();
-    }
-  }
+    const down=
+      (gp.axes[1]??0)>.5||
+      !!b[13];
 
-  if(left&&!lastButtons._left){
-    if(ready){
-      if(selected==='continue'){
-        setSel('close');
-      }else if(selected==='store'){
-        setSel('continue');
-      }else{
-        setSel('close');
+    if(!settings.classList.contains('show')){
+      if(left&&!lastButtons._left){
+        if(selected==='continue'){
+          setSel('close');
+        }else if(selected==='store'){
+          setSel('continue');
+        }
       }
-    }
-  }
 
-  if(right&&!lastButtons._right){
-    if(ready){
-      if(selected==='close'){
-        setSel('continue');
-      }else{
-        setSel('store');
+      if(right&&!lastButtons._right){
+        if(selected==='close'){
+          setSel('continue');
+        }else if(selected==='continue'){
+          setSel('store');
+        }
       }
-    }
-  }
 
-  if(up&&!lastButtons._up){
-    if(ready){
-      setSel(
-        selected==='store'
-          ?'continue'
-          :'close'
-      );
-    }
-  }
+      if(up&&!lastButtons._up){
+        if(selected==='store'){
+          setSel('continue');
+        }else if(selected==='continue'){
+          setSel('close');
+        }
+      }
 
-  if(down&&!lastButtons._down){
-    if(ready){
-      setSel(
-        selected==='close'
-          ?'continue'
-          :'store'
-      );
-    }
-  }
+      if(down&&!lastButtons._down){
+        if(selected==='close'){
+          setSel('continue');
+        }else if(selected==='continue'){
+          setSel('store');
+        }
+      }
 
-  if(pressed(0)){
-    if(!started){
-      startExperience();
-    }else if(!ready){
-      finishBoot();
+      if(
+        pressed(0)||
+        pressed(9)||
+        pressed(16)
+      ){
+        if(pressed(0)){
+          activate();
+        }
+
+        if(
+          pressed(9)||
+          pressed(16)
+        ){
+          openSettings();
+        }
+      }
+
+      if(pressed(8)){
+        goFullscreen();
+      }
     }else{
-      activate();
+      if(
+        pressed(1)||
+        pressed(9)||
+        pressed(16)
+      ){
+        settings.classList.remove(
+          'show'
+        );
+      }
     }
+
+    lastButtons=b;
+
+    lastButtons._left=left;
+    lastButtons._right=right;
+    lastButtons._up=up;
+    lastButtons._down=down;
   }
 
-  if(pressed(1)){
-    if(settings.classList.contains('show')){
-      settings.classList.remove('show');
-    }else if(ready){
-      setSel(selected);
-    }
-  }
-
-  if(pressed(9)){
-    if(ready){
-      openSettings();
-    }
-  }
-
-  if(pressed(8)){
-    if(ready){
-      goFull();
-    }
-  }
-
-  if(pressed(16)){
-    if(ready){
-      openSettings();
-    }
-  }
-
-  lastButtons=buttons;
-
-  lastButtons._left=left;
-  lastButtons._right=right;
-  lastButtons._up=up;
-  lastButtons._down=down;
-
-  requestAnimationFrame(controllerLoop);
+  requestAnimationFrame(
+    controllerLoop
+  );
 }
 
-requestAnimationFrame(controllerLoop);
+requestAnimationFrame(
+  controllerLoop
+);
 </script>
 </body>
 </html>
